@@ -1,0 +1,127 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p1",
+  "overall": "revise",
+  "scores": {
+    "proper_name_precision": 4,
+    "proper_name_recall": 4,
+    "entity_resolution": 4,
+    "place_accuracy": 5,
+    "term_necessity": 3,
+    "office_accuracy": 3,
+    "first_appearance_accuracy": 4,
+    "verbosity_control": 4,
+    "unsupported_claim_risk": 3
+  },
+  "issues": [
+    {
+      "severity": "major",
+      "message": "「諸侯」標為 OFFICE（layer 2）不當：諸侯是周代分封制下的君長身分／爵位通稱，非官職，且屬 annotations 不應畫的類型；應改為 layer 1 TERM 或直接移除。"
+    },
+    {
+      "severity": "major",
+      "message": "「大夫」標為 OFFICE 亦不妥：此處「晉大夫」指晉國世卿的身分通稱，非具體官職職能；且註文「本為晉臣而受周命為諸侯」屬對三家身分的延伸斷言，超出原文所載。"
+    },
+    {
+      "severity": "minor",
+      "message": "「周威烈王」註文稱「在位二十四年（前425—前402）」與史實不合：周威烈王在位約前425—前402年為二十四年之說有誤，且「此年為前403年」屬推算斷言，原文未載，宜刪或改為「約」。"
+    },
+    {
+      "severity": "minor",
+      "message": "「魏斯」註文「任用李悝、吳起等變法圖強，使魏成為戰國初期最強之國」為後世史評，非本段必要註釋，屬過度延伸。"
+    },
+    {
+      "severity": "minor",
+      "message": "「趙籍」「韓虔」註文「戰國趙國／韓國開國君主」用語稍嫌武斷，戰國諸侯稱「開國」易生歧義，宜作「趙烈侯／韓景侯，三家分晉後受周命為諸侯」。"
+    }
+  ],
+  "revisedAnnotations": {
+    "properNames": [
+      {
+        "exact": "周威烈王",
+        "prefix": "",
+        "suffix": "二十三年，初命晉",
+        "type": "PERSON"
+      },
+      {
+        "exact": "魏斯",
+        "prefix": "三年，初命晉大夫",
+        "suffix": "、趙籍、韓虔爲諸",
+        "type": "PERSON"
+      },
+      {
+        "exact": "趙籍",
+        "prefix": "初命晉大夫魏斯、",
+        "suffix": "、韓虔爲諸侯。",
+        "type": "PERSON"
+      },
+      {
+        "exact": "韓虔",
+        "prefix": "大夫魏斯、趙籍、",
+        "suffix": "爲諸侯。",
+        "type": "PERSON"
+      },
+      {
+        "exact": "晉",
+        "prefix": "王二十三年，初命",
+        "suffix": "大夫魏斯、趙籍、",
+        "type": "STATE"
+      }
+    ],
+    "annotations": [
+      {
+        "exact": "周威烈王",
+        "prefix": "",
+        "suffix": "二十三年，初命晉",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "東周天子，名午，周考王之子。此年為《資治通鑑》記事之始。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "魏斯",
+        "prefix": "三年，初命晉大夫",
+        "suffix": "、趙籍、韓虔爲諸",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即魏文侯，戰國魏國君主，與趙籍、韓虔同被周天子命為諸侯。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "趙籍",
+        "prefix": "初命晉大夫魏斯、",
+        "suffix": "、韓虔爲諸侯。",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即趙烈侯，三家分晉後受周命為諸侯。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "韓虔",
+        "prefix": "大夫魏斯、趙籍、",
+        "suffix": "爲諸侯。",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即韓景侯，三家分晉後受周命為諸侯。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "大夫",
+        "prefix": "二十三年，初命晉",
+        "suffix": "魏斯、趙籍、韓虔",
+        "layer": 1,
+        "category": "TERM",
+        "text": "春秋戰國時卿大夫之稱，此指晉國世卿魏、趙、韓三家的身分。",
+        "confidence": 0.85
+      },
+      {
+        "exact": "諸侯",
+        "prefix": "斯、趙籍、韓虔爲",
+        "suffix": "。",
+        "layer": 1,
+        "category": "TERM",
+        "text": "周代分封制下受天子冊命、有封國之君長。此謂周威烈王正式承認三家為諸侯。",
+        "confidence": 0.85
+      }
+    ]
+  }
+}

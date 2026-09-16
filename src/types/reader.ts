@@ -8,6 +8,7 @@ export type ReaderPreferences = {
   lineHeight: number;
   sidebarOpen: boolean;
   settingsOpen: boolean;
+  showProperNames: boolean;
 };
 
 export const DEFAULT_PREFERENCES: ReaderPreferences = {
@@ -17,6 +18,7 @@ export const DEFAULT_PREFERENCES: ReaderPreferences = {
   lineHeight: 1.8,
   sidebarOpen: true,
   settingsOpen: false,
+  showProperNames: true,
 };
 
 export const FONT_SIZE_MIN = 14;

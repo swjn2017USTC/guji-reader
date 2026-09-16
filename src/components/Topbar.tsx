@@ -8,8 +8,10 @@ type TopbarProps = {
   writingMode: WritingMode;
   sidebarOpen: boolean;
   settingsOpen: boolean;
+  showProperNames: boolean;
   onToggleSidebar: () => void;
   onToggleSettings: () => void;
+  onToggleProperNames: () => void;
   onCycleTheme: () => void;
   onToggleWritingMode: () => void;
 };
@@ -32,8 +34,10 @@ export function Topbar({
   writingMode,
   sidebarOpen,
   settingsOpen,
+  showProperNames,
   onToggleSidebar,
   onToggleSettings,
+  onToggleProperNames,
   onCycleTheme,
   onToggleWritingMode,
 }: TopbarProps) {
@@ -54,6 +58,17 @@ export function Topbar({
         <span className={styles.volumeTitle}>{volumeTitle}</span>
       </div>
       <div className={styles.right}>
+        <button
+          type="button"
+          className={
+            showProperNames ? styles.textButtonActive : styles.textButton
+          }
+          onClick={onToggleProperNames}
+          aria-label="切換專名線"
+          aria-pressed={showProperNames}
+        >
+          專名線
+        </button>
         <button
           type="button"
           className={styles.textButton}

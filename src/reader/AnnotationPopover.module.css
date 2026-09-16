@@ -1,0 +1,77 @@
+.popover {
+  z-index: 30;
+  width: 20rem;
+  max-width: 90vw;
+  padding: 0.75rem 0.85rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-stack);
+  color: var(--text-primary);
+  /* Never inherit the passage's vertical writing mode. */
+  writing-mode: horizontal-tb;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.category,
+.layer {
+  font-size: 0.72rem;
+  line-height: 1.6;
+  padding: 0 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+.category {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.layer {
+  background-color: var(--source-note-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--source-note-border);
+}
+
+.close {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.2rem;
+}
+
+.close:hover {
+  color: var(--text-primary);
+}
+
+.quote {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.body {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.footer {
+  margin-top: 0.6rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}

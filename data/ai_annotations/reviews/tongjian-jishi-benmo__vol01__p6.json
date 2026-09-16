@@ -1,0 +1,193 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p6",
+  "overall": "revise",
+  "scores": {
+    "proper_name_precision": 4,
+    "proper_name_recall": 4,
+    "entity_resolution": 4,
+    "place_accuracy": 4,
+    "term_necessity": 3,
+    "office_accuracy": 3,
+    "first_appearance_accuracy": 3,
+    "verbosity_control": 4,
+    "unsupported_claim_risk": 3
+  },
+  "issues": [
+    {
+      "severity": "major",
+      "message": "「天子」被標為 layer=2 category=OFFICE，但「天子」是身分通稱而非官職，且註文斷言「此指周威烈王」屬原文未明言的具體指涉，屬過度斷言。"
+    },
+    {
+      "severity": "major",
+      "message": "「大夫」標為 OFFICE 尚可，但註文「位次於卿的官員」與本段「大夫擅政」「晉大夫暴蔑其君」語境（把持國政的卿大夫階層）略有偏差，且與 layer=2 的首次出場判斷重疊不清。"
+    },
+    {
+      "severity": "minor",
+      "message": "「季氏」type=PERSON 但實為家族/世卿集團，宜作 PERSON 或 INSTITUTION 的處理需一致；註文「此指其勢力足以逐君自為」尚可。"
+    },
+    {
+      "severity": "minor",
+      "message": "「幽、厲」註文補充幽王寵褒姒、厲王致國人暴動等細節，雖屬常見史實，但已超出原文所需，稍嫌冗長。"
+    },
+    {
+      "severity": "minor",
+      "message": "「隧」註文正確，但「請隧」之「隧」是否需獨立加註可斟酌；整體尚可。"
+    }
+  ],
+  "revisedAnnotations": {
+    "properNames": [
+      {
+        "exact": "幽、厲",
+        "prefix": "嗚呼！",
+        "suffix": "失德，周道日衰，",
+        "type": "PERSON"
+      },
+      {
+        "exact": "晉文公",
+        "prefix": "也。何以言之？昔",
+        "suffix": "有大功於王室，請",
+        "type": "PERSON"
+      },
+      {
+        "exact": "襄王",
+        "prefix": "功於王室，請隧於",
+        "suffix": "，襄王不許，曰：",
+        "type": "PERSON"
+      },
+      {
+        "exact": "曹、滕",
+        "prefix": "以周之地則不大於",
+        "suffix": "，以周之民則不衆",
+        "type": "PLACE"
+      },
+      {
+        "exact": "邾、莒",
+        "prefix": "以周之民則不衆於",
+        "suffix": "，然歷數百年，宗",
+        "type": "PLACE"
+      },
+      {
+        "exact": "晉、楚、齊、秦",
+        "prefix": "，宗主天下，雖以",
+        "suffix": "之強不敢加者，何",
+        "type": "STATE"
+      },
+      {
+        "exact": "季氏",
+        "prefix": "分尚存故也。至於",
+        "suffix": "之於魯，田常之於",
+        "type": "PERSON"
+      },
+      {
+        "exact": "田常",
+        "prefix": "至於季氏之於魯，",
+        "suffix": "之於齊，白公之於",
+        "type": "PERSON"
+      },
+      {
+        "exact": "白公",
+        "prefix": "魯，田常之於齊，",
+        "suffix": "之於楚，智伯之於",
+        "type": "PERSON"
+      },
+      {
+        "exact": "智伯",
+        "prefix": "齊，白公之於楚，",
+        "suffix": "之於晉，其勢皆足",
+        "type": "PERSON"
+      }
+    ],
+    "annotations": [
+      {
+        "exact": "幽、厲",
+        "prefix": "嗚呼！",
+        "suffix": "失德，周道日衰，",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "周幽王與周厲王，西周兩位失德之君，後世常並稱以喻衰世。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "晉文公",
+        "prefix": "也。何以言之？昔",
+        "suffix": "有大功於王室，請",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "春秋五霸之一，名重耳，曾平定周王室之亂，有功於周襄王。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "襄王",
+        "prefix": "功於王室，請隧於",
+        "suffix": "，襄王不許，曰：",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "周襄王，名鄭，東周天子，曾遭弟弟子帶之亂，賴晉文公相助復位。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "隧",
+        "prefix": "有大功於王室，請",
+        "suffix": "於襄王，襄王不許",
+        "layer": 1,
+        "category": "TERM",
+        "text": "此指天子葬禮所用之隧葬之禮，諸侯請用隧葬即僭越天子之禮。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "名分",
+        "prefix": "周之子孫尚能守其",
+        "suffix": "故也。何以言之？",
+        "layer": 1,
+        "category": "TERM",
+        "text": "名位與職分，指周天子與諸侯之間上下尊卑的禮制秩序。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "季氏",
+        "prefix": "分尚存故也。至於",
+        "suffix": "之於魯，田常之於",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "魯國世卿家族，長期把持魯國國政，此指其勢力足以逐君自為。",
+        "confidence": 0.85
+      },
+      {
+        "exact": "田常",
+        "prefix": "至於季氏之於魯，",
+        "suffix": "之於齊，白公之於",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即田成子，春秋末齊國權臣，殺齊簡公，專齊國之政，為田氏代齊奠定基礎。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "白公",
+        "prefix": "魯，田常之於齊，",
+        "suffix": "之於楚，智伯之於",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即白公勝，楚平王之孫，曾發動白公之亂，一度劫持楚惠王而專楚政。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "智伯",
+        "prefix": "齊，白公之於楚，",
+        "suffix": "之於晉，其勢皆足",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即智襄子荀瑤，春秋末晉國四卿之一，勢力最強，後為韓、趙、魏所滅。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "大夫",
+        "prefix": "上替，諸侯專征，",
+        "suffix": "擅政，禮之大體什",
+        "layer": 2,
+        "category": "OFFICE",
+        "text": "周代諸侯國中位次於卿的官員，此泛指把持國政的卿大夫階層。",
+        "confidence": 0.85
+      }
+    ]
+  }
+}

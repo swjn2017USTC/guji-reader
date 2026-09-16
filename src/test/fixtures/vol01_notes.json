@@ -6,13 +6,13 @@
     "passageId": "test-work:vol01:p1",
     "anchor": {
       "passageId": "test-work:vol01:p1",
-      "start": 10,
-      "end": 14,
-      "exact": "胡注標記",
-      "prefix": "第一卷正文第二段，含",
-      "suffix": "。"
+      "start": 0,
+      "end": 4,
+      "exact": "周威烈王",
+      "prefix": "",
+      "suffix": "二十三年，初命晉大"
     },
-    "text": "胡三省注：此處為測試古注。",
-    "provenance": "胡三省注測試"
+    "text": "威烈王，名午，考王之子也。",
+    "provenance": "胡三省注《資治通鑑》卷第一"
   }
 ]

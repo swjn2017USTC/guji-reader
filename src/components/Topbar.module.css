@@ -57,8 +57,25 @@
   font-size: 0.85rem;
 }
 
+.textButtonActive {
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background-color: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
 .iconButton:hover,
 .textButton:hover {
   background-color: var(--button-hover);
   color: var(--text-primary);
+}
+
+.textButtonActive:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
 }

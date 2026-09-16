@@ -1,0 +1,106 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p7",
+  "overall": "revise",
+  "scores": {
+    "proper_name_precision": 3,
+    "proper_name_recall": 3,
+    "entity_resolution": 4,
+    "place_accuracy": 4,
+    "term_necessity": 3,
+    "office_accuracy": 2,
+    "first_appearance_accuracy": 3,
+    "verbosity_control": 4,
+    "unsupported_claim_risk": 4
+  },
+  "issues": [
+    {
+      "severity": "major",
+      "message": "「天子」被標為 INSTITUTION 專名，且註釋 category 標為 OFFICE。天子是君主身分通稱，非專名、非官職，屬類型錯置。"
+    },
+    {
+      "severity": "major",
+      "message": "「諸侯」被標為 INSTITUTION 專名，且註釋 category 標為 OFFICE。諸侯是封建爵位／身分通稱，非專名、非官職，屬類型錯置。"
+    },
+    {
+      "severity": "minor",
+      "message": "「周室」properNames 標為 DYNASTY，但註釋 category 標為 PLACE，兩者不一致；周室指周王室政權，宜統一為 DYNASTY 或 TERM。"
+    },
+    {
+      "severity": "minor",
+      "message": "「三晉」properNames 標為 STATE，但註釋 category 標為 TERM，類型不一致；三晉為韓趙魏三國合稱，宜作 STATE 或 TERM 擇一。"
+    },
+    {
+      "severity": "minor",
+      "message": "「桓、文」為齊桓公、晉文公之並稱，屬人物合稱，畫 PERSON 尚可，但 span 含頓號，邊界可再斟酌。"
+    }
+  ],
+  "revisedAnnotations": {
+    "properNames": [
+      {
+        "exact": "周室",
+        "prefix": "者以為當是之時，",
+        "suffix": "微弱，三晉強盛，",
+        "type": "DYNASTY"
+      },
+      {
+        "exact": "三晉",
+        "prefix": "之時，周室微弱，",
+        "suffix": "強盛，雖欲勿許，",
+        "type": "STATE"
+      },
+      {
+        "exact": "桓、文",
+        "prefix": "逆之臣，天下苟有",
+        "suffix": "之君，必奉禮義而",
+        "type": "PERSON"
+      }
+    ],
+    "annotations": [
+      {
+        "exact": "周室",
+        "prefix": "者以為當是之時，",
+        "suffix": "微弱，三晉強盛，",
+        "layer": 1,
+        "category": "TERM",
+        "text": "指周王室、周王朝。周室東遷後王畿狹小、號令不行，此處言其衰微。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "三晉",
+        "prefix": "之時，周室微弱，",
+        "suffix": "強盛，雖欲勿許，",
+        "layer": 1,
+        "category": "TERM",
+        "text": "指晉國分裂而成的韓、趙、魏三家。此段論其請命於天子而得列為諸侯之事。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "天子",
+        "prefix": "義侵禮，則不請於",
+        "suffix": "而自立矣。不請於",
+        "layer": 1,
+        "category": "TERM",
+        "text": "此指周天子，天下共主。戰國時周天子名義上仍為諸侯所共奉之最高君主。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "桓、文",
+        "prefix": "逆之臣，天下苟有",
+        "suffix": "之君，必奉禮義而",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "指齊桓公、晉文公，春秋時以尊王攘夷、主持會盟著稱的霸主。此借指能奉禮義以征討悖逆之臣的強君。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "諸侯",
+        "prefix": "是受天子之命而為",
+        "suffix": "也，誰得而討之！",
+        "layer": 1,
+        "category": "TERM",
+        "text": "此指經天子冊命而取得諸侯身分的封國君主。三晉得天子之命，遂取得合法諸侯地位。",
+        "confidence": 0.9
+      }
+    ]
+  }
+}

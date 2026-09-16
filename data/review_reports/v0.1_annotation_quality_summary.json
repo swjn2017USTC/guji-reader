@@ -1,0 +1,292 @@
+{
+  "generatedAt": "2026-09-16T19:50:38.591649+00:00",
+  "model": "deepseek-flash",
+  "workId": "tongjian-jishi-benmo",
+  "passagesReviewed": 8,
+  "verdicts": {
+    "accept": 0,
+    "revise": 6,
+    "reject": 2
+  },
+  "verdictRates": {
+    "accept": 0.0,
+    "revise": 0.75,
+    "reject": 0.25
+  },
+  "rejectedPassages": [
+    "tongjian-jishi-benmo:vol01:p0",
+    "tongjian-jishi-benmo:vol01:p3"
+  ],
+  "revisedPassages": [
+    "tongjian-jishi-benmo:vol01:p1",
+    "tongjian-jishi-benmo:vol01:p2",
+    "tongjian-jishi-benmo:vol01:p4",
+    "tongjian-jishi-benmo:vol01:p5",
+    "tongjian-jishi-benmo:vol01:p6",
+    "tongjian-jishi-benmo:vol01:p7"
+  ],
+  "averageScores": {
+    "proper_name_precision": 3.25,
+    "proper_name_recall": 3.25,
+    "entity_resolution": 3.75,
+    "place_accuracy": 4.25,
+    "term_necessity": 3.125,
+    "office_accuracy": 3.125,
+    "first_appearance_accuracy": 3.0,
+    "verbosity_control": 4.0,
+    "unsupported_claim_risk": 3.375
+  },
+  "overallAverageScore": 3.458,
+  "perCategoryScores": {
+    "proper_name_precision": {
+      "average": 3.25,
+      "min": 2,
+      "max": 4
+    },
+    "proper_name_recall": {
+      "average": 3.25,
+      "min": 2,
+      "max": 4
+    },
+    "entity_resolution": {
+      "average": 3.75,
+      "min": 3,
+      "max": 4
+    },
+    "place_accuracy": {
+      "average": 4.25,
+      "min": 3,
+      "max": 5
+    },
+    "term_necessity": {
+      "average": 3.125,
+      "min": 3,
+      "max": 4
+    },
+    "office_accuracy": {
+      "average": 3.125,
+      "min": 2,
+      "max": 5
+    },
+    "first_appearance_accuracy": {
+      "average": 3.0,
+      "min": 2,
+      "max": 4
+    },
+    "verbosity_control": {
+      "average": 4.0,
+      "min": 4,
+      "max": 4
+    },
+    "unsupported_claim_risk": {
+      "average": 3.375,
+      "min": 3,
+      "max": 4
+    }
+  },
+  "issueCounts": {
+    "blocker": 2,
+    "major": 16,
+    "minor": 20
+  },
+  "topIssues": [
+    {
+      "severity": "major",
+      "message": "annotations 中「諸侯」標為 OFFICE 並稱「爵位身分」，與 properNames 的 PERSON 自相矛盾；且諸侯為分封列國君主之通稱，非官職，category 不當。",
+      "count": 1
+    },
+    {
+      "severity": "blocker",
+      "message": "properNames 中將「天子」「諸侯」「卿大夫」「士庶人」標為 PERSON，這些是身分／爵位／等級通稱，非專名，類型嚴重錯誤（超過半數條目類型標錯）。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「三家」與「晉」皆為本段唯一且明顯的專名，但「三家」類型錯誤、「晉」類型衝突，整體專名標註不可直接發布。",
+      "count": 1
+    },
+    {
+      "severity": "blocker",
+      "message": "「三家」被標為 INSTITUTION 專名，但「三家」是韓、趙、魏三家世卿的合稱，並非制度或機構，屬類型硬傷。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「三家」註文「指春秋末晉國的韓、趙、魏三家世卿大族」基本正確，但「春秋末」略嫌精確，三家分晉通常繫於戰國初，宜作「春秋末戰國初」或「春秋晚期以來」。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「三晉」properNames 標為 STATE，但註釋 category 標為 TERM，類型不一致；三晉為韓趙魏三國合稱，宜作 STATE 或 TERM 擇一。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「仲叔於奚」註文稱「春秋時衛國大夫」，原文僅言「有功於衞」，未言其為大夫，屬原文沒有的斷言，宜改為「衞人，有功於衞」。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「公、侯、卿、大夫」標為 layer=2 category=OFFICE 不當：公、侯為爵位，卿、大夫為身分／官職通稱，依規則爵位與身分通稱不應畫成官職專名線，且此處是對「名」的舉例，宜作 TERM（layer=1）處理。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「分」「名」兩條註釋雖有必要，但「名」的註文加入「是名分的具體標識」屬引申斷言，原文僅以公侯卿大夫為例，宜更貼原文。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「卿大夫」標為 OFFICE 亦不妥，其為貴族等級通稱，非具體官職；且與 properNames 的 PERSON 類型衝突。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「名器」為本篇核心詞，宜保留；「履霜堅冰至」「一日二日萬幾」引文註釋準確，惟「一日二日萬幾」出處《書·皋陶謨》可保留，屬合理。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「周威烈王」註文稱「在位二十四年（前425—前402）」與史實不合：周威烈王在位約前425—前402年為二十四年之說有誤，且「此年為前403年」屬推算斷言，原文未載，宜刪或改為「約」。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「周室」properNames 標為 DYNASTY，但註釋 category 標為 PLACE，兩者不一致；周室指周王室政權，宜統一為 DYNASTY 或 TERM。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「四海」同時出現在 properNames（PLACE）與 annotations（PLACE），重複且非嚴格專名，宜只保留一處並說明其泛指天下。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「士庶人」標為 OFFICE 不當：士為低級貴族、庶人為平民，並非官職，應為 TERM 或身分通稱。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「大夫」標為 OFFICE 亦不妥：此處「晉大夫」指晉國世卿的身分通稱，非具體官職職能；且註文「本為晉臣而受周命為諸侯」屬對三家身分的延伸斷言，超出原文所載。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「大夫」標為 OFFICE 尚可，但註文「位次於卿的官員」與本段「大夫擅政」「晉大夫暴蔑其君」語境（把持國政的卿大夫階層）略有偏差，且與 layer=2 的首次出場判斷重疊不清。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「天子」被標為 INSTITUTION 專名，且註釋 category 標為 OFFICE。天子是君主身分通稱，非專名、非官職，屬類型錯置。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「天子」被標為 layer=2 category=OFFICE，但「天子」是身分通稱而非官職，且註文斷言「此指周威烈王」屬原文未明言的具體指涉，屬過度斷言。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「天子之職莫大於禮也」整句作為 TERM 註釋，屬句子主旨說明而非詞語註釋，span 過長，宜改為對「職」或整句作意譯說明並縮短。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「季氏」type=PERSON 但實為家族/世卿集團，宜作 PERSON 或 INSTITUTION 的處理需一致；註文「此指其勢力足以逐君自為」尚可。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「幽、厲」註文補充幽王寵褒姒、厲王致國人暴動等細節，雖屬常見史實，但已超出原文所需，稍嫌冗長。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「微子」「季札」「太伯」皆為首次出現的重要人物，卻標為 layer=2 的 FIRST_APPEARANCE，而 layer=2 依規則僅限 OFFICE / FIRST_APPEARANCE 且 category 須匹配；此處 category 用 FIRST_APPEARANCE 尚可，但 layer 與 category 對應規則要求 layer=2 → OFFICE / FIRST_APPEARANCE，勉強可通，惟「微子」「季札」「太伯」同時已列入 properNames，重複且 layer 標示不一致，屬類型標錯。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「易」與「書」標為 DYNASTY 類型錯誤：此處指《易經》《尚書》兩部典籍，非朝代，應改為 TERM 或 INSTITUTION 類；且未畫線亦不影響理解，屬類型硬傷。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「春秋」在 properNames 中標為 DYNASTY，但此處指《春秋》一書（TERM），非朝代；同一 span 在 annotations 中又標為 TERM，前後矛盾。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「晉」在 properNames 標為 STATE，但在 annotations 又標為 PLACE，同一詞兩處類型不一致，且「晉」作為諸侯國應統一為 STATE 專名，不應再作 PLACE 註。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「晉」註文「西周至春秋時期的諸侯國」可接受，但「大致在今山西南部、河南北部一帶」尚可再收斂，且與 properNames 的 STATE 類型重複註釋，屬冗餘。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「桓、文」為齊桓公、晉文公之並稱，屬人物合稱，畫 PERSON 尚可，但 span 含頓號，邊界可再斟酌。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「王人」註為周天子使者，準確；但「王人雖微」之「微」指地位微賤，未註不影響理解，可保留。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「紀綱」註文「原指網的總繩與細目」為詞源補充，尚可，但略增篇幅。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「繁纓」註文稱「諸侯馬匹的裝飾」，原文語境為孔子惜其名器，繁纓實為馬纓（馬胸前飾物），稱「諸侯之馬飾」可，但「非諸侯而請繁纓」之斷語稍強，宜作「非其分而請之，即僭越名器」。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「繫」單字加註為《繫辭》，span 過短且易與動詞「繫」混淆，宜改註「繫之」或直接不註。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「臣光」畫為 PERSON 專名可接受，但「臣」為自稱、「光」為名，span 邊界略寬；建議保留但註文已說明，屬可接受範圍。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「諸侯」標為 OFFICE（layer 2）不當：諸侯是周代分封制下的君長身分／爵位通稱，非官職，且屬 annotations 不應畫的類型；應改為 layer 1 TERM 或直接移除。",
+      "count": 1
+    },
+    {
+      "severity": "major",
+      "message": "「諸侯」被標為 INSTITUTION 專名，且註釋 category 標為 OFFICE。諸侯是封建爵位／身分通稱，非專名、非官職，屬類型錯置。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「趙籍」「韓虔」註文「戰國趙國／韓國開國君主」用語稍嫌武斷，戰國諸侯稱「開國」易生歧義，宜作「趙烈侯／韓景侯，三家分晉後受周命為諸侯」。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「隧」註文正確，但「請隧」之「隧」是否需獨立加註可斟酌；整體尚可。",
+      "count": 1
+    },
+    {
+      "severity": "minor",
+      "message": "「魏斯」註文「任用李悝、吳起等變法圖強，使魏成為戰國初期最強之國」為後世史評，非本段必要註釋，屬過度延伸。",
+      "count": 1
+    }
+  ],
+  "published": {
+    "volumes": [
+      "vol01"
+    ],
+    "annotations": 39,
+    "properNames": 31
+  },
+  "cachedReviews": 0
+}

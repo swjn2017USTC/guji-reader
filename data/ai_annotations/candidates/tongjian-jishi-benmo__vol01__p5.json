@@ -1,0 +1,132 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p5",
+  "properNames": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 69,
+        "end": 73,
+        "exact": "仲叔於奚",
+        "prefix": "禮安得獨在哉！昔",
+        "suffix": "有功於衞，辭邑而"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 76,
+        "end": 77,
+        "exact": "衞",
+        "prefix": "昔仲叔於奚有功於",
+        "suffix": "，辭邑而請繁纓，"
+      },
+      "type": "STATE"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 85,
+        "end": 87,
+        "exact": "孔子",
+        "prefix": "，辭邑而請繁纓，",
+        "suffix": "以為不如多與之邑"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 260,
+        "end": 261,
+        "exact": "易",
+        "prefix": "竭力而不能及也。",
+        "suffix": "曰：「履霜堅冰至"
+      },
+      "type": "DYNASTY"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 271,
+        "end": 272,
+        "exact": "書",
+        "prefix": "「履霜堅冰至，」",
+        "suffix": "曰：「一日二日萬"
+      },
+      "type": "DYNASTY"
+    }
+  ],
+  "annotations": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 69,
+        "end": 73,
+        "exact": "仲叔於奚",
+        "prefix": "禮安得獨在哉！昔",
+        "suffix": "有功於衞，辭邑而"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "春秋時衛國大夫，以有功於衛而辭邑，請得繁纓（諸侯之馬飾），孔子譏其僭越。",
+      "confidence": 0.85
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 82,
+        "end": 84,
+        "exact": "繁纓",
+        "prefix": "功於衞，辭邑而請",
+        "suffix": "，孔子以為不如多"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "古代諸侯馬匹的裝飾，用以別尊卑；非諸侯而請繁纓，即僭越名器。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 55,
+        "end": 57,
+        "exact": "名器",
+        "prefix": "，此禮之大經也。",
+        "suffix": "旣亡，則禮安得獨"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "名號與器物，古代用以區別貴賤等級的制度象徵。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 264,
+        "end": 269,
+        "exact": "履霜堅冰至",
+        "prefix": "能及也。易曰：「",
+        "suffix": "，」書曰：「一日"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "《易·坤卦》爻辭，喻見微知著，防微杜漸。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 275,
+        "end": 281,
+        "exact": "一日二日萬幾",
+        "prefix": "冰至，」書曰：「",
+        "suffix": "，」謂此類也。故"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "《書·皋陶謨》語，謂每日處理萬端政務，當謹慎於微。",
+      "confidence": 0.85
+    }
+  ]
+}

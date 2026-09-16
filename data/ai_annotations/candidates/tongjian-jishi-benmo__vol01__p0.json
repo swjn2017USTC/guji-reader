@@ -1,0 +1,57 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p0",
+  "properNames": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p0",
+        "start": 0,
+        "end": 2,
+        "exact": "三家",
+        "prefix": "",
+        "suffix": "分晉"
+      },
+      "type": "INSTITUTION"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p0",
+        "start": 3,
+        "end": 4,
+        "exact": "晉",
+        "prefix": "三家分",
+        "suffix": ""
+      },
+      "type": "STATE"
+    }
+  ],
+  "annotations": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p0",
+        "start": 0,
+        "end": 2,
+        "exact": "三家",
+        "prefix": "",
+        "suffix": "分晉"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "指春秋末晉國的韓、趙、魏三家世卿大族。",
+      "confidence": 0.95
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p0",
+        "start": 3,
+        "end": 4,
+        "exact": "晉",
+        "prefix": "三家分",
+        "suffix": ""
+      },
+      "layer": 1,
+      "category": "PLACE",
+      "text": "晉國，西周至春秋時期的諸侯國，大致在今山西南部、河南北部一帶。",
+      "confidence": 0.9
+    }
+  ]
+}

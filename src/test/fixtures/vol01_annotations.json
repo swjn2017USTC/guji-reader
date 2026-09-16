@@ -1,0 +1,91 @@
+{
+  "workId": "test-work",
+  "volumeId": "vol01",
+  "annotations": [
+    {
+      "id": "ai:test-work:vol01:p1:PERSON:14-16",
+      "workId": "test-work",
+      "volumeId": "vol01",
+      "passageId": "test-work:vol01:p1",
+      "anchor": {
+        "passageId": "test-work:vol01:p1",
+        "start": 14,
+        "end": 16,
+        "exact": "魏斯",
+        "prefix": "初命晉大夫",
+        "suffix": "爲諸侯。"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "魏斯，即魏文侯，戰國魏國開國君主。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:test-work:vol01:p1:TERM:17-19",
+      "workId": "test-work",
+      "volumeId": "vol01",
+      "passageId": "test-work:vol01:p1",
+      "anchor": {
+        "passageId": "test-work:vol01:p1",
+        "start": 17,
+        "end": 19,
+        "exact": "諸侯",
+        "prefix": "大夫魏斯爲",
+        "suffix": "。"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "諸侯，周代分封制下由天子冊命的封國君主。",
+      "confidence": 0.85,
+      "source": "generator"
+    }
+  ],
+  "properNames": [
+    {
+      "id": "pn:test-work:vol01:p1:PERSON:0-4",
+      "workId": "test-work",
+      "volumeId": "vol01",
+      "passageId": "test-work:vol01:p1",
+      "anchor": {
+        "passageId": "test-work:vol01:p1",
+        "start": 0,
+        "end": 4,
+        "exact": "周威烈王",
+        "prefix": "",
+        "suffix": "二十三年，初命晉大"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:test-work:vol01:p1:STATE:11-12",
+      "workId": "test-work",
+      "volumeId": "vol01",
+      "passageId": "test-work:vol01:p1",
+      "anchor": {
+        "passageId": "test-work:vol01:p1",
+        "start": 11,
+        "end": 12,
+        "exact": "晉",
+        "prefix": "二十三年，初命",
+        "suffix": "大夫魏斯爲諸侯。"
+      },
+      "type": "STATE"
+    },
+    {
+      "id": "pn:test-work:vol01:p1:PERSON:14-16",
+      "workId": "test-work",
+      "volumeId": "vol01",
+      "passageId": "test-work:vol01:p1",
+      "anchor": {
+        "passageId": "test-work:vol01:p1",
+        "start": 14,
+        "end": 16,
+        "exact": "魏斯",
+        "prefix": "初命晉大夫",
+        "suffix": "爲諸侯。"
+      },
+      "type": "PERSON"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p2",
+  "properNames": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 0,
+        "end": 2,
+        "exact": "臣光",
+        "prefix": "",
+        "suffix": "曰：臣聞天子之職"
+      },
+      "type": "PERSON"
+    }
+  ],
+  "annotations": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 0,
+        "end": 2,
+        "exact": "臣光",
+        "prefix": "",
+        "suffix": "曰：臣聞天子之職"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即司馬光（1019—1086），字君實，北宋史學家，《資治通鑑》主編。此處「臣光曰」為其史論發語，仿《史記》「太史公曰」之例。",
+      "confidence": 0.98
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 31,
+        "end": 33,
+        "exact": "紀綱",
+        "prefix": "大於名。何謂禮？",
+        "suffix": "是也。何謂分？君"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "綱紀、法度。原指網的總繩與細目，引申為維繫國家秩序的根本制度與規範。",
+      "confidence": 0.95
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 19,
+        "end": 20,
+        "exact": "分",
+        "prefix": "大於禮，禮莫大於",
+        "suffix": "，分莫大於名。何"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "此處讀 fèn，指名分、職分，即各人依身分地位所應守的界限與本分。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 25,
+        "end": 26,
+        "exact": "名",
+        "prefix": "大於分，分莫大於",
+        "suffix": "。何謂禮？紀綱是"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "名位、名號，指公、侯、卿、大夫等具體的爵位稱號，是名分的具體標識。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 50,
+        "end": 58,
+        "exact": "公、侯、卿、大夫",
+        "prefix": "臣是也。何謂名？",
+        "suffix": "是也。"
+      },
+      "layer": 2,
+      "category": "OFFICE",
+      "text": "周代以來的爵位與官職等級。公、侯為諸侯爵位；卿、大夫為朝廷與封國中的高級官職、身分稱號，各有尊卑等差。",
+      "confidence": 0.92
+    }
+  ]
+}

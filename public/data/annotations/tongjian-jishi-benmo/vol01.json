@@ -1,0 +1,1214 @@
+{
+  "workId": "tongjian-jishi-benmo",
+  "volumeId": "vol01",
+  "annotations": [
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p1:PERSON:0-4",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 0,
+        "end": 4,
+        "exact": "周威烈王",
+        "prefix": "",
+        "suffix": "二十三年，初命晉"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "東周天子，名午，周考王之子。此年為《資治通鑑》記事之始。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p1:TERM:12-14",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 12,
+        "end": 14,
+        "exact": "大夫",
+        "prefix": "二十三年，初命晉",
+        "suffix": "魏斯、趙籍、韓虔"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "春秋戰國時卿大夫之稱，此指晉國世卿魏、趙、韓三家的身分。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p1:PERSON:14-16",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 14,
+        "end": 16,
+        "exact": "魏斯",
+        "prefix": "三年，初命晉大夫",
+        "suffix": "、趙籍、韓虔爲諸"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即魏文侯，戰國魏國君主，與趙籍、韓虔同被周天子命為諸侯。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p1:PERSON:17-19",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 17,
+        "end": 19,
+        "exact": "趙籍",
+        "prefix": "初命晉大夫魏斯、",
+        "suffix": "、韓虔爲諸侯。"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即趙烈侯，三家分晉後受周命為諸侯。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p1:PERSON:20-22",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 20,
+        "end": 22,
+        "exact": "韓虔",
+        "prefix": "大夫魏斯、趙籍、",
+        "suffix": "爲諸侯。"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即韓景侯，三家分晉後受周命為諸侯。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p1:TERM:23-25",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 23,
+        "end": 25,
+        "exact": "諸侯",
+        "prefix": "斯、趙籍、韓虔爲",
+        "suffix": "。"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "周代分封制下受天子冊命、有封國之君長。此謂周威烈王正式承認三家為諸侯。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p2:PERSON:0-2",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p2",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 0,
+        "end": 2,
+        "exact": "臣光",
+        "prefix": "",
+        "suffix": "曰：臣聞天子之職"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即司馬光（1019—1086），字君實，北宋史學家，《資治通鑑》主編。「臣光曰」為其史論發語，仿《史記》「太史公曰」之例。",
+      "confidence": 0.98,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p2:TERM:19-20",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p2",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 19,
+        "end": 20,
+        "exact": "分",
+        "prefix": "大於禮，禮莫大於",
+        "suffix": "，分莫大於名。何"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "此處讀 fèn，指名分、職分，即各人依身分地位所應守的界限與本分。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p2:TERM:25-26",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p2",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 25,
+        "end": 26,
+        "exact": "名",
+        "prefix": "大於分，分莫大於",
+        "suffix": "。何謂禮？紀綱是"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "名位、名號，指公、侯、卿、大夫等具體的爵位稱號。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p2:TERM:31-33",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p2",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 31,
+        "end": 33,
+        "exact": "紀綱",
+        "prefix": "大於名。何謂禮？",
+        "suffix": "是也。何謂分？君"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "綱紀、法度，指維繫國家秩序的根本制度與規範。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p2:TERM:50-58",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p2",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 50,
+        "end": 58,
+        "exact": "公、侯、卿、大夫",
+        "prefix": "臣是也。何謂名？",
+        "suffix": "是也。"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "周代以來的爵位與官職等級。公、侯為諸侯爵位；卿、大夫為朝廷與封國中的高級官職、身分稱號，各有尊卑等差。",
+      "confidence": 0.92,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:PERSON:0-2",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 0,
+        "end": 2,
+        "exact": "文王",
+        "prefix": "",
+        "suffix": "序易，以乾、坤為"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "指周文王姬昌，周朝奠基者，相傳曾推演《易》之卦序。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:PERSON:12-14",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 12,
+        "end": 14,
+        "exact": "孔子",
+        "prefix": "，以乾、坤為首。",
+        "suffix": "繫之曰：「天尊地"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "孔丘，春秋魯國人，儒家創始者，相傳作《易》之《繫辭》。",
+      "confidence": 0.97,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:TERM:14-16",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 14,
+        "end": 16,
+        "exact": "繫之",
+        "prefix": "乾、坤為首。孔子",
+        "suffix": "曰：「天尊地卑，"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "指《易》之《繫辭》，附於卦爻之下以闡發義理。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:TERM:54-56",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 54,
+        "end": 56,
+        "exact": "春秋",
+        "prefix": "天地之不可易也。",
+        "suffix": "抑諸侯，尊王室，"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "此指《春秋》一書，孔子所修魯史，以褒貶抑諸侯、尊王室。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:TERM:64-66",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 64,
+        "end": 66,
+        "exact": "王人",
+        "prefix": "抑諸侯，尊王室，",
+        "suffix": "雖微，序於諸侯之"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "指周天子派出的使者，雖地位微賤，仍列於諸侯之上。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:FIRST_APPEARANCE:131-133",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 131,
+        "end": 133,
+        "exact": "微子",
+        "prefix": "死而已矣。是故以",
+        "suffix": "而代紂則成湯配天"
+      },
+      "layer": 2,
+      "category": "FIRST_APPEARANCE",
+      "text": "商紂王之庶兄，名啟，封於微；此處首次出現，用以假設其代紂為君。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:FIRST_APPEARANCE:144-146",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 144,
+        "end": 146,
+        "exact": "季札",
+        "prefix": "則成湯配天矣，以",
+        "suffix": "而君吳則太伯血食"
+      },
+      "layer": 2,
+      "category": "FIRST_APPEARANCE",
+      "text": "吳國公子，賢而讓國；此處首次出現，用以假設其君吳。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p4:FIRST_APPEARANCE:150-152",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 150,
+        "end": 152,
+        "exact": "太伯",
+        "prefix": "，以季札而君吳則",
+        "suffix": "血食矣，然二子寧"
+      },
+      "layer": 2,
+      "category": "FIRST_APPEARANCE",
+      "text": "周太王長子，讓位南奔，為吳國始祖；此處首次出現。",
+      "confidence": 0.88,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p5:TERM:55-57",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 55,
+        "end": 57,
+        "exact": "名器",
+        "prefix": "，此禮之大經也。",
+        "suffix": "旣亡，則禮安得獨"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "名號與器物，古代用以區別貴賤等級的制度象徵。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p5:PERSON:69-73",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 69,
+        "end": 73,
+        "exact": "仲叔於奚",
+        "prefix": "禮安得獨在哉！昔",
+        "suffix": "有功於衞，辭邑而"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "衞人，有功於衞，辭邑而請繁纓，孔子譏其僭越名器。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p5:TERM:82-84",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 82,
+        "end": 84,
+        "exact": "繁纓",
+        "prefix": "功於衞，辭邑而請",
+        "suffix": "，孔子以為不如多"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "馬纓，古代諸侯馬匹的裝飾，用以別尊卑；非其分而請之，即僭越名器。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p5:TERM:264-269",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 264,
+        "end": 269,
+        "exact": "履霜堅冰至",
+        "prefix": "能及也。易曰：「",
+        "suffix": "，」書曰：「一日"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "《易·坤卦》爻辭，喻見微知著，防微杜漸。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p5:TERM:275-281",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 275,
+        "end": 281,
+        "exact": "一日二日萬幾",
+        "prefix": "冰至，」書曰：「",
+        "suffix": "，」謂此類也。故"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "《書·皋陶謨》語，謂每日處理萬端政務，當謹慎於微。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:PERSON:3-6",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 3,
+        "end": 6,
+        "exact": "幽、厲",
+        "prefix": "嗚呼！",
+        "suffix": "失德，周道日衰，"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "周幽王與周厲王，西周兩位失德之君，後世常並稱以喻衰世。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:OFFICE:29-31",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 29,
+        "end": 31,
+        "exact": "大夫",
+        "prefix": "上替，諸侯專征，",
+        "suffix": "擅政，禮之大體什"
+      },
+      "layer": 2,
+      "category": "OFFICE",
+      "text": "周代諸侯國中位次於卿的官員，此泛指把持國政的卿大夫階層。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:TERM:67-69",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 67,
+        "end": 69,
+        "exact": "名分",
+        "prefix": "周之子孫尚能守其",
+        "suffix": "故也。何以言之？"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "名位與職分，指周天子與諸侯之間上下尊卑的禮制秩序。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:PERSON:78-81",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 78,
+        "end": 81,
+        "exact": "晉文公",
+        "prefix": "也。何以言之？昔",
+        "suffix": "有大功於王室，請"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "春秋五霸之一，名重耳，曾平定周王室之亂，有功於周襄王。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:TERM:89-90",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 89,
+        "end": 90,
+        "exact": "隧",
+        "prefix": "有大功於王室，請",
+        "suffix": "於襄王，襄王不許"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "此指天子葬禮所用之隧葬之禮，諸侯請用隧葬即僭越天子之禮。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:PERSON:91-93",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 91,
+        "end": 93,
+        "exact": "襄王",
+        "prefix": "功於王室，請隧於",
+        "suffix": "，襄王不許，曰："
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "周襄王，名鄭，東周天子，曾遭弟弟子帶之亂，賴晉文公相助復位。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:PERSON:216-218",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 216,
+        "end": 218,
+        "exact": "季氏",
+        "prefix": "分尚存故也。至於",
+        "suffix": "之於魯，田常之於"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "魯國世卿家族，長期把持魯國國政，此指其勢力足以逐君自為。",
+      "confidence": 0.85,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:PERSON:222-224",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 222,
+        "end": 224,
+        "exact": "田常",
+        "prefix": "至於季氏之於魯，",
+        "suffix": "之於齊，白公之於"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即田成子，春秋末齊國權臣，殺齊簡公，專齊國之政，為田氏代齊奠定基礎。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:PERSON:228-230",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 228,
+        "end": 230,
+        "exact": "白公",
+        "prefix": "魯，田常之於齊，",
+        "suffix": "之於楚，智伯之於"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即白公勝，楚平王之孫，曾發動白公之亂，一度劫持楚惠王而專楚政。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p6:PERSON:234-236",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 234,
+        "end": 236,
+        "exact": "智伯",
+        "prefix": "齊，白公之於楚，",
+        "suffix": "之於晉，其勢皆足"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即智襄子荀瑤，春秋末晉國四卿之一，勢力最強，後為韓、趙、魏所滅。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p7:TERM:9-11",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 9,
+        "end": 11,
+        "exact": "周室",
+        "prefix": "者以為當是之時，",
+        "suffix": "微弱，三晉強盛，"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "指周王室、周王朝。周室東遷後王畿狹小、號令不行，此處言其衰微。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p7:TERM:14-16",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 14,
+        "end": 16,
+        "exact": "三晉",
+        "prefix": "之時，周室微弱，",
+        "suffix": "強盛，雖欲勿許，"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "指晉國分裂而成的韓、趙、魏三家。此段論其請命於天子而得列為諸侯之事。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p7:TERM:57-59",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 57,
+        "end": 59,
+        "exact": "天子",
+        "prefix": "義侵禮，則不請於",
+        "suffix": "而自立矣。不請於"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "此指周天子，天下共主。戰國時周天子名義上仍為諸侯所共奉之最高君主。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p7:PERSON:84-87",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 84,
+        "end": 87,
+        "exact": "桓、文",
+        "prefix": "逆之臣，天下苟有",
+        "suffix": "之君，必奉禮義而"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "指齊桓公、晉文公，春秋時以尊王攘夷、主持會盟著稱的霸主。此借指能奉禮義以征討悖逆之臣的強君。",
+      "confidence": 0.95,
+      "source": "reviewer"
+    },
+    {
+      "id": "ai:tongjian-jishi-benmo:vol01:p7:TERM:117-119",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 117,
+        "end": 119,
+        "exact": "諸侯",
+        "prefix": "是受天子之命而為",
+        "suffix": "也，誰得而討之！"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "此指經天子冊命而取得諸侯身分的封國君主。三晉得天子之命，遂取得合法諸侯地位。",
+      "confidence": 0.9,
+      "source": "reviewer"
+    }
+  ],
+  "properNames": [
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p1:PERSON:0-4",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 0,
+        "end": 4,
+        "exact": "周威烈王",
+        "prefix": "",
+        "suffix": "二十三年，初命晉"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p1:STATE:11-12",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 11,
+        "end": 12,
+        "exact": "晉",
+        "prefix": "王二十三年，初命",
+        "suffix": "大夫魏斯、趙籍、"
+      },
+      "type": "STATE"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p1:PERSON:14-16",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 14,
+        "end": 16,
+        "exact": "魏斯",
+        "prefix": "三年，初命晉大夫",
+        "suffix": "、趙籍、韓虔爲諸"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p1:PERSON:17-19",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 17,
+        "end": 19,
+        "exact": "趙籍",
+        "prefix": "初命晉大夫魏斯、",
+        "suffix": "、韓虔爲諸侯。"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p1:PERSON:20-22",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p1",
+        "start": 20,
+        "end": 22,
+        "exact": "韓虔",
+        "prefix": "大夫魏斯、趙籍、",
+        "suffix": "爲諸侯。"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p2:PERSON:0-2",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p2",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p2",
+        "start": 0,
+        "end": 2,
+        "exact": "臣光",
+        "prefix": "",
+        "suffix": "曰：臣聞天子之職"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:0-2",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 0,
+        "end": 2,
+        "exact": "文王",
+        "prefix": "",
+        "suffix": "序易，以乾、坤為"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:12-14",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 12,
+        "end": 14,
+        "exact": "孔子",
+        "prefix": "，以乾、坤為首。",
+        "suffix": "繫之曰：「天尊地"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:95-96",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 95,
+        "end": 96,
+        "exact": "桀",
+        "prefix": "嘗不惓惓也。非有",
+        "suffix": "、紂之暴，湯、武"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:97-98",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 97,
+        "end": 98,
+        "exact": "紂",
+        "prefix": "惓惓也。非有桀、",
+        "suffix": "之暴，湯、武之仁"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:101-102",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 101,
+        "end": 102,
+        "exact": "湯",
+        "prefix": "非有桀、紂之暴，",
+        "suffix": "、武之仁，人歸之"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:103-104",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 103,
+        "end": 104,
+        "exact": "武",
+        "prefix": "桀、紂之暴，湯、",
+        "suffix": "之仁，人歸之，天"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:131-133",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 131,
+        "end": 133,
+        "exact": "微子",
+        "prefix": "死而已矣。是故以",
+        "suffix": "而代紂則成湯配天"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:144-146",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 144,
+        "end": 146,
+        "exact": "季札",
+        "prefix": "則成湯配天矣，以",
+        "suffix": "而君吳則太伯血食"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p4:PERSON:150-152",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p4",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p4",
+        "start": 150,
+        "end": 152,
+        "exact": "太伯",
+        "prefix": "，以季札而君吳則",
+        "suffix": "血食矣，然二子寧"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p5:PERSON:69-73",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 69,
+        "end": 73,
+        "exact": "仲叔於奚",
+        "prefix": "禮安得獨在哉！昔",
+        "suffix": "有功於衞，辭邑而"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p5:STATE:76-77",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 76,
+        "end": 77,
+        "exact": "衞",
+        "prefix": "昔仲叔於奚有功於",
+        "suffix": "，辭邑而請繁纓，"
+      },
+      "type": "STATE"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p5:PERSON:85-87",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p5",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 85,
+        "end": 87,
+        "exact": "孔子",
+        "prefix": "，辭邑而請繁纓，",
+        "suffix": "以為不如多與之邑"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PERSON:3-6",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 3,
+        "end": 6,
+        "exact": "幽、厲",
+        "prefix": "嗚呼！",
+        "suffix": "失德，周道日衰，"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PERSON:78-81",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 78,
+        "end": 81,
+        "exact": "晉文公",
+        "prefix": "也。何以言之？昔",
+        "suffix": "有大功於王室，請"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PERSON:91-93",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 91,
+        "end": 93,
+        "exact": "襄王",
+        "prefix": "功於王室，請隧於",
+        "suffix": "，襄王不許，曰："
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PLACE:159-162",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 159,
+        "end": 162,
+        "exact": "曹、滕",
+        "prefix": "以周之地則不大於",
+        "suffix": "，以周之民則不衆"
+      },
+      "type": "PLACE"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PLACE:171-174",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 171,
+        "end": 174,
+        "exact": "邾、莒",
+        "prefix": "以周之民則不衆於",
+        "suffix": "，然歷數百年，宗"
+      },
+      "type": "PLACE"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:STATE:188-195",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 188,
+        "end": 195,
+        "exact": "晉、楚、齊、秦",
+        "prefix": "，宗主天下，雖以",
+        "suffix": "之強不敢加者，何"
+      },
+      "type": "STATE"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PERSON:216-218",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 216,
+        "end": 218,
+        "exact": "季氏",
+        "prefix": "分尚存故也。至於",
+        "suffix": "之於魯，田常之於"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PERSON:222-224",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 222,
+        "end": 224,
+        "exact": "田常",
+        "prefix": "至於季氏之於魯，",
+        "suffix": "之於齊，白公之於"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PERSON:228-230",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 228,
+        "end": 230,
+        "exact": "白公",
+        "prefix": "魯，田常之於齊，",
+        "suffix": "之於楚，智伯之於"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p6:PERSON:234-236",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p6",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 234,
+        "end": 236,
+        "exact": "智伯",
+        "prefix": "齊，白公之於楚，",
+        "suffix": "之於晉，其勢皆足"
+      },
+      "type": "PERSON"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p7:DYNASTY:9-11",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 9,
+        "end": 11,
+        "exact": "周室",
+        "prefix": "者以為當是之時，",
+        "suffix": "微弱，三晉強盛，"
+      },
+      "type": "DYNASTY"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p7:STATE:14-16",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 14,
+        "end": 16,
+        "exact": "三晉",
+        "prefix": "之時，周室微弱，",
+        "suffix": "強盛，雖欲勿許，"
+      },
+      "type": "STATE"
+    },
+    {
+      "id": "pn:tongjian-jishi-benmo:vol01:p7:PERSON:84-87",
+      "workId": "tongjian-jishi-benmo",
+      "volumeId": "vol01",
+      "passageId": "tongjian-jishi-benmo:vol01:p7",
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 84,
+        "end": 87,
+        "exact": "桓、文",
+        "prefix": "逆之臣，天下苟有",
+        "suffix": "之君，必奉禮義而"
+      },
+      "type": "PERSON"
+    }
+  ]
+}

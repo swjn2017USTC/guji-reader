@@ -1,0 +1,38 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p0",
+  "overall": "reject",
+  "scores": {
+    "proper_name_precision": 2,
+    "proper_name_recall": 3,
+    "entity_resolution": 3,
+    "place_accuracy": 4,
+    "term_necessity": 3,
+    "office_accuracy": 3,
+    "first_appearance_accuracy": 3,
+    "verbosity_control": 4,
+    "unsupported_claim_risk": 3
+  },
+  "issues": [
+    {
+      "severity": "blocker",
+      "message": "「三家」被標為 INSTITUTION 專名，但「三家」是韓、趙、魏三家世卿的合稱，並非制度或機構，屬類型硬傷。"
+    },
+    {
+      "severity": "major",
+      "message": "「晉」在 properNames 標為 STATE，但在 annotations 又標為 PLACE，同一詞兩處類型不一致，且「晉」作為諸侯國應統一為 STATE 專名，不應再作 PLACE 註。"
+    },
+    {
+      "severity": "major",
+      "message": "「三家」與「晉」皆為本段唯一且明顯的專名，但「三家」類型錯誤、「晉」類型衝突，整體專名標註不可直接發布。"
+    },
+    {
+      "severity": "minor",
+      "message": "「三家」註文「指春秋末晉國的韓、趙、魏三家世卿大族」基本正確，但「春秋末」略嫌精確，三家分晉通常繫於戰國初，宜作「春秋末戰國初」或「春秋晚期以來」。"
+    },
+    {
+      "severity": "minor",
+      "message": "「晉」註文「西周至春秋時期的諸侯國」可接受，但「大致在今山西南部、河南北部一帶」尚可再收斂，且與 properNames 的 STATE 類型重複註釋，屬冗餘。"
+    }
+  ],
+  "revisedAnnotations": null
+}

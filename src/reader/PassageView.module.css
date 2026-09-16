@@ -5,10 +5,54 @@
   text-indent: 2em;
 }
 
+/* --- 古注 source note: dashed, tinted, tooltip ------------------------- */
+
 .sourceNote {
   color: var(--source-note-text);
   background-color: var(--source-note-bg);
-  border-bottom: 1px dashed var(--source-note-border);
-  padding: 0 0.15em;
+  border-block-end: 1px dashed var(--source-note-border);
+  padding: 0 0.12em;
   cursor: help;
+}
+
+/* --- AI annotation: solid accent underline + "注" marker --------------- */
+
+.annotated {
+  border-block-end: 1px solid var(--accent);
+}
+
+.annotationMarker {
+  font-family: inherit;
+  font-size: 0.62em;
+  line-height: 1;
+  vertical-align: super;
+  margin-inline-start: 0.15em;
+  padding: 0.1em 0.25em;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.annotationMarker:hover {
+  background-color: var(--accent);
+  color: var(--bg-surface);
+}
+
+/* --- 專名線 proper-name line ------------------------------------------- */
+
+/*
+ * border-block-end maps to the physical bottom in horizontal-tb and to the
+ * physical left in vertical-rl, which is exactly the V0.1 spec for 專名線.
+ * margin-inline-end inserts the required break between two adjacent but
+ * different entities without breaking a single entity that spans segments.
+ */
+.properName {
+  border-block-end: 1px solid var(--proper-name-line);
+  margin-inline-end: 0.1em;
+}
+
+.properNameContinued {
+  border-block-end: 1px solid var(--proper-name-line);
 }

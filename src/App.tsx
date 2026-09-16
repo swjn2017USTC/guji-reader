@@ -4,11 +4,16 @@ import { Sidebar } from "./components/Sidebar";
 import { SettingsPanel } from "./components/SettingsPanel";
 import { Reader } from "./reader/Reader";
 import { loadCatalog } from "./data/catalog";
+import { loadPublishedAnnotations } from "./data/annotations";
 import { loadSourceNotes } from "./data/sourceNotes";
 import { loadVolume } from "./data/volume";
 import { usePreferences } from "./hooks/usePreferences";
 import type { Passage, VolumeRef, Work } from "./types/corpus";
 import type { SourceNote } from "./types/corpus";
+import type {
+  PublishedAnnotation,
+  PublishedProperName,
+} from "./types/annotations";
 import "./styles/themes.css";
 import "./styles/layout.css";
 import styles from "./App.module.css";
@@ -20,6 +25,7 @@ function App() {
     setLineHeight,
     toggleSidebar,
     toggleSettings,
+    toggleProperNames,
     cycleTheme,
     toggleWritingMode,
   } = usePreferences();
@@ -28,6 +34,12 @@ function App() {
   const [currentVolume, setCurrentVolume] = useState<VolumeRef | null>(null);
   const [passages, setPassages] = useState<Passage[]>([]);
   const [sourceNotes, setSourceNotes] = useState<SourceNote[]>([]);
+  const [publishedAnnotations, setPublishedAnnotations] = useState<
+    PublishedAnnotation[]
+  >([]);
+  const [publishedProperNames, setPublishedProperNames] = useState<
+    PublishedProperName[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,10 +58,13 @@ function App() {
     Promise.all([
       loadVolume(work.id, currentVolume.id),
       loadSourceNotes(work.id, currentVolume.id),
+      loadPublishedAnnotations(work.id, currentVolume.id),
     ])
-      .then(([loadedPassages, loadedNotes]) => {
+      .then(([loadedPassages, loadedNotes, loadedAnnotations]) => {
         setPassages(loadedPassages);
         setSourceNotes(loadedNotes);
+        setPublishedAnnotations(loadedAnnotations.annotations);
+        setPublishedProperNames(loadedAnnotations.properNames);
       })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   }, [work, currentVolume]);
@@ -97,8 +112,10 @@ function App() {
         writingMode={preferences.writingMode}
         sidebarOpen={preferences.sidebarOpen}
         settingsOpen={preferences.settingsOpen}
+        showProperNames={preferences.showProperNames}
         onToggleSidebar={toggleSidebar}
         onToggleSettings={toggleSettings}
+        onToggleProperNames={toggleProperNames}
         onCycleTheme={cycleTheme}
         onToggleWritingMode={toggleWritingMode}
       />
@@ -118,7 +135,10 @@ function App() {
           <Reader
             passages={passages}
             sourceNotes={sourceNotes}
+            properNames={publishedProperNames}
+            annotations={publishedAnnotations}
             writingMode={preferences.writingMode}
+            showProperNames={preferences.showProperNames}
             scrollKey={scrollKey}
           />
         </main>

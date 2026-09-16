@@ -60,6 +60,10 @@ export function usePreferences() {
     setPreferences((prev) => ({ ...prev, settingsOpen: !prev.settingsOpen }));
   }, []);
 
+  const toggleProperNames = useCallback(() => {
+    setPreferences((prev) => ({ ...prev, showProperNames: !prev.showProperNames }));
+  }, []);
+
   const cycleTheme = useCallback(() => {
     const order: Theme[] = ["paper", "rice", "night"];
     const next = order[(order.indexOf(preferences.theme) + 1) % order.length];
@@ -78,6 +82,7 @@ export function usePreferences() {
     setLineHeight,
     toggleSidebar,
     toggleSettings,
+    toggleProperNames,
     cycleTheme,
     toggleWritingMode,
   };

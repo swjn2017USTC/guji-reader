@@ -4,6 +4,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 CANONICAL_DIR = PROJECT_ROOT / "data" / "canonical"
+AI_ANNOTATIONS_DIR = PROJECT_ROOT / "data" / "ai_annotations"
+REVIEW_REPORTS_DIR = PROJECT_ROOT / "data" / "review_reports"
 PUBLIC_DATA_DIR = PROJECT_ROOT / "public" / "data"
 FIXTURES_DIR = PROJECT_ROOT / "python" / "tests" / "fixtures"
 

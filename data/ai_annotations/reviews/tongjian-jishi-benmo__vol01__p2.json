@@ -1,0 +1,90 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p2",
+  "overall": "revise",
+  "scores": {
+    "proper_name_precision": 4,
+    "proper_name_recall": 3,
+    "entity_resolution": 4,
+    "place_accuracy": 5,
+    "term_necessity": 3,
+    "office_accuracy": 3,
+    "first_appearance_accuracy": 3,
+    "verbosity_control": 4,
+    "unsupported_claim_risk": 4
+  },
+  "issues": [
+    {
+      "severity": "minor",
+      "message": "「臣光」畫為 PERSON 專名可接受，但「臣」為自稱、「光」為名，span 邊界略寬；建議保留但註文已說明，屬可接受範圍。"
+    },
+    {
+      "severity": "major",
+      "message": "「公、侯、卿、大夫」標為 layer=2 category=OFFICE 不當：公、侯為爵位，卿、大夫為身分／官職通稱，依規則爵位與身分通稱不應畫成官職專名線，且此處是對「名」的舉例，宜作 TERM（layer=1）處理。"
+    },
+    {
+      "severity": "minor",
+      "message": "「分」「名」兩條註釋雖有必要，但「名」的註文加入「是名分的具體標識」屬引申斷言，原文僅以公侯卿大夫為例，宜更貼原文。"
+    },
+    {
+      "severity": "minor",
+      "message": "「紀綱」註文「原指網的總繩與細目」為詞源補充，尚可，但略增篇幅。"
+    }
+  ],
+  "revisedAnnotations": {
+    "properNames": [
+      {
+        "exact": "臣光",
+        "prefix": "",
+        "suffix": "曰：臣聞天子之職",
+        "type": "PERSON"
+      }
+    ],
+    "annotations": [
+      {
+        "exact": "臣光",
+        "prefix": "",
+        "suffix": "曰：臣聞天子之職",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即司馬光（1019—1086），字君實，北宋史學家，《資治通鑑》主編。「臣光曰」為其史論發語，仿《史記》「太史公曰」之例。",
+        "confidence": 0.98
+      },
+      {
+        "exact": "紀綱",
+        "prefix": "大於名。何謂禮？",
+        "suffix": "是也。何謂分？君",
+        "layer": 1,
+        "category": "TERM",
+        "text": "綱紀、法度，指維繫國家秩序的根本制度與規範。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "分",
+        "prefix": "大於禮，禮莫大於",
+        "suffix": "，分莫大於名。何",
+        "layer": 1,
+        "category": "TERM",
+        "text": "此處讀 fèn，指名分、職分，即各人依身分地位所應守的界限與本分。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "名",
+        "prefix": "大於分，分莫大於",
+        "suffix": "。何謂禮？紀綱是",
+        "layer": 1,
+        "category": "TERM",
+        "text": "名位、名號，指公、侯、卿、大夫等具體的爵位稱號。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "公、侯、卿、大夫",
+        "prefix": "臣是也。何謂名？",
+        "suffix": "是也。",
+        "layer": 1,
+        "category": "TERM",
+        "text": "周代以來的爵位與官職等級。公、侯為諸侯爵位；卿、大夫為朝廷與封國中的高級官職、身分稱號，各有尊卑等差。",
+        "confidence": 0.92
+      }
+    ]
+  }
+}

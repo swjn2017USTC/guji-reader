@@ -31,6 +31,7 @@
   --source-note-text: #4a453d;
   --button-bg: #ffffff;
   --button-hover: #f0ece3;
+  --proper-name-line: #1f6f4a;
 }
 
 [data-theme="rice"] {
@@ -49,6 +50,7 @@
   --source-note-text: #4a453d;
   --button-bg: #f7f0e0;
   --button-hover: #e8dec8;
+  --proper-name-line: #1b5e3f;
 }
 
 [data-theme="night"] {
@@ -67,4 +69,5 @@
   --source-note-text: #c8c0b4;
   --button-bg: #3a3a3a;
   --button-hover: #4a4a4a;
+  --proper-name-line: #6fae8c;
 }

@@ -1,0 +1,42 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p3",
+  "overall": "reject",
+  "scores": {
+    "proper_name_precision": 2,
+    "proper_name_recall": 2,
+    "entity_resolution": 3,
+    "place_accuracy": 3,
+    "term_necessity": 3,
+    "office_accuracy": 2,
+    "first_appearance_accuracy": 2,
+    "verbosity_control": 4,
+    "unsupported_claim_risk": 3
+  },
+  "issues": [
+    {
+      "severity": "blocker",
+      "message": "properNames 中將「天子」「諸侯」「卿大夫」「士庶人」標為 PERSON，這些是身分／爵位／等級通稱，非專名，類型嚴重錯誤（超過半數條目類型標錯）。"
+    },
+    {
+      "severity": "major",
+      "message": "annotations 中「諸侯」標為 OFFICE 並稱「爵位身分」，與 properNames 的 PERSON 自相矛盾；且諸侯為分封列國君主之通稱，非官職，category 不當。"
+    },
+    {
+      "severity": "major",
+      "message": "「士庶人」標為 OFFICE 不當：士為低級貴族、庶人為平民，並非官職，應為 TERM 或身分通稱。"
+    },
+    {
+      "severity": "major",
+      "message": "「卿大夫」標為 OFFICE 亦不妥，其為貴族等級通稱，非具體官職；且與 properNames 的 PERSON 類型衝突。"
+    },
+    {
+      "severity": "minor",
+      "message": "「天子之職莫大於禮也」整句作為 TERM 註釋，屬句子主旨說明而非詞語註釋，span 過長，宜改為對「職」或整句作意譯說明並縮短。"
+    },
+    {
+      "severity": "minor",
+      "message": "「四海」同時出現在 properNames（PLACE）與 annotations（PLACE），重複且非嚴格專名，宜只保留一處並說明其泛指天下。"
+    }
+  ],
+  "revisedAnnotations": null
+}

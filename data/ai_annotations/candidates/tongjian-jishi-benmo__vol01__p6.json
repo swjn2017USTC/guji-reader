@@ -1,0 +1,271 @@
+{
+  "passageId": "tongjian-jishi-benmo:vol01:p6",
+  "properNames": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 3,
+        "end": 6,
+        "exact": "幽、厲",
+        "prefix": "嗚呼！",
+        "suffix": "失德，周道日衰，"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 78,
+        "end": 81,
+        "exact": "晉文公",
+        "prefix": "也。何以言之？昔",
+        "suffix": "有大功於王室，請"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 91,
+        "end": 93,
+        "exact": "襄王",
+        "prefix": "功於王室，請隧於",
+        "suffix": "，襄王不許，曰："
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 159,
+        "end": 162,
+        "exact": "曹、滕",
+        "prefix": "以周之地則不大於",
+        "suffix": "，以周之民則不衆"
+      },
+      "type": "PLACE"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 171,
+        "end": 174,
+        "exact": "邾、莒",
+        "prefix": "以周之民則不衆於",
+        "suffix": "，然歷數百年，宗"
+      },
+      "type": "PLACE"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 188,
+        "end": 195,
+        "exact": "晉、楚、齊、秦",
+        "prefix": "，宗主天下，雖以",
+        "suffix": "之強不敢加者，何"
+      },
+      "type": "STATE"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 216,
+        "end": 218,
+        "exact": "季氏",
+        "prefix": "分尚存故也。至於",
+        "suffix": "之於魯，田常之於"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 222,
+        "end": 224,
+        "exact": "田常",
+        "prefix": "至於季氏之於魯，",
+        "suffix": "之於齊，白公之於"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 228,
+        "end": 230,
+        "exact": "白公",
+        "prefix": "魯，田常之於齊，",
+        "suffix": "之於楚，智伯之於"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 234,
+        "end": 236,
+        "exact": "智伯",
+        "prefix": "齊，白公之於楚，",
+        "suffix": "之於晉，其勢皆足"
+      },
+      "type": "PERSON"
+    }
+  ],
+  "annotations": [
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 3,
+        "end": 6,
+        "exact": "幽、厲",
+        "prefix": "嗚呼！",
+        "suffix": "失德，周道日衰，"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "周幽王與周厲王，西周兩位失德之君，幽王寵褒姒致犬戎之禍，厲王暴虐致國人暴動，二人常並稱以喻衰世。",
+      "confidence": 0.95
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 78,
+        "end": 81,
+        "exact": "晉文公",
+        "prefix": "也。何以言之？昔",
+        "suffix": "有大功於王室，請"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "春秋五霸之一，名重耳，曾平定周王室子帶之亂，有功於周襄王。",
+      "confidence": 0.95
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 91,
+        "end": 93,
+        "exact": "襄王",
+        "prefix": "功於王室，請隧於",
+        "suffix": "，襄王不許，曰："
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "周襄王，名鄭，東周天子，曾遭弟弟子帶之亂，賴晉文公相助復位。",
+      "confidence": 0.95
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 89,
+        "end": 90,
+        "exact": "隧",
+        "prefix": "有大功於王室，請",
+        "suffix": "於襄王，襄王不許"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "隧道，此指天子葬禮所用之隧葬之禮，諸侯請用隧葬即僭越天子之禮。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 67,
+        "end": 69,
+        "exact": "名分",
+        "prefix": "周之子孫尚能守其",
+        "suffix": "故也。何以言之？"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "名位與職分，指周天子與諸侯之間上下尊卑的禮制秩序。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 216,
+        "end": 218,
+        "exact": "季氏",
+        "prefix": "分尚存故也。至於",
+        "suffix": "之於魯，田常之於"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "魯國權臣家族，世為魯卿，長期把持魯國國政，此指其勢力足以逐君自為。",
+      "confidence": 0.85
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 222,
+        "end": 224,
+        "exact": "田常",
+        "prefix": "至於季氏之於魯，",
+        "suffix": "之於齊，白公之於"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即田成子，春秋末齊國權臣，殺齊簡公，專齊國之政，為田氏代齊奠定基礎。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 228,
+        "end": 230,
+        "exact": "白公",
+        "prefix": "魯，田常之於齊，",
+        "suffix": "之於楚，智伯之於"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即白公勝，楚平王之孫，曾發動白公之亂，一度劫持楚惠王而專楚政。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 234,
+        "end": 236,
+        "exact": "智伯",
+        "prefix": "齊，白公之於楚，",
+        "suffix": "之於晉，其勢皆足"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "即智襄子荀瑤，春秋末晉國四卿之一，勢力最強，後為韓、趙、魏所滅。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 29,
+        "end": 31,
+        "exact": "大夫",
+        "prefix": "上替，諸侯專征，",
+        "suffix": "擅政，禮之大體什"
+      },
+      "layer": 2,
+      "category": "OFFICE",
+      "text": "周代諸侯國中位次於卿的官員，此泛指把持國政的卿大夫階層。",
+      "confidence": 0.85
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p6",
+        "start": 297,
+        "end": 299,
+        "exact": "天子",
+        "prefix": "其君，剖分晉國，",
+        "suffix": "旣不能討，又寵秩"
+      },
+      "layer": 2,
+      "category": "OFFICE",
+      "text": "周天子，天下共主，此指周威烈王，本有討伐僭越之權而未能行使。",
+      "confidence": 0.9
+    }
+  ]
+}
