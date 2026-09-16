@@ -1,0 +1,70 @@
+:root {
+  --font-stack:
+    "GenWanMin TC",
+    "GenYoMin TC",
+    "Noto Serif TC",
+    "Source Han Serif TC",
+    "Songti TC",
+    "STSong",
+    serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="paper"] {
+  --bg-page: #f7f5f0;
+  --bg-surface: #ffffff;
+  --bg-sidebar: #faf8f3;
+  --bg-settings: #faf8f3;
+  --text-primary: #2a2620;
+  --text-secondary: #6b655c;
+  --text-muted: #948c80;
+  --border: #e3ddd2;
+  --accent: #8b5a2b;
+  --accent-hover: #6d4520;
+  --source-note-bg: #f0ece3;
+  --source-note-border: #d9d2c4;
+  --source-note-text: #4a453d;
+  --button-bg: #ffffff;
+  --button-hover: #f0ece3;
+}
+
+[data-theme="rice"] {
+  --bg-page: #f0e6d2;
+  --bg-surface: #f7f0e0;
+  --bg-sidebar: #f2e8d5;
+  --bg-settings: #f2e8d5;
+  --text-primary: #2a2620;
+  --text-secondary: #6b655c;
+  --text-muted: #948c80;
+  --border: #d9cbb3;
+  --accent: #7a4e24;
+  --accent-hover: #5c3a1b;
+  --source-note-bg: #e8dec8;
+  --source-note-border: #cbbfa6;
+  --source-note-text: #4a453d;
+  --button-bg: #f7f0e0;
+  --button-hover: #e8dec8;
+}
+
+[data-theme="night"] {
+  --bg-page: #2a2a2a;
+  --bg-surface: #333333;
+  --bg-sidebar: #2e2e2e;
+  --bg-settings: #2e2e2e;
+  --text-primary: #e8e4dc;
+  --text-secondary: #b8b0a4;
+  --text-muted: #8a8278;
+  --border: #4a4a4a;
+  --accent: #d4a76a;
+  --accent-hover: #e0bd8a;
+  --source-note-bg: #3a3630;
+  --source-note-border: #4a4a4a;
+  --source-note-text: #c8c0b4;
+  --button-bg: #3a3a3a;
+  --button-hover: #4a4a4a;
+}

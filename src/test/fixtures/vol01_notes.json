@@ -1,0 +1,18 @@
+[
+  {
+    "id": "hu:vol01:p1:1",
+    "workId": "test-work",
+    "volumeId": "vol01",
+    "passageId": "test-work:vol01:p1",
+    "anchor": {
+      "passageId": "test-work:vol01:p1",
+      "start": 10,
+      "end": 14,
+      "exact": "胡注標記",
+      "prefix": "第一卷正文第二段，含",
+      "suffix": "。"
+    },
+    "text": "胡三省注：此處為測試古注。",
+    "provenance": "胡三省注測試"
+  }
+]

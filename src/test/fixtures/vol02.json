@@ -1,0 +1,11 @@
+[
+  {
+    "id": "test-work:vol02:p0",
+    "workId": "test-work",
+    "volumeId": "vol02",
+    "order": 0,
+    "text": "第二卷正文。",
+    "sourcePage": "https://example.com/vol02",
+    "revisionId": "2"
+  }
+]

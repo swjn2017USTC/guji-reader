@@ -1,0 +1,28 @@
+{
+  "id": "test-work",
+  "title": "測試古籍",
+  "editionId": "test-edition",
+  "source": {
+    "provider": "wikisource",
+    "url": "https://example.com",
+    "retrievedAt": "2024-01-01T00:00:00Z"
+  },
+  "volumes": [
+    {
+      "id": "vol01",
+      "workId": "test-work",
+      "title": "第一卷",
+      "order": 0,
+      "sourcePage": "https://example.com/vol01",
+      "passageCount": 2
+    },
+    {
+      "id": "vol02",
+      "workId": "test-work",
+      "title": "第二卷",
+      "order": 1,
+      "sourcePage": "https://example.com/vol02",
+      "passageCount": 1
+    }
+  ]
+}

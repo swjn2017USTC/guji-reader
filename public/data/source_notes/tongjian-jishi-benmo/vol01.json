@@ -1,0 +1,34 @@
+[
+  {
+    "id": "hu-sanxing:vol01:p1:1",
+    "workId": "tongjian-jishi-benmo",
+    "volumeId": "vol01",
+    "passageId": "tongjian-jishi-benmo:vol01:p1",
+    "anchor": {
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "start": 0,
+      "end": 4,
+      "exact": "周威烈王",
+      "prefix": "",
+      "suffix": "二十三年，初命晉大夫魏斯、趙籍、韓虔爲諸侯。"
+    },
+    "text": "威烈王，名午，考王之子也。烈，諡法：有功安民曰烈。",
+    "provenance": "胡三省注《資治通鑑》卷第一"
+  },
+  {
+    "id": "hu-sanxing:vol01:p1:2",
+    "workId": "tongjian-jishi-benmo",
+    "volumeId": "vol01",
+    "passageId": "tongjian-jishi-benmo:vol01:p1",
+    "anchor": {
+      "passageId": "tongjian-jishi-benmo:vol01:p1",
+      "start": 11,
+      "end": 14,
+      "exact": "晉大夫",
+      "prefix": "周威烈王二十三年，初命",
+      "suffix": "魏斯、趙籍、韓虔爲諸侯。"
+    },
+    "text": "晉大夫，謂魏斯、趙籍、韓虔也。三家分晉之漸，見於此矣。",
+    "provenance": "胡三省注《資治通鑑》卷第一"
+  }
+]

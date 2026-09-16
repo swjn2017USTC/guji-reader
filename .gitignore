@@ -35,7 +35,10 @@ data/canonical/
 data/source_notes/
 data/ai_annotations/
 data/review_reports/
-public/data/
+public/data/works/
+public/data/catalog.json
+# Curated source-note fixtures are tracked; everything else in public/data is generated.
+!public/data/source_notes/
 *.sqlite
 *.db
 

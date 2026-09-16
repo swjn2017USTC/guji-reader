@@ -1,0 +1,59 @@
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+}
+
+.header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.bookTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.volumeList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.volumeButton,
+.volumeButtonActive {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.25rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.volumeButton:hover {
+  background-color: var(--button-hover);
+  color: var(--text-primary);
+}
+
+.volumeButtonActive {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.volumeButtonActive:hover {
+  background-color: var(--accent-hover);
+}

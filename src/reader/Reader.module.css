@@ -1,0 +1,22 @@
+.scroll {
+  flex: 1;
+  overflow: auto;
+  padding: 2rem;
+  background-color: var(--bg-page);
+}
+
+.contentHorizontal,
+.contentVertical {
+  margin: 0 auto;
+  text-align: justify;
+}
+
+.contentHorizontal {
+  max-width: 42rem;
+}
+
+.contentVertical {
+  max-width: none;
+  max-height: calc(100vh - 9rem);
+  text-orientation: mixed;
+}

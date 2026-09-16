@@ -1,0 +1,38 @@
+.panel {
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--bg-settings);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.row label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.row input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+.value {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: right;
+}

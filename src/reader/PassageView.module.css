@@ -1,0 +1,14 @@
+.passage {
+  margin: 0 0 1.5rem;
+  line-height: var(--line-height, 1.8);
+  font-size: var(--font-size, 20px);
+  text-indent: 2em;
+}
+
+.sourceNote {
+  color: var(--source-note-text);
+  background-color: var(--source-note-bg);
+  border-bottom: 1px dashed var(--source-note-border);
+  padding: 0 0.15em;
+  cursor: help;
+}

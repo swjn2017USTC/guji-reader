@@ -1,0 +1,20 @@
+[
+  {
+    "id": "test-work:vol01:p0",
+    "workId": "test-work",
+    "volumeId": "vol01",
+    "order": 0,
+    "text": "第一卷正文第一段。",
+    "sourcePage": "https://example.com/vol01",
+    "revisionId": "1"
+  },
+  {
+    "id": "test-work:vol01:p1",
+    "workId": "test-work",
+    "volumeId": "vol01",
+    "order": 1,
+    "text": "第一卷正文第二段，含胡注標記。",
+    "sourcePage": "https://example.com/vol01",
+    "revisionId": "1"
+  }
+]
