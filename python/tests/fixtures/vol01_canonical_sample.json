@@ -1,0 +1,29 @@
+[
+  {
+    "id": "tongjian-jishi-benmo:vol01:p0",
+    "workId": "tongjian-jishi-benmo",
+    "volumeId": "vol01",
+    "order": 0,
+    "text": "三家分晉",
+    "sourcePage": "https://zh.wikisource.org/wiki/%E9%80%9A%E9%91%91%E7%B4%80%E4%BA%8B%E6%9C%AC%E6%9C%AB/%E7%AC%AC%E4%B8%80%E5%8D%B7",
+    "revisionId": "2149327"
+  },
+  {
+    "id": "tongjian-jishi-benmo:vol01:p1",
+    "workId": "tongjian-jishi-benmo",
+    "volumeId": "vol01",
+    "order": 1,
+    "text": "周威烈王二十三年，初命晉大夫魏斯、趙籍、韓虔爲諸侯。",
+    "sourcePage": "https://zh.wikisource.org/wiki/%E9%80%9A%E9%91%91%E7%B4%80%E4%BA%8B%E6%9C%AC%E6%9C%AB/%E7%AC%AC%E4%B8%80%E5%8D%B7",
+    "revisionId": "2149327"
+  },
+  {
+    "id": "tongjian-jishi-benmo:vol01:p2",
+    "workId": "tongjian-jishi-benmo",
+    "volumeId": "vol01",
+    "order": 2,
+    "text": "臣光曰：臣聞天子之職莫大於禮，禮莫大於分，分莫大於名。何謂禮？紀綱是也。何謂分？君、臣是也。何謂名？公、侯、卿、大夫是也。",
+    "sourcePage": "https://zh.wikisource.org/wiki/%E9%80%9A%E9%91%91%E7%B4%80%E4%BA%8B%E6%9C%AC%E6%9C%AB/%E7%AC%AC%E4%B8%80%E5%8D%B7",
+    "revisionId": "2149327"
+  }
+]
