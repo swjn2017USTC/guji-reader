@@ -1,0 +1,20 @@
+modelRoles:
+  plan: opencode-go/kimi-k3:max
+  slow: opencode-go/kimi-k3:max
+
+  default: opencode-go/kimi-k2.7-code
+  task: opencode-go/kimi-k2.7-code
+
+  review: opencode-go/glm-5.3:high
+
+  smol: opencode-go/deepseek-v4.1-flash
+  tiny: opencode-go/deepseek-v4.1-flash
+  commit: opencode-go/deepseek-v4.1-flash
+
+cycleOrder:
+  - smol
+  - default
+  - slow
+
+advisor:
+  enabled: false
