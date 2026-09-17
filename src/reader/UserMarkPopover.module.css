@@ -61,6 +61,11 @@
   gap: 0.4rem;
 }
 
+/* The destructive row sits below the primary action, visually separated. */
+.actionsSecondary {
+  margin-top: 0.4rem;
+}
+
 .primary,
 .secondary,
 .danger {

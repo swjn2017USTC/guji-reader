@@ -10,6 +10,9 @@ type UserMarkPopoverProps = {
   /** Open directly in edit mode — used by 寫批註 on a brand-new mark. */
   startEditing?: boolean;
   onSave: (note: string) => void;
+  /** Clear the note but keep the mark. */
+  onDeleteNote: () => void;
+  /** Remove the whole record, note included. */
   onDelete: () => void;
   onClose: () => void;
 };
@@ -21,12 +24,17 @@ type UserMarkPopoverProps = {
  * popover: both can be deleted, and both can carry a note. The only difference
  * is the label on the primary action — a mark with no note yet offers 寫批註,
  * one that has a note offers 編輯.
+ *
+ * A note is stored on the mark, so the two deletions are offered separately:
+ * 刪除批註 keeps the highlight/wavy and only clears the note, 刪除標記 removes
+ * the record and therefore the note with it.
  */
 export function UserMarkPopover({
   annotation,
   referenceElement,
   startEditing = false,
   onSave,
+  onDeleteNote,
   onDelete,
   onClose,
 }: UserMarkPopoverProps) {
@@ -106,13 +114,32 @@ export function UserMarkPopover({
             >
               {hasNote ? "編輯" : "寫批註"}
             </button>
+          </div>
+          {/*
+           * Two separate destructive actions. A note and its mark live in one
+           * record, so removing the mark necessarily removes the note too — but
+           * wanting to drop only the note while keeping the highlight is a
+           * normal thing to want, and used to be impossible.
+           */}
+          <div className={`${styles.actions} ${styles.actionsSecondary}`}>
+            {hasNote && (
+              <button
+                type="button"
+                className={styles.secondary}
+                data-delete-note
+                onClick={onDeleteNote}
+              >
+                刪除批註
+              </button>
+            )}
             <button
               type="button"
               className={styles.danger}
               data-delete-mark
+              title={hasNote ? "同時移除批註" : undefined}
               onClick={onDelete}
             >
-              刪除
+              刪除標記
             </button>
           </div>
         </>

@@ -417,7 +417,22 @@ export function Reader({
     [onUpdateUserAnnotation, openNote],
   );
 
+  /**
+   * Clear only the note, keeping the highlight/wavy mark.
+   *
+   * The popover is anchored to the 批 badge, which disappears once the note is
+   * gone, so it is closed rather than left pointing at a removed element.
+   */
   const handleDeleteNote = useCallback(async () => {
+    if (!openNote) {
+      return;
+    }
+    await onUpdateUserAnnotation(openNote.annotation.id, { note: "" });
+    setOpenNote(null);
+  }, [onUpdateUserAnnotation, openNote]);
+
+  /** Remove the whole mark. The note lives on the record, so it goes too. */
+  const handleDeleteMark = useCallback(async () => {
     if (!openNote) {
       return;
     }
@@ -485,7 +500,8 @@ export function Reader({
           referenceElement={openNote.element}
           startEditing={openNote.startEditing}
           onSave={(note) => void handleSaveNote(note)}
-          onDelete={() => void handleDeleteNote()}
+          onDeleteNote={() => void handleDeleteNote()}
+          onDelete={() => void handleDeleteMark()}
           onClose={() => setOpenNote(null)}
         />
       )}

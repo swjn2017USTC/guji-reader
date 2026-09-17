@@ -156,7 +156,7 @@ test.describe("smoke-3 私人批註", () => {
     );
 
     // Delete.
-    await page.getByRole("dialog", { name: "個人標記" }).getByRole("button", { name: "刪除" }).click();
+    await page.getByRole("dialog", { name: "個人標記" }).getByRole("button", { name: "刪除標記", exact: true }).click();
     await expect(page.locator("[data-batch-marker]")).toHaveCount(0);
     await expect(page.locator("[data-user-annotation-id]")).toHaveCount(0);
   });
@@ -185,7 +185,7 @@ test.describe("smoke-3 私人批註", () => {
 
     // Deleting removes it, and it stays gone after a reload.
     await page.locator('[data-user-style="highlight"]').click();
-    await page.getByRole("dialog", { name: "個人標記" }).getByRole("button", { name: "刪除" }).click();
+    await page.getByRole("dialog", { name: "個人標記" }).getByRole("button", { name: "刪除標記", exact: true }).click();
     await expect(page.locator("[data-user-annotation-id]")).toHaveCount(0);
 
     await page.reload();
@@ -201,7 +201,7 @@ test.describe("smoke-3 私人批註", () => {
 
     await page.locator('[data-user-style="wavy"]').click();
     await expect(page.getByRole("dialog", { name: "個人標記" })).toBeVisible();
-    await page.getByRole("dialog", { name: "個人標記" }).getByRole("button", { name: "刪除" }).click();
+    await page.getByRole("dialog", { name: "個人標記" }).getByRole("button", { name: "刪除標記", exact: true }).click();
     await expect(page.locator("[data-user-annotation-id]")).toHaveCount(0);
   });
 
@@ -225,7 +225,7 @@ test.describe("smoke-3 私人批註", () => {
     await page.locator("[data-batch-marker]").click();
     const inspector = page.getByRole("dialog", { name: "個人標記" });
     await expect(inspector).toContainText("魏斯即魏文侯。");
-    await inspector.getByRole("button", { name: "刪除" }).click();
+    await inspector.getByRole("button", { name: "刪除標記", exact: true }).click();
 
     // Deleting the mark removes its 批 marker too.
     await expect(page.locator("[data-user-annotation-id]")).toHaveCount(0);
@@ -440,7 +440,67 @@ test.describe("smoke-3 長選取不出屏", () => {
     expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
     expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
 
-    const del = await popover.getByRole("button", { name: "刪除" }).boundingBox();
+    const del = await popover.getByRole("button", { name: "刪除標記", exact: true }).boundingBox();
     expect(del!.y + del!.height).toBeLessThanOrEqual(viewport.height);
+  });
+});
+
+test.describe("smoke-3 分開刪除", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector(PASSAGE);
+    await page.evaluate(async () => {
+      await new Promise<void>((resolve) => {
+        const request = indexedDB.deleteDatabase("guji-reader");
+        request.onsuccess = () => resolve();
+        request.onerror = () => resolve();
+        request.onblocked = () => resolve();
+      });
+    });
+    await page.reload();
+    await page.waitForSelector(PASSAGE);
+  });
+
+  test("刪除批註保留高亮，刪除標記才移除全部", async ({ page }) => {
+    // One mark carrying a note, so both destructive actions are available.
+    await selectInPassage(page, 14, 16);
+    await page
+      .getByRole("toolbar", { name: "標記工具" })
+      .getByRole("button", { name: "寫批註" })
+      .click();
+    await page.getByLabel("批註內容").fill("魏斯即魏文侯。");
+    await page.getByRole("button", { name: "儲存" }).click();
+    await expect(page.locator("[data-batch-marker]")).toHaveCount(1);
+
+    const markPieces = () => page.locator("[data-user-annotation-id]");
+    expect(await markPieces().count()).toBeGreaterThan(0);
+
+    // Both actions are present and separately labelled.
+    await page.locator("[data-batch-marker]").click();
+    const popover = page.getByRole("dialog", { name: "個人標記" });
+    await expect(popover.getByRole("button", { name: "刪除批註" })).toBeVisible();
+    await expect(
+      popover.getByRole("button", { name: "刪除標記", exact: true }),
+    ).toBeVisible();
+
+    // 刪除批註 drops the note and its 批 marker but keeps the highlight.
+    await popover.getByRole("button", { name: "刪除批註" }).click();
+    await expect(page.locator("[data-batch-marker]")).toHaveCount(0);
+    await expect(page.locator('[data-user-style="highlight"]')).not.toHaveCount(0);
+    expect(await markPieces().count()).toBeGreaterThan(0);
+
+    // It survives a reload, i.e. the note is really gone and the mark really kept.
+    await page.reload();
+    await page.waitForSelector(PASSAGE);
+    await expect(page.locator("[data-batch-marker]")).toHaveCount(0);
+    expect(await markPieces().count()).toBeGreaterThan(0);
+
+    // The note can still be re-added, and 刪除標記 then removes everything.
+    await markPieces().first().click();
+    const reopened = page.getByRole("dialog", { name: "個人標記" });
+    await expect(reopened).toContainText("尚無批註");
+    await expect(reopened.getByRole("button", { name: "刪除批註" })).toHaveCount(0);
+    await reopened.getByRole("button", { name: "刪除標記", exact: true }).click();
+    await expect(markPieces()).toHaveCount(0);
   });
 });

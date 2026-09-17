@@ -258,9 +258,9 @@ describe("personal annotations", () => {
     const popover = screen.getByRole("dialog", { name: "個人標記" });
     expect(within(popover).getByText("魏斯")).toBeInTheDocument(); // 原文選段
     expect(within(popover).getByText("尚無批註")).toBeInTheDocument();
-    expect(within(popover).getByRole("button", { name: "刪除" })).toBeInTheDocument();
+    expect(within(popover).getByRole("button", { name: "刪除標記" })).toBeInTheDocument();
 
-    fireEvent.click(within(popover).getByRole("button", { name: "刪除" }));
+    fireEvent.click(within(popover).getByRole("button", { name: "刪除標記" }));
 
     await waitFor(() => {
       expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0);
@@ -279,7 +279,7 @@ describe("personal annotations", () => {
 
     const popover = screen.getByRole("dialog", { name: "個人標記" });
     expect(within(popover).getByText("波浪線")).toBeInTheDocument();
-    fireEvent.click(within(popover).getByRole("button", { name: "刪除" }));
+    fireEvent.click(within(popover).getByRole("button", { name: "刪除標記" }));
 
     await waitFor(() =>
       expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0),
@@ -329,7 +329,7 @@ describe("personal annotations", () => {
     await flush();
     const popover = screen.getByRole("dialog", { name: "個人標記" });
     expect(within(popover).getByText("魏斯即魏文侯。")).toBeInTheDocument();
-    fireEvent.click(within(popover).getByRole("button", { name: "刪除" }));
+    fireEvent.click(within(popover).getByRole("button", { name: "刪除標記" }));
 
     await waitFor(() => {
       expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0);
@@ -359,7 +359,7 @@ describe("personal annotations", () => {
     await flush();
     fireEvent.click(
       within(screen.getByRole("dialog", { name: "個人標記" })).getByRole("button", {
-        name: "刪除",
+        name: "刪除標記",
       }),
     );
 
@@ -380,7 +380,7 @@ describe("personal annotations", () => {
     await flush();
     fireEvent.click(
       within(screen.getByRole("dialog", { name: "個人標記" })).getByRole("button", {
-        name: "刪除",
+        name: "刪除標記",
       }),
     );
     await waitFor(() =>
@@ -393,6 +393,54 @@ describe("personal annotations", () => {
     await flush();
 
     expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0);
+  });
+
+  it("deletes only the note, keeping the highlight", async () => {
+    await createMark();
+    await waitFor(() =>
+      expect(document.querySelector("[data-user-annotation-id]")).not.toBeNull(),
+    );
+
+    // Write a note so both destructive actions are on offer.
+    fireEvent.click(document.querySelector("[data-user-annotation-id]") as HTMLElement);
+    await flush();
+    fireEvent.click(
+      within(screen.getByRole("dialog", { name: "個人標記" })).getByRole("button", {
+        name: "寫批註",
+      }),
+    );
+    fireEvent.change(screen.getByLabelText("批註內容"), { target: { value: "魏斯即魏文侯。" } });
+    fireEvent.click(screen.getByRole("button", { name: "儲存" }));
+    await waitFor(() =>
+      expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(1),
+    );
+
+    // Both deletions are offered, separately labelled.
+    fireEvent.click(document.querySelector("[data-batch-marker]") as HTMLElement);
+    await flush();
+    const popover = screen.getByRole("dialog", { name: "個人標記" });
+    expect(within(popover).getByRole("button", { name: "刪除批註" })).toBeInTheDocument();
+    expect(
+      within(popover).getByRole("button", { name: "刪除標記" }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(within(popover).getByRole("button", { name: "刪除批註" }));
+    await flush();
+
+    // The note and its 批 marker are gone; the mark itself survives.
+    expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(0);
+    expect(document.querySelectorAll("[data-user-annotation-id]").length).toBeGreaterThan(0);
+    expect(document.querySelector('[data-user-style="highlight"]')).not.toBeNull();
+    expect(screen.queryByRole("dialog", { name: "個人標記" })).not.toBeInTheDocument();
+
+    // The mark is still editable and can take a new note.
+    fireEvent.click(document.querySelector("[data-user-annotation-id]") as HTMLElement);
+    await flush();
+    const reopened = screen.getByRole("dialog", { name: "個人標記" });
+    expect(within(reopened).getByText("尚無批註")).toBeInTheDocument();
+    expect(within(reopened).getByRole("button", { name: "寫批註" })).toBeInTheDocument();
+    // With no note there is nothing to delete separately.
+    expect(within(reopened).queryByRole("button", { name: "刪除批註" })).not.toBeInTheDocument();
   });
 
   it("keeps AI 注 and 專名線 clickable alongside a user highlight", async () => {
