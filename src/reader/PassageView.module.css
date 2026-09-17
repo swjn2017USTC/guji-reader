@@ -7,12 +7,26 @@
 
 /* --- 古注 source note: dashed, tinted, tooltip ------------------------- */
 
+/*
+ * The dashed underline and tint are what distinguish 古注 from the other three
+ * layers; the note text itself is revealed by the native tooltip.
+ *
+ * Two details matter:
+ *
+ * 1. No horizontal padding. A note can be split across segments when another
+ *    layer cuts through it — 「晉大夫」 splits at 晉 because 晉 is also a
+ *    proper name — and padding on each piece opens a visible gap in the middle
+ *    of one continuous note.
+ * 2. `cursor: default`, not `cursor: help`. Browsers render `help` as a
+ *    question mark, which reads as an error state rather than "there is a note
+ *    here". The note is not clickable in V0.1, so a pointer cursor would lie.
+ */
 .sourceNote {
   color: var(--source-note-text);
   background-color: var(--source-note-bg);
   border-block-end: 1px dashed var(--source-note-border);
-  padding: 0 0.12em;
-  cursor: help;
+  padding: 0;
+  cursor: default;
 }
 
 /* --- AI annotation: "注" marker only ----------------------------------- */
@@ -106,4 +120,14 @@
 
 .properNameContinued {
   border-block-end: 1px solid var(--proper-name-line);
+}
+
+/*
+ * A proper name that carries a 古注 must not push that note apart: the margin
+ * below exists to separate two adjacent proper names, but here the following
+ * text belongs to the same note (「晉大夫」 where 晉 is also a proper name).
+ */
+.properName:has(.sourceNote),
+.properNameContinued:has(.sourceNote) {
+  margin-inline-end: 0;
 }

@@ -54,53 +54,13 @@ body {
   position: relative;
 }
 
-.reader-scroll {
-  flex: 1;
-  overflow: auto;
-  padding: 2rem;
-}
-
-.reader-content {
-  max-width: 42rem;
-  margin: 0 auto;
-}
-
-.reader-content.vertical {
-  max-width: none;
-  max-height: calc(100vh - 8rem);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  text-align: justify;
-}
-
-.reader-content.horizontal {
-  writing-mode: horizontal-tb;
-  text-align: justify;
-}
-
-.passage {
-  margin-bottom: 1.5rem;
-  line-height: var(--line-height, 1.8);
-  font-size: var(--font-size, 20px);
-}
-
-.passage-text {
-  display: inline;
-}
-
-.source-note {
-  display: inline;
-  color: var(--source-note-text);
-  background-color: var(--source-note-bg);
-  border-bottom: 1px dashed var(--source-note-border);
-  padding: 0 0.1em;
-  margin: 0 0.1em;
-  cursor: help;
-}
-
-.source-note-content {
-  display: none;
-}
+/*
+ * `.reader-scroll` / `.reader-content` / `.passage` / `.source-note` used to
+ * live here. They were superseded by the Reader and PassageView CSS modules in
+ * P02 and became dead duplicates — one of them still carried the old
+ * `cursor: help` on 古注, which is exactly the kind of stale shadow copy that
+ * misleads a later reader. Per-passage styling belongs to the modules.
+ */
 
 @media (max-width: 900px) {
   .reader-sidebar,
