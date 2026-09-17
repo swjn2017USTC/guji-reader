@@ -62,6 +62,14 @@ export const sourceNoteSchema = z.object({
 
 export type SourceNote = z.infer<typeof sourceNoteSchema>;
 
+/*
+ * Mirrors models.AIAnnotation. Nothing in src/ consumes it directly — the reader
+ * validates the published shape via publishedAnnotationSchema in
+ * types/annotations.ts — but it is kept because the checklist requires
+ * src/types to correspond one-to-one with the Python models, and the Python side
+ * genuinely uses it (PublishedAnnotation extends AIAnnotation). Removing it
+ * would break that contract to satisfy a dead-code heuristic.
+ */
 export const aiAnnotationSchema = z.object({
   id: z.string(),
   workId: z.string(),
