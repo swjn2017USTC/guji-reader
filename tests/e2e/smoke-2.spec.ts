@@ -52,3 +52,83 @@ test.describe("smoke-2 AI 註釋", () => {
     await expect(page.getByRole("dialog", { name: "AI 注釋" })).toBeVisible();
   });
 });
+
+test.describe("smoke-2 專名線與註釋不得混淆", () => {
+  test("被註釋但不是專名的詞不畫線", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("[data-annotation-marker]");
+
+    // 「諸侯」只是一個 TERM 註釋，不是專名。
+    const term = page.locator('[data-annotation-id*="TERM"]').first();
+    await expect(term).toBeVisible();
+    await expect(term).not.toHaveAttribute("data-proper-name-type", /.+/);
+    const borders = await term.evaluate((el) => {
+      const cs = getComputedStyle(el);
+      return {
+        bottom: parseFloat(cs.borderBottomWidth),
+        left: parseFloat(cs.borderLeftWidth),
+      };
+    });
+    expect(borders.bottom).toBe(0);
+    expect(borders.left).toBe(0);
+  });
+
+  test("「注」標記本身不被畫進線裡", async ({ page }) => {
+    await page.goto("/");
+    const badge = page.locator("[data-annotation-marker]").first();
+    await expect(badge).toBeVisible();
+    // 標記不得位於任何專名 span 之內。
+    expect(await badge.evaluate((el) => el.closest("[data-proper-name-type]") !== null)).toBe(
+      false,
+    );
+  });
+
+  test("關閉專名線後所有線都消失但註釋仍在", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("[data-proper-name-type]");
+    const markersBefore = await page.locator("[data-annotation-marker]").count();
+    expect(markersBefore).toBeGreaterThan(0);
+
+    await page.getByRole("button", { name: "切換專名線" }).click();
+    await expect(page.locator("[data-proper-name-type]")).toHaveCount(0);
+
+    // 註釋與其標記不受專名線開關影響。
+    await expect(page.locator("[data-annotation-marker]")).toHaveCount(markersBefore);
+
+    const anyLine = await page.evaluate(() =>
+      [...document.querySelectorAll("[data-annotation-id]")].some((el) => {
+        const cs = getComputedStyle(el as HTMLElement);
+        return parseFloat(cs.borderBottomWidth) > 0 || parseFloat(cs.borderLeftWidth) > 0;
+      }),
+    );
+    expect(anyLine).toBe(false);
+  });
+
+  test("豎排可用滑鼠滾輪捲動", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "切換橫豎排" }).click();
+    await expect(page.locator(".reader-main > div > div").first()).toHaveCSS(
+      "writing-mode",
+      "vertical-rl",
+    );
+
+    const result = await page.evaluate(() => {
+      const scroller = document.querySelector("[data-reader-scroll]") as HTMLElement;
+      scroller.scrollLeft = scroller.scrollWidth - scroller.clientWidth;
+      const before = scroller.scrollLeft;
+      scroller.dispatchEvent(
+        new WheelEvent("wheel", { deltaY: 400, bubbles: true, cancelable: true }),
+      );
+      const afterDown = scroller.scrollLeft;
+      scroller.dispatchEvent(
+        new WheelEvent("wheel", { deltaY: -200, bubbles: true, cancelable: true }),
+      );
+      return { before, afterDown, afterUp: scroller.scrollLeft };
+    });
+
+    // 向下滾＝往後讀，scrollLeft 必須減少；向上滾則回復。
+    expect(result.afterDown).toBeLessThan(result.before);
+    expect(result.afterUp).toBeGreaterThan(result.afterDown);
+    expect(result.before - result.afterDown).toBe(400);
+  });
+});

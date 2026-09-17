@@ -109,6 +109,29 @@ export function Reader({
     };
   }, [writingMode]);
 
+  // Vertical CJK text overflows horizontally, so the scroller has nothing to
+  // scroll vertically. A plain mouse wheel only reports deltaY, which the
+  // browser tries to apply vertically and therefore does nothing — the reader
+  // was forced to drag the scrollbar. Map deltaY onto the inline axis instead.
+  useEffect(() => {
+    const scroller = scrollRef.current;
+    if (!scroller || writingMode !== "vertical") {
+      return;
+    }
+    const handleWheel = (event: WheelEvent) => {
+      // Horizontal trackpad gestures and pinch-zoom already behave correctly.
+      if (event.deltaY === 0 || event.ctrlKey) {
+        return;
+      }
+      event.preventDefault();
+      // vertical-rl reads right-to-left: wheel-down advances the text, which
+      // means scrolling toward the left edge.
+      scroller.scrollLeft -= event.deltaY;
+    };
+    scroller.addEventListener("wheel", handleWheel, { passive: false });
+    return () => scroller.removeEventListener("wheel", handleWheel);
+  }, [writingMode]);
+
   useEffect(() => {
     const scroller = scrollRef.current;
     if (!scroller) {
@@ -141,7 +164,7 @@ export function Reader({
   }, [scrollKey]);
 
   return (
-    <div ref={scrollRef} className={styles.scroll}>
+    <div ref={scrollRef} className={styles.scroll} data-reader-scroll>
       <div
         className={
           writingMode === "vertical" ? styles.contentVertical : styles.contentHorizontal

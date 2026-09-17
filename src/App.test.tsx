@@ -115,6 +115,61 @@ describe("Reader UI", () => {
     expect(types).toContain("STATE");
   });
 
+  it("does not give annotated text a proper-name line", async () => {
+    await renderReader();
+
+    // 「諸侯」 is only an annotation (TERM), never a proper name.
+    const term = document.querySelector(
+      '[data-annotation-id*="TERM"]',
+    ) as HTMLElement;
+    expect(term).not.toBeNull();
+    expect(term.getAttribute("data-proper-name-type")).toBeNull();
+    expect(term.querySelector("[data-proper-name-type]")).toBeNull();
+  });
+
+  it("keeps the 注 badge outside any proper-name span", async () => {
+    await renderReader();
+
+    // 魏斯 is both a proper name and an annotated term.
+    const badge = document.querySelector(
+      '[data-annotation-marker^="ai:test-work:vol01:p1:PERSON"]',
+    ) as HTMLElement;
+    expect(badge).not.toBeNull();
+    expect(badge.closest("[data-proper-name-type]")).toBeNull();
+    expect(badge.textContent).toBe("注");
+  });
+
+  it("toggles proper-name lines off while annotations stay", async () => {
+    await renderReader();
+    const markerCount = () =>
+      document.querySelectorAll("[data-annotation-marker]").length;
+    expect(markerCount()).toBeGreaterThan(0);
+
+    await userEvent.click(screen.getByRole("button", { name: "切換專名線" }));
+
+    expect(document.querySelectorAll("[data-proper-name-type]").length).toBe(0);
+    // Turning lines off must not hide annotations.
+    expect(markerCount()).toBeGreaterThan(0);
+  });
+
+  it("maps the wheel onto the inline axis in vertical mode", async () => {
+    await renderReader();
+    await userEvent.click(screen.getByRole("button", { name: "切換橫豎排" }));
+
+    const scroller = document.querySelector("[data-reader-scroll]") as HTMLElement;
+    scroller.scrollLeft = 500;
+    fireEvent.wheel(scroller, { deltaY: 120 });
+    expect(scroller.scrollLeft).toBe(380);
+  });
+
+  it("leaves the wheel alone in horizontal mode", async () => {
+    await renderReader();
+    const scroller = document.querySelector("[data-reader-scroll]") as HTMLElement;
+    scroller.scrollLeft = 500;
+    fireEvent.wheel(scroller, { deltaY: 120 });
+    expect(scroller.scrollLeft).toBe(500);
+  });
+
   it("toggles proper-name lines off and persists the choice", async () => {
     await renderReader();
     expect(document.querySelectorAll("[data-proper-name-type]").length).toBeGreaterThan(0);

@@ -15,10 +15,22 @@
   cursor: help;
 }
 
-/* --- AI annotation: solid accent underline + "注" marker --------------- */
+/* --- AI annotation: "注" marker only ----------------------------------- */
 
+/*
+ * Deliberately draws no line. An underline here was indistinguishable from a
+ * 專名線, so annotated text that is not a proper name (e.g. the quotation
+ * 「一日二日萬幾」) looked like it had a proper-name line, the line also ran
+ * under the 注 badge, and the 專名線 toggle could not turn it off.
+ *
+ * Three treatments are now visually distinct:
+ *   專名線   solid line (bottom in horizontal, left in vertical)
+ *   古注     dashed line + tinted background
+ *   AI 注釋  "注" badge only, no line
+ */
 .annotated {
-  border-block-end: 1px solid var(--accent);
+  background: none;
+  border: 0;
 }
 
 .annotationMarker {
