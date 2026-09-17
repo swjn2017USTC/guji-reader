@@ -6,8 +6,6 @@ export const workSourceSchema = z.object({
   retrievedAt: z.string().datetime(),
 });
 
-export type WorkSource = z.infer<typeof workSourceSchema>;
-
 export const volumeRefSchema = z.object({
   id: z.string(),
   workId: z.string(),

@@ -12,8 +12,6 @@ export const properNameTypeSchema = z.enum([
   "INSTITUTION",
 ]);
 
-export type ProperNameType = z.infer<typeof properNameTypeSchema>;
-
 export const annotationCategorySchema = z.enum([
   "PERSON",
   "PLACE",
