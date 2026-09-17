@@ -132,3 +132,57 @@ test.describe("smoke-2 專名線與註釋不得混淆", () => {
     expect(result.before - result.afterDown).toBe(400);
   });
 });
+
+test.describe("smoke-2 古注可點擊", () => {
+  test("點擊古注開啟 popover，點擊外部收起", async ({ page }) => {
+    await page.goto("/");
+    const note = page.locator("[data-source-note-id]").first();
+    await expect(note).toBeVisible();
+    // The old behaviour was a native tooltip; it must be gone.
+    await expect(note).not.toHaveAttribute("title", /.+/);
+
+    await note.click();
+
+    const popover = page.getByRole("dialog", { name: "古注" });
+    await expect(popover).toBeVisible();
+    await expect(popover).toContainText("古注");
+    await expect(popover).toContainText("周威烈王"); // 原文選段
+    await expect(popover).toContainText("胡三省注"); // provenance
+    // Rule 4: never presented as an AI annotation.
+    await expect(popover).not.toContainText("AI 註釋");
+
+    await page.locator("header").click();
+    await expect(popover).toBeHidden();
+  });
+
+  test("古注在豎排下也可點擊，且 popover 不出屏", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "切換橫豎排" }).click();
+    await expect(page.locator(".reader-main > div > div").first()).toHaveCSS(
+      "writing-mode",
+      "vertical-rl",
+    );
+
+    await page.locator("[data-source-note-id]").first().click();
+    const popover = page.getByRole("dialog", { name: "古注" });
+    await expect(popover).toBeVisible();
+
+    // Collision middleware must keep it on screen, as for the other popovers.
+    const box = await popover.boundingBox();
+    const viewport = page.viewportSize()!;
+    expect(box).not.toBeNull();
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
+  });
+
+  test("同時只開一個 popover", async ({ page }) => {
+    await page.goto("/");
+    await page.locator("[data-annotation-marker]").first().click();
+    await expect(page.getByRole("dialog", { name: "AI 注釋" })).toBeVisible();
+
+    await page.locator("[data-source-note-id]").first().click();
+    await expect(page.getByRole("dialog", { name: "古注" })).toBeVisible();
+    await expect(page.getByRole("dialog", { name: "AI 注釋" })).toBeHidden();
+  });
+});

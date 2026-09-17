@@ -3,6 +3,7 @@ import type { Passage, SourceNote, UserAnnotation } from "../types/corpus";
 import type { PublishedAnnotation, PublishedProperName } from "../types/annotations";
 import type { WritingMode } from "../types/reader";
 import { AnnotationPopover } from "./AnnotationPopover";
+import { SourceNotePopover } from "./SourceNotePopover";
 import { PassageView } from "./PassageView";
 import { UserAnnotationToolbar } from "./UserAnnotationToolbar";
 import { UserMarkPopover } from "./UserMarkPopover";
@@ -106,6 +107,10 @@ export function Reader({
     startEditing?: boolean;
   } | null>(null);
   const [pendingNoteId, setPendingNoteId] = useState<string | null>(null);
+  const [openSourceNote, setOpenSourceNote] = useState<{
+    note: SourceNote;
+    element: HTMLElement;
+  } | null>(null);
 
   const notesByPassage = useMemo(() => groupByPassage(sourceNotes), [sourceNotes]);
   const properNamesByPassage = useMemo(() => groupByPassage(properNames), [properNames]);
@@ -131,10 +136,24 @@ export function Reader({
     window.getSelection()?.removeAllRanges();
   }, []);
 
+  // Exactly one reader popover may be open at a time (rule 4 keeps the layers
+  // distinguishable; stacked popovers would blur them). Each opener closes the
+  // others first, and re-clicking the same target toggles it shut.
   const handleOpenAnnotation = useCallback(
     (annotation: PublishedAnnotation, element: HTMLElement) => {
+      setOpenSourceNote(null);
+      setOpenNote(null);
       setOpenAnnotation((current) => (current?.id === annotation.id ? null : annotation));
       setAnchorElement(element);
+    },
+    [],
+  );
+
+  const handleOpenSourceNote = useCallback(
+    (note: SourceNote, element: HTMLElement) => {
+      setOpenAnnotation(null);
+      setOpenNote(null);
+      setOpenSourceNote((current) => (current?.note.id === note.id ? null : { note, element }));
     },
     [],
   );
@@ -144,6 +163,8 @@ export function Reader({
   useEffect(() => {
     // A popover anchored to old DOM must not survive a volume or mode change.
     setOpenAnnotation(null);
+    setOpenSourceNote(null);
+    setOpenNote(null);
   }, [scrollKey, writingMode]);
 
   // Track which passage sits at the reading origin so a writing-mode switch can
@@ -372,6 +393,7 @@ export function Reader({
   const handleOpenMark = useCallback(
     (annotation: UserAnnotation, element: HTMLElement) => {
       setOpenAnnotation(null);
+      setOpenSourceNote(null);
       setOpenNote((current) =>
         current?.annotation.id === annotation.id ? null : { annotation, element },
       );
@@ -398,10 +420,6 @@ export function Reader({
     setOpenNote(null);
   }, [onDeleteUserAnnotation, openNote]);
 
-  useEffect(() => {
-    setOpenNote(null);
-  }, [scrollKey, writingMode]);
-
   return (
     <div ref={scrollRef} className={styles.scroll} data-reader-scroll>
       <div
@@ -422,15 +440,25 @@ export function Reader({
             userAnnotations={userAnnotationsByPassage.get(passage.id) ?? EMPTY_LAYER}
             showProperNames={showProperNames}
             onOpenAnnotation={handleOpenAnnotation}
+            onOpenSourceNote={handleOpenSourceNote}
             onOpenMark={handleOpenMark}
           />
         ))}
       </div>
-      <AnnotationPopover
-        annotation={openAnnotation}
-        referenceElement={anchorElement}
-        onClose={closeAnnotation}
-      />
+      {openAnnotation && (
+        <AnnotationPopover
+          annotation={openAnnotation}
+          referenceElement={anchorElement}
+          onClose={closeAnnotation}
+        />
+      )}
+      {openSourceNote && (
+        <SourceNotePopover
+          note={openSourceNote.note}
+          referenceElement={openSourceNote.element}
+          onClose={() => setOpenSourceNote(null)}
+        />
+      )}
       {pending && (
         <UserAnnotationToolbar
           rect={pending.rect}

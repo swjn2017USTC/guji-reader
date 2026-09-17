@@ -1,17 +1,3 @@
-.popover {
-  z-index: 40;
-  width: 20rem;
-  max-width: 90vw;
-  padding: 0.75rem 0.85rem;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  font-family: var(--font-stack);
-  color: var(--text-primary);
-  writing-mode: horizontal-tb;
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -33,21 +19,6 @@
   background-color: var(--source-note-bg);
   color: var(--text-secondary);
   border: 1px solid var(--source-note-border);
-}
-
-.close {
-  margin-left: auto;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0 0.2rem;
-}
-
-.close:hover {
-  color: var(--text-primary);
 }
 
 .quote {

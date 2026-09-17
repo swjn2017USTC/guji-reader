@@ -1,0 +1,29 @@
+.shell {
+  z-index: 40;
+  width: 20rem;
+  max-width: 90vw;
+  padding: 0.75rem 0.85rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-stack);
+  color: var(--text-primary);
+  /* Never inherit the passage's vertical writing mode. */
+  writing-mode: horizontal-tb;
+}
+
+.close {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.2rem;
+}
+
+.close:hover {
+  color: var(--text-primary);
+}

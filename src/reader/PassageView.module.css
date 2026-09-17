@@ -17,16 +17,16 @@
  *    layer cuts through it — 「晉大夫」 splits at 晉 because 晉 is also a
  *    proper name — and padding on each piece opens a visible gap in the middle
  *    of one continuous note.
- * 2. `cursor: default`, not `cursor: help`. Browsers render `help` as a
+ * 2. `cursor: pointer`, not `cursor: help`. Browsers render `help` as a
  *    question mark, which reads as an error state rather than "there is a note
- *    here". The note is not clickable in V0.1, so a pointer cursor would lie.
+ *    here". The note opens a popover on click, so a pointer cursor is accurate.
  */
 .sourceNote {
   color: var(--source-note-text);
   background-color: var(--source-note-bg);
   border-block-end: 1px dashed var(--source-note-border);
   padding: 0;
-  cursor: default;
+  cursor: pointer;
 }
 
 /* --- AI annotation: "注" marker only ----------------------------------- */

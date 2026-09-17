@@ -92,10 +92,8 @@ describe("Reader UI", () => {
 
     const sourceNote = document.querySelector("[data-source-note-id]") as HTMLElement;
     expect(sourceNote).not.toBeNull();
-    expect(sourceNote).toHaveAttribute(
-      "title",
-      expect.stringContaining("胡三省注"),
-    );
+    // The native tooltip is gone: the note now opens a popover on click.
+    expect(sourceNote).not.toHaveAttribute("title");
     // A 古注 is not an AI annotation and must never carry a 注 marker.
     expect(sourceNote.querySelector("[data-annotation-marker]")).toBeNull();
 

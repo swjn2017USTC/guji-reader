@@ -1,10 +1,8 @@
-import { flip, offset, shift, useFloating } from "@floating-ui/react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { UserAnnotation } from "../types/corpus";
 import { USER_STYLE_LABEL, withOpacity } from "./userAnnotationStyle";
+import { PopoverClose, PopoverShell } from "./PopoverShell";
 import styles from "./UserMarkPopover.module.css";
-
-const MIDDLEWARE = [offset(8), flip(), shift({ padding: 8 })];
 
 type UserMarkPopoverProps = {
   annotation: UserAnnotation;
@@ -35,53 +33,22 @@ export function UserMarkPopover({
   const [editing, setEditing] = useState(startEditing);
   const [draft, setDraft] = useState(annotation.note);
 
-  const elements = useMemo(() => ({ reference: referenceElement }), [referenceElement]);
-  const { refs, floatingStyles } = useFloating({ elements, middleware: MIDDLEWARE });
-
   useEffect(() => {
     setDraft(annotation.note);
     setEditing(startEditing);
   }, [annotation.id, annotation.note, startEditing]);
 
-  useEffect(() => {
-    const handlePointerDown = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (refs.floating.current?.contains(target)) {
-        return;
-      }
-      if (referenceElement?.contains(target)) {
-        return;
-      }
-      onClose();
-    };
-    document.addEventListener("mousedown", handlePointerDown);
-    return () => document.removeEventListener("mousedown", handlePointerDown);
-  }, [onClose, referenceElement, refs.floating]);
-
   const hasNote = annotation.note.trim().length > 0;
 
   return (
-    <div
-      ref={refs.setFloating}
-      style={floatingStyles}
-      className={styles.popover}
-      role="dialog"
-      aria-label="個人標記"
-    >
+    <PopoverShell referenceElement={referenceElement} label="個人標記" onClose={onClose}>
       <div className={styles.header}>
         <span
           className={styles.swatch}
           style={{ backgroundColor: withOpacity(annotation.color, annotation.opacity) }}
         />
         <span className={styles.styleLabel}>{USER_STYLE_LABEL[annotation.style]}</span>
-        <button
-          type="button"
-          className={styles.close}
-          onClick={onClose}
-          aria-label="關閉標記"
-        >
-          ×
-        </button>
+        <PopoverClose label="關閉標記" onClose={onClose} />
       </div>
 
       <p className={styles.quote} data-note-quote>
@@ -150,6 +117,6 @@ export function UserMarkPopover({
           </div>
         </>
       )}
-    </div>
+    </PopoverShell>
   );
 }

@@ -13,6 +13,7 @@ type PassageViewProps = {
   userAnnotations: UserAnnotation[];
   showProperNames: boolean;
   onOpenAnnotation: (annotation: PublishedAnnotation, element: HTMLElement) => void;
+  onOpenSourceNote: (note: SourceNote, element: HTMLElement) => void;
   onOpenMark: (annotation: UserAnnotation, element: HTMLElement) => void;
 };
 
@@ -57,6 +58,7 @@ function PassageViewComponent({
   userAnnotations,
   showProperNames,
   onOpenAnnotation,
+  onOpenSourceNote,
   onOpenMark,
 }: PassageViewProps) {
   const segments = useMemo(() => {
@@ -106,7 +108,24 @@ function PassageViewComponent({
             <span
               className={styles.sourceNote}
               data-source-note-id={sourceNote.id}
-              title={`${sourceNote.provenance}：${sourceNote.text}`}
+              role="button"
+              tabIndex={0}
+              aria-label={`查看古注：${sourceNote.anchor.exact}`}
+              onClick={(event) => {
+                // A note is also selectable text: if the user just drag-selected
+                // across it, the selection is the intent, not inspection.
+                const selection = window.getSelection();
+                if (selection && !selection.isCollapsed && selection.toString().trim()) {
+                  return;
+                }
+                onOpenSourceNote(sourceNote, event.currentTarget);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onOpenSourceNote(sourceNote, event.currentTarget);
+                }
+              }}
             >
               {node}
             </span>

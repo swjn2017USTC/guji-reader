@@ -5,23 +5,18 @@
   margin-bottom: 0.5rem;
 }
 
-.category,
-.layer {
+/*
+ * Dashed + tinted, matching how 古注 is marked in the text. The AI layer uses a
+ * solid accent chip, so the two are never mistaken for each other.
+ */
+.layerChip {
   font-size: 0.72rem;
   line-height: 1.6;
-  padding: 0 0.4rem;
+  padding: 0 0.45rem;
   border-radius: var(--radius-sm);
-}
-
-.category {
-  background-color: var(--accent);
-  color: #fff;
-}
-
-.layer {
   background-color: var(--source-note-bg);
-  color: var(--text-secondary);
-  border: 1px solid var(--source-note-border);
+  color: var(--source-note-text);
+  border: 1px dashed var(--source-note-border);
 }
 
 .quote {
@@ -35,13 +30,13 @@
   margin: 0;
   font-size: 0.92rem;
   line-height: 1.7;
-  color: var(--text-secondary);
+  color: var(--source-note-text);
 }
 
 .footer {
   margin-top: 0.6rem;
   padding-top: 0.4rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px dashed var(--source-note-border);
   font-size: 0.72rem;
   color: var(--text-muted);
 }
