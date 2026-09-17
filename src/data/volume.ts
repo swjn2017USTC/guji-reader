@@ -2,6 +2,11 @@ import { passageSchema, type Passage } from "../types/corpus";
 
 const cache = new Map<string, Passage[]>();
 
+/** Test seam: drop cached volumes so fresh fetches are issued. */
+export function resetVolumeCache(): void {
+  cache.clear();
+}
+
 export async function loadVolume(workId: string, volumeId: string): Promise<Passage[]> {
   const key = `${workId}/${volumeId}`;
   if (cache.has(key)) {

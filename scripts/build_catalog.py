@@ -41,11 +41,17 @@ def run_build(
     work_data = load_json(work_path)
     work = Work(**work_data)
 
-    # Atomic publish: write to a temp directory, then swap it into place.
-    temp_public_root = public_root.parent / f"{public_root.name}.tmp.{uuid4().hex}"
+    # Atomic publish of the *generated* subtrees only.
+    #
+    # public/data/ also holds hand-curated, committed siblings —
+    # annotations/ (gate-passed AI annotations) and source_notes/ (the verified
+    # 胡三省注 fixture). Replacing the whole directory would silently destroy
+    # them, and a full rebuild is a required step in the release flow, so this
+    # swaps only what it generates: works/ and catalog.json.
+    staging = public_root.parent / f"{public_root.name}.tmp.{uuid4().hex}"
     try:
-        public_work_dir = temp_public_root / "works" / WORK_ID
-        public_work_dir.mkdir(parents=True, exist_ok=True)
+        staged_work_dir = staging / "works" / WORK_ID
+        staged_work_dir.mkdir(parents=True, exist_ok=True)
 
         for volume in work.volumes:
             canonical_path = canonical_root / WORK_ID / f"{volume.id}.json"
@@ -64,20 +70,25 @@ def run_build(
                     f"VolumeRef says {volume.passageCount}, canonical has {len(passages)}"
                 )
 
-            target = public_work_dir / f"{volume.id}.json"
+            target = staged_work_dir / f"{volume.id}.json"
             save_json(target, [p.model_dump(mode="json") for p in passages])
 
         # Catalog only contains Work with VolumeRefs, not full passages.
-        catalog_path = temp_public_root / "catalog.json"
-        save_json(catalog_path, work.model_dump(mode="json"))
+        save_json(staging / "catalog.json", work.model_dump(mode="json"))
 
-        # Swap temp tree into place.
-        if public_root.exists():
-            shutil.rmtree(public_root)
-        temp_public_root.rename(public_root)
-    except Exception:
-        # Leave temp dir for debugging on failure; clean up only on success.
-        raise
+        public_root.mkdir(parents=True, exist_ok=True)
+
+        # Publish volumes: replace works/ wholesale so removed volumes disappear.
+        works_target = public_root / "works"
+        if works_target.exists():
+            shutil.rmtree(works_target)
+        (staging / "works").rename(works_target)
+
+        # Publish the catalog with an atomic file replace, so a reader loading
+        # concurrently never sees a half-written catalog.
+        (staging / "catalog.json").replace(public_root / "catalog.json")
+    finally:
+        shutil.rmtree(staging, ignore_errors=True)
 
     print(f"Catalog: {public_root / 'catalog.json'}")
     print(f"Volumes: {len(work.volumes)}")

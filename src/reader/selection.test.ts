@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import type { Passage } from "../types/corpus";
+import { anchorMatches } from "./anchors";
 import {
-  anchorMatchesText,
   domPositionToCodePoint,
   rangesOverlap,
   selectionToAnchor,
@@ -68,7 +68,7 @@ describe("selection to anchor", () => {
     expect(result.anchor.end).toBe(2);
     expect(result.anchor.exact).toBe("周威");
     expect(result.anchor.suffix).toBe("烈王二十三年");
-    expect(anchorMatchesText(result.anchor, text)).toBe(true);
+    expect(anchorMatches(text, result.anchor)).toBe(true);
   });
 
   it("produces prefix context for a mid-text selection", () => {

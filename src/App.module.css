@@ -13,3 +13,17 @@
 .error {
   color: #c0392b;
 }
+
+/*
+ * A degraded layer notice, not an error state: the reader stays fully usable
+ * when only the personal-annotation store is unavailable.
+ */
+.degraded {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--source-note-text);
+  background-color: var(--source-note-bg);
+  border-bottom: 1px solid var(--source-note-border);
+}

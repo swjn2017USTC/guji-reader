@@ -12,6 +12,11 @@ const empty = (workId: string, volumeId: string): PublishedVolumeAnnotations => 
 
 const cache = new Map<string, PublishedVolumeAnnotations>();
 
+/** Test seam: drop cached annotations so fresh fetches are issued. */
+export function resetAnnotationsCache(): void {
+  cache.clear();
+}
+
 /**
  * Published annotations are optional per volume. In dev the SPA fallback answers
  * unknown paths with index.html and status 200, so a content-type check is what

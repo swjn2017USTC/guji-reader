@@ -267,3 +267,76 @@ test.describe("smoke-3 私人批註", () => {
     await expect(page.getByRole("dialog", { name: "AI 注釋" })).toBeVisible();
   });
 });
+
+test.describe("smoke-3 工具條不得出屏", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector(PASSAGE);
+    await page.evaluate(async () => {
+      await new Promise<void>((resolve) => {
+        const request = indexedDB.deleteDatabase("guji-reader");
+        request.onsuccess = () => resolve();
+        request.onerror = () => resolve();
+        request.onblocked = () => resolve();
+      });
+    });
+    await page.reload();
+    await page.waitForSelector(PASSAGE);
+  });
+
+  test("豎排卷首選字時，工具條所有控制項仍在視口內", async ({ page }) => {
+    /*
+     * vertical-rl starts at the right-hand column, so the beginning of a volume
+     * is the region most likely to push a 15.5rem toolbar past the right edge.
+     * Every control must stay reachable, not merely "visible" to Playwright.
+     */
+    await page.getByRole("button", { name: "切換橫豎排" }).click();
+    await expect(page.locator(".reader-main > div > div").first()).toHaveCSS(
+      "writing-mode",
+      "vertical-rl",
+    );
+
+    await selectInPassage(page, 14, 16); // 魏斯, near the right-hand column
+    const toolbar = page.getByRole("toolbar", { name: "標記工具" });
+    await expect(toolbar).toBeVisible();
+
+    const viewport = page.viewportSize()!;
+    const box = await toolbar.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.y).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
+
+    // Every control, including the ones that were previously clipped.
+    for (const name of ["高亮", "波浪線", "寫批註", "標記"]) {
+      const control = toolbar.getByRole("button", { name, exact: true });
+      const controlBox = await control.boundingBox();
+      expect(controlBox, `${name} has no box`).not.toBeNull();
+      expect(controlBox!.x, `${name} clipped on the left`).toBeGreaterThanOrEqual(0);
+      expect(
+        controlBox!.x + controlBox!.width,
+        `${name} clipped on the right`,
+      ).toBeLessThanOrEqual(viewport.width);
+    }
+
+    const closeBox = await toolbar.getByRole("button", { name: "取消標記" }).boundingBox();
+    expect(closeBox!.x + closeBox!.width).toBeLessThanOrEqual(viewport.width);
+
+    // And it still works: the mark is created.
+    await toolbar.getByRole("button", { name: "標記", exact: true }).click();
+    await expect(page.locator("[data-user-annotation-id]")).toHaveCount(1);
+  });
+
+  test("橫排下工具條同樣不出屏", async ({ page }) => {
+    await selectInPassage(page, 14, 16);
+    const toolbar = page.getByRole("toolbar", { name: "標記工具" });
+    await expect(toolbar).toBeVisible();
+
+    const viewport = page.viewportSize()!;
+    const box = await toolbar.boundingBox();
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
+  });
+});

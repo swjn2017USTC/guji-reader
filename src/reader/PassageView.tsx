@@ -1,7 +1,7 @@
-import { memo, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 import type { Passage, SourceNote, UserAnnotation } from "../types/corpus";
 import type { PublishedAnnotation, PublishedProperName } from "../types/annotations";
-import { segmentByIntervals, type Interval } from "./anchors";
+import { anchorMatches, segmentByIntervals, type Interval } from "./anchors";
 import { withOpacity } from "./userAnnotationStyle";
 import styles from "./PassageView.module.css";
 
@@ -61,33 +61,69 @@ function PassageViewComponent({
   onOpenSourceNote,
   onOpenMark,
 }: PassageViewProps) {
-  const segments = useMemo(() => {
+  const { segments, staleCount } = useMemo(() => {
+    /*
+     * Anchors are re-validated against the canonical text on every render. A
+     * corpus re-import can shift the text (Wikisource revisions change), and an
+     * anchor whose `exact` no longer matches its range would otherwise decorate
+     * the wrong characters silently. Stale ones are dropped rather than
+     * misapplied, and reported below.
+     */
+    const fresh = <T extends { anchor: { start: number; end: number; exact: string } }>(
+      items: T[],
+    ): T[] => items.filter((item) => anchorMatches(passage.text, item.anchor));
+
+    const validProperNames = fresh(properNames);
+    const validAnnotations = fresh(annotations);
+    const validSourceNotes = fresh(sourceNotes);
+    const validUserAnnotations = fresh(userAnnotations);
+
+    const stale =
+      properNames.length +
+      annotations.length +
+      sourceNotes.length +
+      userAnnotations.length -
+      validProperNames.length -
+      validAnnotations.length -
+      validSourceNotes.length -
+      validUserAnnotations.length;
+
     const intervals: Interval<Layer>[] = [
       ...(showProperNames
-        ? properNames.map((value) => ({
+        ? validProperNames.map((value) => ({
             start: value.anchor.start,
             end: value.anchor.end,
             data: { kind: "properName" as const, value },
           }))
         : []),
-      ...annotations.map((value) => ({
+      ...validAnnotations.map((value) => ({
         start: value.anchor.start,
         end: value.anchor.end,
         data: { kind: "annotation" as const, value },
       })),
-      ...sourceNotes.map((value) => ({
+      ...validSourceNotes.map((value) => ({
         start: value.anchor.start,
         end: value.anchor.end,
         data: { kind: "sourceNote" as const, value },
       })),
-      ...userAnnotations.map((value) => ({
+      ...validUserAnnotations.map((value) => ({
         start: value.anchor.start,
         end: value.anchor.end,
         data: { kind: "userAnnotation" as const, value },
       })),
     ];
-    return segmentByIntervals(passage.text, intervals);
+
+    return { segments: segmentByIntervals(passage.text, intervals), staleCount: stale };
   }, [passage.text, properNames, annotations, sourceNotes, userAnnotations, showProperNames]);
+
+  useEffect(() => {
+    if (staleCount > 0) {
+      console.warn(
+        `guji-reader: ${staleCount} annotation(s) in ${passage.id} no longer match the ` +
+          "canonical text and were not rendered. Re-import the corpus or re-anchor them.",
+      );
+    }
+  }, [staleCount, passage.id]);
 
   return (
     <p className={styles.passage} data-passage-id={passage.id}>

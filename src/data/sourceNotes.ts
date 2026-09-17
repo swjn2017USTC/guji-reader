@@ -2,6 +2,11 @@ import { sourceNoteSchema, type SourceNote } from "../types/corpus";
 
 const cache = new Map<string, SourceNote[]>();
 
+/** Test seam: drop cached source notes so fresh fetches are issued. */
+export function resetSourceNotesCache(): void {
+  cache.clear();
+}
+
 export async function loadSourceNotes(
   workId: string,
   volumeId: string,

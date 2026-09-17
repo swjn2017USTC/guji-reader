@@ -49,6 +49,18 @@ function App() {
   >([]);
   const [userAnnotations, setUserAnnotations] = useState<UserAnnotation[]>([]);
   const [error, setError] = useState<string | null>(null);
+  /*
+   * Personal annotations live in IndexedDB, which can be unavailable (disabled,
+   * private mode, quota exhausted). That must never take the reader down with
+   * it: the canonical text, 古注 and AI annotations are served from static JSON
+   * and stay usable, so this is reported as a degradation rather than a fatal
+   * error (plan §1.1 — the UI must not depend on any one layer being present).
+   */
+  const [annotationStoreError, setAnnotationStoreError] = useState<string | null>(null);
+
+  const reportAnnotationStoreFailure = useCallback((err: unknown) => {
+    setAnnotationStoreError(err instanceof Error ? err.message : String(err));
+  }, []);
 
   useEffect(() => {
     loadCatalog()
@@ -88,11 +100,15 @@ function App() {
           setUserAnnotations(loaded);
         }
       })
-      .catch((err) => setError(err instanceof Error ? err.message : String(err)));
+      .catch((err) => {
+        if (!cancelled) {
+          reportAnnotationStoreFailure(err);
+        }
+      });
     return () => {
       cancelled = true;
     };
-  }, [work]);
+  }, [reportAnnotationStoreFailure, work]);
 
   // Re-read from IndexedDB after every mutation so the DOM always reflects what
   // was actually persisted, rather than optimistic local state.
@@ -100,8 +116,13 @@ function App() {
     if (!work) {
       return;
     }
-    setUserAnnotations(await loadUserAnnotations(work.id));
-  }, [work]);
+    try {
+      setUserAnnotations(await loadUserAnnotations(work.id));
+      setAnnotationStoreError(null);
+    } catch (err) {
+      reportAnnotationStoreFailure(err);
+    }
+  }, [reportAnnotationStoreFailure, work]);
 
   const handleCreateUserAnnotation = useCallback(
     async (draft: {
@@ -110,19 +131,25 @@ function App() {
       color: string;
       opacity: number;
       note: string;
-    }): Promise<UserAnnotation> => {
+    }): Promise<UserAnnotation | null> => {
       if (!work) {
-        throw new Error("work not loaded");
+        reportAnnotationStoreFailure("work not loaded");
+        return null;
       }
-      const created = await createUserAnnotation({
-        workId: work.id,
-        editionId: work.editionId,
-        ...draft,
-      });
-      await refreshUserAnnotations();
-      return created;
+      try {
+        const created = await createUserAnnotation({
+          workId: work.id,
+          editionId: work.editionId,
+          ...draft,
+        });
+        await refreshUserAnnotations();
+        return created;
+      } catch (err) {
+        reportAnnotationStoreFailure(err);
+        return null;
+      }
     },
-    [refreshUserAnnotations, work],
+    [refreshUserAnnotations, reportAnnotationStoreFailure, work],
   );
 
   const handleUpdateUserAnnotation = useCallback(
@@ -130,18 +157,26 @@ function App() {
       id: string,
       changes: Partial<Pick<UserAnnotation, "style" | "color" | "opacity" | "note">>,
     ) => {
-      await updateUserAnnotation(id, changes);
-      await refreshUserAnnotations();
+      try {
+        await updateUserAnnotation(id, changes);
+        await refreshUserAnnotations();
+      } catch (err) {
+        reportAnnotationStoreFailure(err);
+      }
     },
-    [refreshUserAnnotations],
+    [refreshUserAnnotations, reportAnnotationStoreFailure],
   );
 
   const handleDeleteUserAnnotation = useCallback(
     async (id: string) => {
-      await deleteUserAnnotation(id);
-      await refreshUserAnnotations();
+      try {
+        await deleteUserAnnotation(id);
+        await refreshUserAnnotations();
+      } catch (err) {
+        reportAnnotationStoreFailure(err);
+      }
     },
-    [refreshUserAnnotations],
+    [refreshUserAnnotations, reportAnnotationStoreFailure],
   );
 
   const handleSelectVolume = (volume: VolumeRef) => {
@@ -207,6 +242,11 @@ function App() {
           />
         </div>
         <main className="reader-main">
+          {annotationStoreError && (
+            <p className={styles.degraded} role="status" data-annotation-store-error>
+              個人標記暫時無法使用（瀏覽器儲存不可用），正文與註釋仍可正常閱讀。
+            </p>
+          )}
           <Reader
             passages={passages}
             sourceNotes={sourceNotes}

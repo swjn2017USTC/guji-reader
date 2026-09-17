@@ -233,3 +233,69 @@ def test_build_catalog_empty_passages_list(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="No passages"):
         run_build(canonical_root=canonical_root, public_root=public_root)
+
+
+def test_build_preserves_sibling_directories(tmp_path: Path) -> None:
+    """Rebuilding must not destroy hand-curated siblings under public/data.
+
+    public/data also holds committed, non-generated content — annotations/ (the
+    gate-passed AI annotations) and source_notes/ (the verified 胡三省注 fixture).
+    A rebuild is a required release step, so wiping the parent directory would
+    silently delete them.
+    """
+    canonical_root = tmp_path / "canonical"
+    public_root = tmp_path / "public"
+
+    work = {
+        "id": WORK_ID,
+        "title": "通鑑紀事本末",
+        "editionId": "test-edition",
+        "source": {
+            "provider": "wikisource",
+            "url": "https://example.com",
+            "retrievedAt": "2024-01-01T00:00:00Z",
+        },
+        "volumes": [
+            {
+                "id": "vol01",
+                "workId": WORK_ID,
+                "title": "第一卷",
+                "order": 0,
+                "sourcePage": "https://example.com/vol01",
+                "passageCount": 1,
+            }
+        ],
+    }
+    _write_json(canonical_root / WORK_ID / "work.json", work)
+    _write_json(
+        canonical_root / WORK_ID / "vol01.json",
+        [
+            {
+                "id": f"{WORK_ID}:vol01:p0",
+                "workId": WORK_ID,
+                "volumeId": "vol01",
+                "order": 0,
+                "text": "正文。",
+                "sourcePage": "https://example.com/vol01",
+            }
+        ],
+    )
+
+    curated = public_root / "annotations" / WORK_ID
+    curated.mkdir(parents=True)
+    _write_json(curated / "vol01.json", {"workId": WORK_ID, "volumeId": "vol01"})
+    fixture = public_root / "source_notes" / WORK_ID
+    fixture.mkdir(parents=True)
+    _write_json(fixture / "vol01.json", [{"id": "hu:1"}])
+    # A stale generated file that must NOT survive the rebuild.
+    _write_json(public_root / "works" / WORK_ID / "vol99.json", [{"id": "stale"}])
+
+    run_build(canonical_root=canonical_root, public_root=public_root)
+
+    assert (curated / "vol01.json").exists(), "annotations/ was destroyed by the build"
+    assert (fixture / "vol01.json").exists(), "source_notes/ was destroyed by the build"
+    assert not (public_root / "works" / WORK_ID / "vol99.json").exists(), (
+        "works/ must still be replaced wholesale"
+    )
+    assert (public_root / "works" / WORK_ID / "vol01.json").exists()
+    assert (public_root / "catalog.json").exists()

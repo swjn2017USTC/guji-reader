@@ -19,10 +19,16 @@ const FIXTURES: Record<string, object> = {
   },
 };
 
-export function mockFetch(): void {
+/**
+ * Serve the fixture corpus. `overrides` replaces individual fixture payloads so
+ * a test can inject malformed or drifted data (e.g. an anchor whose exact no
+ * longer matches the text).
+ */
+export function mockFetch(overrides: Record<string, object> = {}): void {
+  const fixtures = { ...FIXTURES, ...overrides };
   global.fetch = vi.fn(async (input: RequestInfo | URL) => {
     const url = typeof input === "string" ? input : input.toString();
-    const data = FIXTURES[url];
+    const data = fixtures[url];
     if (data === undefined) {
       return new Response("Not found", { status: 404 });
     }

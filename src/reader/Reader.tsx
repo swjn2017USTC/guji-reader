@@ -34,7 +34,7 @@ type ReaderProps = {
     color: string;
     opacity: number;
     note: string;
-  }) => Promise<UserAnnotation>;
+  }) => Promise<UserAnnotation | null>;
   onUpdateUserAnnotation: (
     id: string,
     changes: Partial<Pick<UserAnnotation, "style" | "color" | "opacity" | "note">>,
@@ -366,10 +366,15 @@ export function Reader({
       opacity: pendingOpacity,
       note: "",
     });
+    dismissPending();
+    if (!created) {
+      // The store rejected the write; App surfaces the reason and reading
+      // continues, so there is nothing to open here.
+      return;
+    }
     // The record only exists in the DOM after the next render, so defer
     // resolving its 批 badge by id.
     setPendingNoteId(created.id);
-    dismissPending();
   }, [dismissPending, onCreateUserAnnotation, pending, pendingColor, pendingOpacity, pendingStyle]);
 
   // Once the newly created mark has rendered, open its editor directly so

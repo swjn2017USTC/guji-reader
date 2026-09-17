@@ -1,4 +1,4 @@
-import { offset, useFloating } from "@floating-ui/react";
+import { flip, offset, shift, useFloating } from "@floating-ui/react";
 import { useEffect } from "react";
 import type { UserAnnotation } from "../types/corpus";
 import {
@@ -10,11 +10,12 @@ import {
 import styles from "./UserAnnotationToolbar.module.css";
 
 /*
- * Only `offset` is used: flip/shift measured at ~7s per mount under jsdom and
- * leaked across tests. The toolbar is a small fixed-width strip placed just
- * below the selection.
+ * offset + collision handling, matching PopoverShell. Without flip/shift the
+ * toolbar renders off-screen in vertical mode: vertical-rl starts at the right
+ * column, so a selection near the volume start sits at the far right and the
+ * 15.5rem toolbar overflows, putting 取消標記 and 寫批註 out of reach.
  */
-const MIDDLEWARE = [offset(8)];
+const MIDDLEWARE = [offset(8), flip(), shift({ padding: 8 })];
 
 type UserAnnotationToolbarProps = {
   rect: DOMRect;

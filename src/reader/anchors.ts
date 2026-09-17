@@ -59,6 +59,30 @@ export type Interval<T> = {
   data: T;
 };
 
+export type AnchorRange = {
+  start: number;
+  end: number;
+  exact: string;
+};
+
+/**
+ * Whether a stored anchor still describes the canonical text it was taken from.
+ *
+ * Anchors are validated before rendering, not only when they are created: a
+ * re-import can shift the text (Wikisource revisions change), and an anchor
+ * whose `exact` no longer matches would otherwise decorate the wrong characters
+ * with no signal at all. Offsets are code points on both sides.
+ */
+export function anchorMatches(text: string, anchor: AnchorRange): boolean {
+  if (anchor.start < 0 || anchor.end <= anchor.start) {
+    return false;
+  }
+  if (anchor.end > codePointLength(text)) {
+    return false;
+  }
+  return sliceByCodePoints(text, anchor.start, anchor.end) === anchor.exact;
+}
+
 export type Segment<T> = {
   start: number;
   end: number;

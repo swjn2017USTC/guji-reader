@@ -15,7 +15,13 @@
  */
 
 import type { Passage, TextAnchor } from "../types/corpus";
-import { codePointLength, sliceByCodePoints, toCodePointIndex, toUtf16Index } from "./anchors";
+import {
+  anchorMatches,
+  codePointLength,
+  sliceByCodePoints,
+  toCodePointIndex,
+  toUtf16Index,
+} from "./anchors";
 
 export const PASSAGE_ATTRIBUTE = "data-passage-id";
 export const UI_MARKER_ATTRIBUTE = "data-ui-marker";
@@ -148,7 +154,7 @@ export function selectionToAnchor(
     ),
   };
 
-  if (!anchorMatchesText(anchor, passage.text)) {
+  if (!anchorMatches(passage.text, anchor)) {
     return { ok: false, reason: "stale" };
   }
 
@@ -160,15 +166,4 @@ export function selectionToAnchor(
       : new DOMRect(0, 0, 0, 0);
 
   return { ok: true, anchor, rect };
-}
-
-/** Fail loudly if an anchor no longer matches the canonical text. */
-export function anchorMatchesText(anchor: TextAnchor, passageText: string): boolean {
-  if (anchor.start < 0 || anchor.end <= anchor.start) {
-    return false;
-  }
-  if (anchor.end > codePointLength(passageText)) {
-    return false;
-  }
-  return sliceByCodePoints(passageText, anchor.start, anchor.end) === anchor.exact;
 }
