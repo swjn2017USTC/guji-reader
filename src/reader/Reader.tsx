@@ -5,7 +5,7 @@ import type { WritingMode } from "../types/reader";
 import { AnnotationPopover } from "./AnnotationPopover";
 import { PassageView } from "./PassageView";
 import { UserAnnotationToolbar } from "./UserAnnotationToolbar";
-import { UserNotePopover } from "./UserNotePopover";
+import { UserMarkPopover } from "./UserMarkPopover";
 import {
   rangesOverlap,
   selectionToAnchor,
@@ -369,7 +369,7 @@ export function Reader({
     }
   }, [pendingNoteId, userAnnotations]);
 
-  const handleOpenNote = useCallback(
+  const handleOpenMark = useCallback(
     (annotation: UserAnnotation, element: HTMLElement) => {
       setOpenAnnotation(null);
       setOpenNote((current) =>
@@ -422,7 +422,7 @@ export function Reader({
             userAnnotations={userAnnotationsByPassage.get(passage.id) ?? EMPTY_LAYER}
             showProperNames={showProperNames}
             onOpenAnnotation={handleOpenAnnotation}
-            onOpenNote={handleOpenNote}
+            onOpenMark={handleOpenMark}
           />
         ))}
       </div>
@@ -447,7 +447,7 @@ export function Reader({
         />
       )}
       {openNote && (
-        <UserNotePopover
+        <UserMarkPopover
           annotation={openNote.annotation}
           referenceElement={openNote.element}
           startEditing={openNote.startEditing}

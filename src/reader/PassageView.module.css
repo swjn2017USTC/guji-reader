@@ -43,10 +43,12 @@
 .userMarked {
   margin-inline-end: 0.08em;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .userContinued {
   border-radius: 0;
+  cursor: pointer;
 }
 
 .batchMarker {

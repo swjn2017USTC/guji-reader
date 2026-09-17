@@ -1,12 +1,12 @@
-import { offset, useFloating } from "@floating-ui/react";
+import { flip, offset, shift, useFloating } from "@floating-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import type { UserAnnotation } from "../types/corpus";
 import { USER_STYLE_LABEL, withOpacity } from "./userAnnotationStyle";
-import styles from "./UserNotePopover.module.css";
+import styles from "./UserMarkPopover.module.css";
 
-const MIDDLEWARE = [offset(8)];
+const MIDDLEWARE = [offset(8), flip(), shift({ padding: 8 })];
 
-type UserNotePopoverProps = {
+type UserMarkPopoverProps = {
   annotation: UserAnnotation;
   referenceElement: HTMLElement | null;
   /** Open directly in edit mode — used by 寫批註 on a brand-new mark. */
@@ -16,14 +16,22 @@ type UserNotePopoverProps = {
   onClose: () => void;
 };
 
-export function UserNotePopover({
+/**
+ * Inspector for one personal mark.
+ *
+ * highlight and wavy share a single record shape, so they share a single
+ * popover: both can be deleted, and both can carry a note. The only difference
+ * is the label on the primary action — a mark with no note yet offers 寫批註,
+ * one that has a note offers 編輯.
+ */
+export function UserMarkPopover({
   annotation,
   referenceElement,
   startEditing = false,
   onSave,
   onDelete,
   onClose,
-}: UserNotePopoverProps) {
+}: UserMarkPopoverProps) {
   const [editing, setEditing] = useState(startEditing);
   const [draft, setDraft] = useState(annotation.note);
 
@@ -50,13 +58,15 @@ export function UserNotePopover({
     return () => document.removeEventListener("mousedown", handlePointerDown);
   }, [onClose, referenceElement, refs.floating]);
 
+  const hasNote = annotation.note.trim().length > 0;
+
   return (
     <div
       ref={refs.setFloating}
       style={floatingStyles}
       className={styles.popover}
       role="dialog"
-      aria-label="個人批註"
+      aria-label="個人標記"
     >
       <div className={styles.header}>
         <span
@@ -68,7 +78,7 @@ export function UserNotePopover({
           type="button"
           className={styles.close}
           onClick={onClose}
-          aria-label="關閉批註"
+          aria-label="關閉標記"
         >
           ×
         </button>
@@ -112,18 +122,29 @@ export function UserNotePopover({
         </>
       ) : (
         <>
-          <p className={styles.note} data-note-body>
-            {annotation.note ? annotation.note : "（無批註文字）"}
-          </p>
+          {hasNote ? (
+            <p className={styles.note} data-note-body>
+              {annotation.note}
+            </p>
+          ) : (
+            <p className={styles.hint} data-note-empty>
+              尚無批註
+            </p>
+          )}
           <div className={styles.actions}>
             <button
               type="button"
               className={styles.primary}
               onClick={() => setEditing(true)}
             >
-              編輯
+              {hasNote ? "編輯" : "寫批註"}
             </button>
-            <button type="button" className={styles.danger} onClick={onDelete}>
+            <button
+              type="button"
+              className={styles.danger}
+              data-delete-mark
+              onClick={onDelete}
+            >
               刪除
             </button>
           </div>

@@ -26,7 +26,12 @@ async function renderReader() {
  */
 async function flush(): Promise<void> {
   await act(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    // Several macrotasks, not one: creating a mark round-trips through Dexie
+    // (write, then re-read), so a single tick is not enough for the new record
+    // to reach the DOM.
+    for (let i = 0; i < 5; i += 1) {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    }
   });
 }
 
@@ -199,8 +204,10 @@ describe("personal annotations", () => {
     fireEvent.click(within(toolbar).getByRole("button", { name: "寫批註" }));
 
     // The note editor opens directly on the new mark.
-    await flush();
-    const editor = screen.getByRole("dialog", { name: "個人批註" });
+    await waitFor(() =>
+      expect(screen.getByRole("dialog", { name: "個人標記" })).toBeInTheDocument(),
+    );
+    const editor = screen.getByRole("dialog", { name: "個人標記" });
     const textarea = within(editor).getByLabelText("批註內容");
     fireEvent.change(textarea, { target: { value: "魏斯即魏文侯。" } });
     fireEvent.click(within(editor).getByRole("button", { name: "儲存" }));
@@ -209,12 +216,12 @@ describe("personal annotations", () => {
     await waitFor(() =>
       expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(1),
     );
-    expect(screen.queryByRole("dialog", { name: "個人批註" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("dialog", { name: "個人標記" })).not.toBeInTheDocument();
 
     // Reopen it and confirm the stored note, then edit.
     fireEvent.click(document.querySelector("[data-batch-marker]") as HTMLElement);
     await flush();
-    const reopened = screen.getByRole("dialog", { name: "個人批註" });
+    const reopened = screen.getByRole("dialog", { name: "個人標記" });
     expect(within(reopened).getByText("魏斯即魏文侯。")).toBeInTheDocument();
     expect(within(reopened).getByText("魏斯")).toBeInTheDocument(); // 原文選段
 
@@ -227,45 +234,165 @@ describe("personal annotations", () => {
     // Let the save settle before reopening: the popover toggle would otherwise
     // close the still-open dialog instead of opening it.
     await flush();
-    expect(screen.queryByRole("dialog", { name: "個人批註" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("dialog", { name: "個人標記" })).not.toBeInTheDocument();
 
     fireEvent.click(document.querySelector("[data-batch-marker]") as HTMLElement);
     await flush();
-    const again = screen.getByRole("dialog", { name: "個人批註" });
+    const again = screen.getByRole("dialog", { name: "個人標記" });
     expect(within(again).getByText("改：魏文侯，戰國魏國開國君主。")).toBeInTheDocument();
   });
 
-  it("deletes an annotation from the note popover", async () => {
+  it("opens a mark by clicking its text, and deletes it (highlight, no note)", async () => {
     await createMark();
     await waitFor(() =>
       expect(document.querySelector("[data-user-annotation-id]")).not.toBeNull(),
     );
 
-    // A mark without a note still opens via its marked text? No — V0.1 exposes
-    // editing through the 批 marker, so write a note first.
-    selectInPassage(PASSAGE_ID, 17, 19); // 諸侯, no overlap
-    const toolbar = await screen.findByRole("toolbar", { name: "標記工具" });
-    fireEvent.click(within(toolbar).getByRole("button", { name: "寫批註" }));
+    // No note yet, so there is no 批 marker to click — the marked text itself
+    // is the entry point.
+    expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(0);
+
+    fireEvent.click(document.querySelector("[data-user-annotation-id]") as HTMLElement);
     await flush();
-    const editor = screen.getByRole("dialog", { name: "個人批註" });
-    fireEvent.change(within(editor).getByLabelText("批註內容"), {
-      target: { value: "待刪除" },
+
+    const popover = screen.getByRole("dialog", { name: "個人標記" });
+    expect(within(popover).getByText("魏斯")).toBeInTheDocument(); // 原文選段
+    expect(within(popover).getByText("尚無批註")).toBeInTheDocument();
+    expect(within(popover).getByRole("button", { name: "刪除" })).toBeInTheDocument();
+
+    fireEvent.click(within(popover).getByRole("button", { name: "刪除" }));
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0);
+      expect(screen.queryByRole("dialog", { name: "個人標記" })).not.toBeInTheDocument();
     });
-    fireEvent.click(within(editor).getByRole("button", { name: "儲存" }));
+  });
+
+  it("deletes a wavy mark by clicking its text", async () => {
+    await createMark("wavy");
+    await waitFor(() =>
+      expect(document.querySelector('[data-user-style="wavy"]')).not.toBeNull(),
+    );
+
+    fireEvent.click(document.querySelector('[data-user-style="wavy"]') as HTMLElement);
+    await flush();
+
+    const popover = screen.getByRole("dialog", { name: "個人標記" });
+    expect(within(popover).getByText("波浪線")).toBeInTheDocument();
+    fireEvent.click(within(popover).getByRole("button", { name: "刪除" }));
+
+    await waitFor(() =>
+      expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0),
+    );
+  });
+
+  it("keeps the mark when deletion is dismissed", async () => {
+    await createMark();
+    await waitFor(() =>
+      expect(document.querySelector("[data-user-annotation-id]")).not.toBeNull(),
+    );
+
+    fireEvent.click(document.querySelector("[data-user-annotation-id]") as HTMLElement);
+    await flush();
+    fireEvent.click(screen.getByRole("button", { name: "關閉標記" }));
+
+    await flush();
+    expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(1);
+  });
+
+  it("writes a note from a note-less mark and then deletes both together", async () => {
+    await createMark();
+    await waitFor(() =>
+      expect(document.querySelector("[data-user-annotation-id]")).not.toBeNull(),
+    );
+
+    fireEvent.click(document.querySelector("[data-user-annotation-id]") as HTMLElement);
+    await flush();
+    // Primary action is 寫批註 while there is no note.
+    fireEvent.click(
+      within(screen.getByRole("dialog", { name: "個人標記" })).getByRole("button", {
+        name: "寫批註",
+      }),
+    );
+    fireEvent.change(screen.getByLabelText("批註內容"), {
+      target: { value: "魏斯即魏文侯。" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "儲存" }));
+
+    // The 批 marker now exists.
+    await waitFor(() =>
+      expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(1),
+    );
+
+    // Deleting via the marked text removes the note as well.
+    fireEvent.click(document.querySelector("[data-user-annotation-id]") as HTMLElement);
+    await flush();
+    const popover = screen.getByRole("dialog", { name: "個人標記" });
+    expect(within(popover).getByText("魏斯即魏文侯。")).toBeInTheDocument();
+    fireEvent.click(within(popover).getByRole("button", { name: "刪除" }));
+
+    await waitFor(() => {
+      expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0);
+      expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(0);
+    });
+  });
+
+  it("deletes a mark that still has a note via the 批 marker", async () => {
+    await createMark();
+    await waitFor(() =>
+      expect(document.querySelector("[data-user-annotation-id]")).not.toBeNull(),
+    );
+
+    selectInPassage(PASSAGE_ID, 17, 19); // 趙籍, no overlap
+    const toolbar = screen.getByRole("toolbar", { name: "標記工具" });
+    fireEvent.click(within(toolbar).getByRole("button", { name: "寫批註" }));
+    await waitFor(() =>
+      expect(screen.getByLabelText("批註內容")).toBeInTheDocument(),
+    );
+    fireEvent.change(screen.getByLabelText("批註內容"), { target: { value: "待刪除" } });
+    fireEvent.click(screen.getByRole("button", { name: "儲存" }));
 
     await waitFor(() =>
       expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(1),
     );
     fireEvent.click(document.querySelector("[data-batch-marker]") as HTMLElement);
     await flush();
-    const reopened = screen.getByRole("dialog", { name: "個人批註" });
-    fireEvent.click(within(reopened).getByRole("button", { name: "刪除" }));
+    fireEvent.click(
+      within(screen.getByRole("dialog", { name: "個人標記" })).getByRole("button", {
+        name: "刪除",
+      }),
+    );
 
     await waitFor(() => {
       expect(document.querySelectorAll("[data-batch-marker]")).toHaveLength(0);
-      // The highlight from the first mark is untouched.
+      // The first highlight is untouched.
       expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(1);
     });
+  });
+
+  it("persists a deletion across a reload", async () => {
+    await createMark();
+    await waitFor(() =>
+      expect(document.querySelector("[data-user-annotation-id]")).not.toBeNull(),
+    );
+
+    fireEvent.click(document.querySelector("[data-user-annotation-id]") as HTMLElement);
+    await flush();
+    fireEvent.click(
+      within(screen.getByRole("dialog", { name: "個人標記" })).getByRole("button", {
+        name: "刪除",
+      }),
+    );
+    await waitFor(() =>
+      expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0),
+    );
+
+    document.body.innerHTML = "";
+    window.getSelection()?.removeAllRanges();
+    await renderReader();
+    await flush();
+
+    expect(document.querySelectorAll("[data-user-annotation-id]")).toHaveLength(0);
   });
 
   it("keeps AI 注 and 專名線 clickable alongside a user highlight", async () => {

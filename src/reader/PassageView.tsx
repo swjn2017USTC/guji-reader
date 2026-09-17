@@ -2,7 +2,6 @@ import { memo, useMemo } from "react";
 import type { Passage, SourceNote, UserAnnotation } from "../types/corpus";
 import type { PublishedAnnotation, PublishedProperName } from "../types/annotations";
 import { segmentByIntervals, type Interval } from "./anchors";
-import { UI_MARKER_ATTRIBUTE } from "./selection";
 import { withOpacity } from "./userAnnotationStyle";
 import styles from "./PassageView.module.css";
 
@@ -14,7 +13,7 @@ type PassageViewProps = {
   userAnnotations: UserAnnotation[];
   showProperNames: boolean;
   onOpenAnnotation: (annotation: PublishedAnnotation, element: HTMLElement) => void;
-  onOpenNote: (annotation: UserAnnotation, element: HTMLElement) => void;
+  onOpenMark: (annotation: UserAnnotation, element: HTMLElement) => void;
 };
 
 type Layer =
@@ -58,7 +57,7 @@ function PassageViewComponent({
   userAnnotations,
   showProperNames,
   onOpenAnnotation,
-  onOpenNote,
+  onOpenMark,
 }: PassageViewProps) {
   const segments = useMemo(() => {
     const intervals: Interval<Layer>[] = [
@@ -158,6 +157,16 @@ function PassageViewComponent({
               style={decoration}
               data-user-annotation-id={userAnnotation.id}
               data-user-style={userAnnotation.style}
+              title="點擊可查看或刪除標記"
+              onClick={(event) => {
+                // A mark is also selectable text: if the user just drag-selected
+                // across it, the selection is the intent, not inspection.
+                const selection = window.getSelection();
+                if (selection && !selection.isCollapsed && selection.toString().trim()) {
+                  return;
+                }
+                onOpenMark(userAnnotation, event.currentTarget);
+              }}
             >
               {node}
             </span>
@@ -188,7 +197,7 @@ function PassageViewComponent({
                   data-batch-marker={userAnnotation.id}
                   data-ui-marker
                   aria-label={`查看批註：${userAnnotation.anchor.exact}`}
-                  onClick={(event) => onOpenNote(userAnnotation, event.currentTarget)}
+                  onClick={(event) => onOpenMark(userAnnotation, event.currentTarget)}
                 >
                   批
                 </button>
@@ -199,9 +208,6 @@ function PassageViewComponent({
     </p>
   );
 }
-
-/** Marks the 注 / 批 badges as UI so they never contribute to a text offset. */
-export const UI_MARKER_SELECTOR = `[${UI_MARKER_ATTRIBUTE}]`;
 
 /*
  * A volume holds hundreds of passages, and every state change (creating a mark,
