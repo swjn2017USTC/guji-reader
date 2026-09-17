@@ -1,14 +1,7 @@
-import { flip, offset, shift, useFloating } from "@floating-ui/react";
+import { useFloating } from "@floating-ui/react";
 import { useEffect, useMemo, type ReactNode } from "react";
+import { PANEL_MIDDLEWARE } from "./floatingPlacement";
 import styles from "./PopoverShell.module.css";
-
-/*
- * offset + collision handling. flip/shift are not optional here: in vertical
- * mode the marked text sits near the right edge (measured: mark x=1412 in a
- * 1512px viewport), and a 20rem popover without them renders off-screen with its
- * buttons out of reach.
- */
-const MIDDLEWARE = [offset(8), flip(), shift({ padding: 8 })];
 
 type PopoverShellProps = {
   referenceElement: HTMLElement | null;
@@ -33,7 +26,7 @@ export function PopoverShell({
 }: PopoverShellProps) {
   // Memoized: floating-ui recomputes whenever `elements` changes identity.
   const elements = useMemo(() => ({ reference: referenceElement }), [referenceElement]);
-  const { refs, floatingStyles } = useFloating({ elements, middleware: MIDDLEWARE });
+  const { refs, floatingStyles } = useFloating({ elements, middleware: PANEL_MIDDLEWARE });
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {

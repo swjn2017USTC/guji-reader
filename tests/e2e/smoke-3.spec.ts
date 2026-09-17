@@ -11,6 +11,7 @@ async function selectInPassage(
   page: import("@playwright/test").Page,
   start: number,
   end: number,
+  passageSelector: string = PASSAGE,
 ) {
   await page.evaluate(
     ({ passageSelector, from, to }) => {
@@ -51,7 +52,7 @@ async function selectInPassage(
       selection.removeAllRanges();
       selection.addRange(range);
     },
-    { passageSelector: PASSAGE, from: start, to: end },
+    { passageSelector, from: start, to: end },
   );
 
   // The app listens on mouseup to convert the selection into an anchor.
@@ -338,5 +339,108 @@ test.describe("smoke-3 工具條不得出屏", () => {
     expect(box!.x).toBeGreaterThanOrEqual(0);
     expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
     expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
+  });
+});
+
+test.describe("smoke-3 長選取不出屏", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector(PASSAGE);
+    // Personal marks live in IndexedDB, so start each case clean.
+    await page.evaluate(async () => {
+      await new Promise<void>((resolve) => {
+        const request = indexedDB.deleteDatabase("guji-reader");
+        request.onsuccess = () => resolve();
+        request.onerror = () => resolve();
+        request.onblocked = () => resolve();
+      });
+    });
+    await page.reload();
+    await page.waitForSelector(PASSAGE);
+  });
+
+  test("豎排長選取（跨多欄）時工具條仍完全在視口內", async ({ page }) => {
+    /*
+     * Regression: in vertical mode a selection spanning several columns has a
+     * full-height bounding box (measured 777px tall in a 945px viewport). The
+     * toolbar was placed below it, overflowing the bottom by ~89px and putting
+     * 標記 / 寫批註 out of reach, and `flip` could not help because "above" did
+     * not fit either. The fix is main-axis clamping in the shared placement.
+     */
+    await page.getByRole("button", { name: "切換橫豎排" }).click();
+    await expect(page.locator(".reader-main > div > div").first()).toHaveCSS(
+      "writing-mode",
+      "vertical-rl",
+    );
+
+    // p3 is 151 code points, so this selection spans multiple columns.
+    await selectInPassage(page, 0, 150, '[data-passage-id="tongjian-jishi-benmo:vol01:p3"]');
+    const toolbar = page.getByRole("toolbar", { name: "標記工具" });
+    await expect(toolbar).toBeVisible();
+
+    const viewport = page.viewportSize()!;
+    const box = await toolbar.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.y, "toolbar overflows the top").toBeGreaterThanOrEqual(0);
+    expect(box!.x, "toolbar overflows the left").toBeGreaterThanOrEqual(0);
+    expect(box!.y + box!.height, "toolbar overflows the bottom").toBeLessThanOrEqual(
+      viewport.height,
+    );
+    expect(box!.x + box!.width, "toolbar overflows the right").toBeLessThanOrEqual(
+      viewport.width,
+    );
+
+    // The controls the report said were unreachable.
+    for (const name of ["標記", "寫批註"]) {
+      const control = toolbar.getByRole("button", { name, exact: true });
+      const controlBox = await control.boundingBox();
+      expect(controlBox, `${name} has no box`).not.toBeNull();
+      expect(controlBox!.y, `${name} clipped at the bottom`).toBeGreaterThanOrEqual(0);
+      expect(
+        controlBox!.y + controlBox!.height,
+        `${name} clipped at the bottom`,
+      ).toBeLessThanOrEqual(viewport.height);
+    }
+
+    // It must also still work, not merely render in-bounds. A long mark is cut
+    // into several spans by the other layers' boundaries, so count distinct
+    // annotation ids rather than DOM pieces.
+    await toolbar.getByRole("button", { name: "標記", exact: true }).click();
+    await expect
+      .poll(async () =>
+        page.evaluate(
+          () =>
+            new Set(
+              [...document.querySelectorAll("[data-user-annotation-id]")].map((el) =>
+                el.getAttribute("data-user-annotation-id"),
+              ),
+            ).size,
+        ),
+      )
+      .toBe(1);
+  });
+
+  test("豎排長標記的標記 popover 也不出屏", async ({ page }) => {
+    await page.getByRole("button", { name: "切換橫豎排" }).click();
+
+    await selectInPassage(page, 0, 150, '[data-passage-id="tongjian-jishi-benmo:vol01:p3"]');
+    await page
+      .getByRole("toolbar", { name: "標記工具" })
+      .getByRole("button", { name: "標記", exact: true })
+      .click();
+
+    // A long mark is itself a tall reference for the popover.
+    await page.locator("[data-user-annotation-id]").first().click();
+    const popover = page.getByRole("dialog", { name: "個人標記" });
+    await expect(popover).toBeVisible();
+
+    const viewport = page.viewportSize()!;
+    const box = await popover.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
+
+    const del = await popover.getByRole("button", { name: "刪除" }).boundingBox();
+    expect(del!.y + del!.height).toBeLessThanOrEqual(viewport.height);
   });
 });
