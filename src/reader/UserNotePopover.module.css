@@ -1,0 +1,128 @@
+.popover {
+  z-index: 40;
+  width: 20rem;
+  max-width: 90vw;
+  padding: 0.75rem 0.85rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-stack);
+  color: var(--text-primary);
+  writing-mode: horizontal-tb;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+.styleLabel {
+  font-size: 0.72rem;
+  padding: 0 0.4rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--source-note-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--source-note-border);
+}
+
+.close {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.2rem;
+}
+
+.close:hover {
+  color: var(--text-primary);
+}
+
+.quote {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.note {
+  margin: 0 0 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.5rem;
+  resize: vertical;
+  margin-bottom: 0.6rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.primary,
+.secondary,
+.danger {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.primary {
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
+  color: #fff;
+}
+
+.primary:hover {
+  background-color: var(--accent-hover);
+}
+
+.secondary {
+  background-color: var(--button-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.secondary:hover {
+  background-color: var(--button-hover);
+  color: var(--text-primary);
+}
+
+.danger {
+  background-color: var(--button-bg);
+  border: 1px solid #b4534b;
+  color: #b4534b;
+}
+
+.danger:hover {
+  background-color: #b4534b;
+  color: #fff;
+}

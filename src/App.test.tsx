@@ -101,8 +101,13 @@ describe("Reader UI", () => {
 
     const annotation = document.querySelector("[data-annotation-id]") as HTMLElement;
     expect(annotation).not.toBeNull();
-    expect(annotation.querySelector("[data-annotation-marker]")).not.toBeNull();
     expect(annotation).not.toHaveAttribute("data-source-note-id");
+    // The 注 badge is a sibling of the decorated span, never a child: an
+    // underline must not run underneath it (see P03 fix).
+    expect(annotation.querySelector("[data-annotation-marker]")).toBeNull();
+    expect(
+      annotation.parentElement?.querySelector("[data-annotation-marker]"),
+    ).not.toBeNull();
   });
 
   it("renders proper-name lines with their type", async () => {

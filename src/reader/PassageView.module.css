@@ -33,6 +33,43 @@
   border: 0;
 }
 
+/* --- personal annotation ------------------------------------------------ */
+
+/*
+ * Background/underline come from inline styles (colour and opacity are
+ * per-record). These classes only carry layout, so a highlight and a wavy mark
+ * are the same element with different decoration.
+ */
+.userMarked {
+  margin-inline-end: 0.08em;
+  border-radius: 2px;
+}
+
+.userContinued {
+  border-radius: 0;
+}
+
+.batchMarker {
+  font-family: inherit;
+  font-size: 0.62em;
+  line-height: 1;
+  vertical-align: super;
+  margin-inline-start: 0.1em;
+  padding: 0.05em 0.2em;
+  border: 1px solid var(--text-secondary);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.batchMarker:hover {
+  background-color: var(--text-secondary);
+  color: var(--bg-surface);
+}
+
+/* ------------------------------------------------------------------------ */
+
 .annotationMarker {
   font-family: inherit;
   font-size: 0.62em;

@@ -25,6 +25,26 @@ export function sliceByCodePoints(text: string, start: number, end: number): str
   return text.slice(toUtf16Index(text, start), toUtf16Index(text, end));
 }
 
+/**
+ * Inverse of ``toUtf16Index``: convert a UTF-16 index (what the Selection API
+ * reports) into a code-point offset (what every anchor stores).
+ */
+export function toCodePointIndex(text: string, utf16Index: number): number {
+  if (utf16Index <= 0) {
+    return 0;
+  }
+  let utf16 = 0;
+  let codePoints = 0;
+  for (const character of text) {
+    if (utf16 >= utf16Index) {
+      break;
+    }
+    utf16 += character.length;
+    codePoints += 1;
+  }
+  return codePoints;
+}
+
 export function codePointLength(text: string): number {
   let count = 0;
   for (const _ of text) {

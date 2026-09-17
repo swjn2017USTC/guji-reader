@@ -1,10 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Topbar } from "./components/Topbar";
 import { Sidebar } from "./components/Sidebar";
 import { SettingsPanel } from "./components/SettingsPanel";
 import { Reader } from "./reader/Reader";
 import { loadCatalog } from "./data/catalog";
 import { loadPublishedAnnotations } from "./data/annotations";
+import {
+  createUserAnnotation,
+  deleteUserAnnotation,
+  loadUserAnnotations,
+  updateUserAnnotation,
+} from "./db/userAnnotations";
 import { loadSourceNotes } from "./data/sourceNotes";
 import { loadVolume } from "./data/volume";
 import { usePreferences } from "./hooks/usePreferences";
@@ -14,6 +20,7 @@ import type {
   PublishedAnnotation,
   PublishedProperName,
 } from "./types/annotations";
+import type { UserAnnotation } from "./types/corpus";
 import "./styles/themes.css";
 import "./styles/layout.css";
 import styles from "./App.module.css";
@@ -40,6 +47,7 @@ function App() {
   const [publishedProperNames, setPublishedProperNames] = useState<
     PublishedProperName[]
   >([]);
+  const [userAnnotations, setUserAnnotations] = useState<UserAnnotation[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -68,6 +76,73 @@ function App() {
       })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   }, [work, currentVolume]);
+
+  useEffect(() => {
+    if (!work) {
+      return;
+    }
+    let cancelled = false;
+    loadUserAnnotations(work.id)
+      .then((loaded) => {
+        if (!cancelled) {
+          setUserAnnotations(loaded);
+        }
+      })
+      .catch((err) => setError(err instanceof Error ? err.message : String(err)));
+    return () => {
+      cancelled = true;
+    };
+  }, [work]);
+
+  // Re-read from IndexedDB after every mutation so the DOM always reflects what
+  // was actually persisted, rather than optimistic local state.
+  const refreshUserAnnotations = useCallback(async () => {
+    if (!work) {
+      return;
+    }
+    setUserAnnotations(await loadUserAnnotations(work.id));
+  }, [work]);
+
+  const handleCreateUserAnnotation = useCallback(
+    async (draft: {
+      anchor: UserAnnotation["anchor"];
+      style: UserAnnotation["style"];
+      color: string;
+      opacity: number;
+      note: string;
+    }): Promise<UserAnnotation> => {
+      if (!work) {
+        throw new Error("work not loaded");
+      }
+      const created = await createUserAnnotation({
+        workId: work.id,
+        editionId: work.editionId,
+        ...draft,
+      });
+      await refreshUserAnnotations();
+      return created;
+    },
+    [refreshUserAnnotations, work],
+  );
+
+  const handleUpdateUserAnnotation = useCallback(
+    async (
+      id: string,
+      changes: Partial<Pick<UserAnnotation, "style" | "color" | "opacity" | "note">>,
+    ) => {
+      await updateUserAnnotation(id, changes);
+      await refreshUserAnnotations();
+    },
+    [refreshUserAnnotations],
+  );
+
+  const handleDeleteUserAnnotation = useCallback(
+    async (id: string) => {
+      await deleteUserAnnotation(id);
+      await refreshUserAnnotations();
+    },
+    [refreshUserAnnotations],
+  );
 
   const handleSelectVolume = (volume: VolumeRef) => {
     setCurrentVolume(volume);
@@ -137,9 +212,13 @@ function App() {
             sourceNotes={sourceNotes}
             properNames={publishedProperNames}
             annotations={publishedAnnotations}
+            userAnnotations={userAnnotations}
             writingMode={preferences.writingMode}
             showProperNames={preferences.showProperNames}
             scrollKey={scrollKey}
+            onCreateUserAnnotation={handleCreateUserAnnotation}
+            onUpdateUserAnnotation={handleUpdateUserAnnotation}
+            onDeleteUserAnnotation={handleDeleteUserAnnotation}
           />
         </main>
         <div
