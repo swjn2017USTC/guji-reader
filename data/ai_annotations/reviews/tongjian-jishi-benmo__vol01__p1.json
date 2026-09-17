@@ -5,7 +5,7 @@
     "proper_name_precision": 4,
     "proper_name_recall": 4,
     "entity_resolution": 4,
-    "place_accuracy": 5,
+    "place_accuracy": 4,
     "term_necessity": 3,
     "office_accuracy": 3,
     "first_appearance_accuracy": 4,
@@ -15,23 +15,23 @@
   "issues": [
     {
       "severity": "major",
-      "message": "「諸侯」標為 OFFICE（layer 2）不當：諸侯是周代分封制下的君長身分／爵位通稱，非官職，且屬 annotations 不應畫的類型；應改為 layer 1 TERM 或直接移除。"
+      "message": "「諸侯」被標為 layer=2 category=OFFICE，但「諸侯」是身分／爵位通稱，非官職，且屬不得畫專名線之通稱類；作為 OFFICE 註釋屬類型錯置，應改為 layer=1 TERM。"
     },
     {
       "severity": "major",
-      "message": "「大夫」標為 OFFICE 亦不妥：此處「晉大夫」指晉國世卿的身分通稱，非具體官職職能；且註文「本為晉臣而受周命為諸侯」屬對三家身分的延伸斷言，超出原文所載。"
+      "message": "「大夫」註文稱「位在卿之下、士之上」，但本段魏斯、趙籍、韓虔實為晉國之卿，註文自身又說「三家身為晉國之卿而泛稱大夫」，前後矛盾，且以爵位階序硬套此處泛稱，屬制度套用不當。"
     },
     {
       "severity": "minor",
-      "message": "「周威烈王」註文稱「在位二十四年（前425—前402）」與史實不合：周威烈王在位約前425—前402年為二十四年之說有誤，且「此年為前403年」屬推算斷言，原文未載，宜刪或改為「約」。"
+      "message": "「周威烈王」註文稱「在位二十四年（前425—前402）」，其即位年與在位年數說法不一，精確年代屬無充分根據之斷言，宜改為約略表述或刪去年份。"
     },
     {
       "severity": "minor",
-      "message": "「魏斯」註文「任用李悝、吳起等變法圖強，使魏成為戰國初期最強之國」為後世史評，非本段必要註釋，屬過度延伸。"
+      "message": "「魏斯」註文稱「前403年被周天子正式命為諸侯」，原文作「二十三年」，即前403年，尚可；但「戰國魏國開國君主」表述略鬆，魏文侯非嚴格意義開國之君，宜作「魏國始列為諸侯之君」。"
     },
     {
       "severity": "minor",
-      "message": "「趙籍」「韓虔」註文「戰國趙國／韓國開國君主」用語稍嫌武斷，戰國諸侯稱「開國」易生歧義，宜作「趙烈侯／韓景侯，三家分晉後受周命為諸侯」。"
+      "message": "「晉」在 properNames 標 STATE，在 annotations 標 PLACE，兩處類型不一致；作為國名宜統一為 STATE 對應之處理，或於註釋中明言指晉國。"
     }
   ],
   "revisedAnnotations": {
@@ -74,7 +74,7 @@
         "suffix": "二十三年，初命晉",
         "layer": 1,
         "category": "PERSON",
-        "text": "東周天子，名午，周考王之子。此年為《資治通鑑》記事之始。",
+        "text": "東周天子，名午，周考王之子，在位約二十餘年。",
         "confidence": 0.95
       },
       {
@@ -83,7 +83,7 @@
         "suffix": "、趙籍、韓虔爲諸",
         "layer": 1,
         "category": "PERSON",
-        "text": "即魏文侯，戰國魏國君主，與趙籍、韓虔同被周天子命為諸侯。",
+        "text": "即魏文侯，晉國之卿，前403年受周天子冊命為諸侯，魏國始列為諸侯。",
         "confidence": 0.95
       },
       {
@@ -92,7 +92,7 @@
         "suffix": "、韓虔爲諸侯。",
         "layer": 1,
         "category": "PERSON",
-        "text": "即趙烈侯，三家分晉後受周命為諸侯。",
+        "text": "即趙烈侯，晉國之卿，與魏斯、韓虔同時受周天子冊命為諸侯。",
         "confidence": 0.9
       },
       {
@@ -101,16 +101,25 @@
         "suffix": "爲諸侯。",
         "layer": 1,
         "category": "PERSON",
-        "text": "即韓景侯，三家分晉後受周命為諸侯。",
+        "text": "即韓景侯，晉國之卿，前403年與魏、趙同受冊命為諸侯。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "晉",
+        "prefix": "王二十三年，初命",
+        "suffix": "大夫魏斯、趙籍、",
+        "layer": 1,
+        "category": "PLACE",
+        "text": "指晉國，春秋大國，此時國君已衰，政權由魏、趙、韓三家把持。",
         "confidence": 0.9
       },
       {
         "exact": "大夫",
         "prefix": "二十三年，初命晉",
         "suffix": "魏斯、趙籍、韓虔",
-        "layer": 1,
-        "category": "TERM",
-        "text": "春秋戰國時卿大夫之稱，此指晉國世卿魏、趙、韓三家的身分。",
+        "layer": 2,
+        "category": "OFFICE",
+        "text": "先秦對有官位者之泛稱；此處魏、趙、韓三家實為晉國之卿，泛稱大夫。",
         "confidence": 0.85
       },
       {
@@ -119,8 +128,8 @@
         "suffix": "。",
         "layer": 1,
         "category": "TERM",
-        "text": "周代分封制下受天子冊命、有封國之君長。此謂周威烈王正式承認三家為諸侯。",
-        "confidence": 0.85
+        "text": "周代受天子冊命、有封國之君長；此謂周威烈王正式承認三家為諸侯。",
+        "confidence": 0.9
       }
     ]
   }

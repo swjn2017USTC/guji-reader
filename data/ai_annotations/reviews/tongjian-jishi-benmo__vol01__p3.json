@@ -1,42 +1,100 @@
 {
   "passageId": "tongjian-jishi-benmo:vol01:p3",
-  "overall": "reject",
+  "overall": "revise",
   "scores": {
-    "proper_name_precision": 2,
+    "proper_name_precision": 3,
     "proper_name_recall": 2,
     "entity_resolution": 3,
-    "place_accuracy": 3,
+    "place_accuracy": 4,
     "term_necessity": 3,
-    "office_accuracy": 2,
-    "first_appearance_accuracy": 2,
+    "office_accuracy": 3,
+    "first_appearance_accuracy": 3,
     "verbosity_control": 4,
     "unsupported_claim_risk": 3
   },
   "issues": [
     {
-      "severity": "blocker",
-      "message": "properNames 中將「天子」「諸侯」「卿大夫」「士庶人」標為 PERSON，這些是身分／爵位／等級通稱，非專名，類型嚴重錯誤（超過半數條目類型標錯）。"
+      "severity": "major",
+      "message": "「三公」註文斷言「位在諸侯之上」與原文「天子統三公，三公率諸侯」的層級雖相符，但「周代最高官職的合稱，指太師、太傅、太保（或司徒、司馬、司空）」屬後世（漢代）三公說之混入，且未限定「約」；此段為戰國秦漢間文獻，官制不宜硬套周代具體三公名目，屬時代錯置風險。"
     },
     {
       "severity": "major",
-      "message": "annotations 中「諸侯」標為 OFFICE 並稱「爵位身分」，與 properNames 的 PERSON 自相矛盾；且諸侯為分封列國君主之通稱，非官職，category 不當。"
+      "message": "「諸侯」以 OFFICE 標註不當：諸侯為封建君主身分／爵位通稱，非官職，應改為 TERM 或不標；以 OFFICE 處理屬類型錯置。"
     },
     {
       "severity": "major",
-      "message": "「士庶人」標為 OFFICE 不當：士為低級貴族、庶人為平民，並非官職，應為 TERM 或身分通稱。"
-    },
-    {
-      "severity": "major",
-      "message": "「卿大夫」標為 OFFICE 亦不妥，其為貴族等級通稱，非具體官職；且與 properNames 的 PERSON 類型衝突。"
+      "message": "「卿大夫」以 OFFICE 標註不當：卿、大夫為貴族等級通稱，非具體官職，且為合稱，應以 TERM 處理。"
     },
     {
       "severity": "minor",
-      "message": "「天子之職莫大於禮也」整句作為 TERM 註釋，屬句子主旨說明而非詞語註釋，span 過長，宜改為對「職」或整句作意譯說明並縮短。"
+      "message": "「士庶人」為士與庶人之合稱，屬身分等級泛稱，以 TERM 處理尚可，但註文「士為最低一級的貴族」表述略簡，宜補「庶人即平民」已具，尚可接受。"
     },
     {
       "severity": "minor",
-      "message": "「四海」同時出現在 properNames（PLACE）與 annotations（PLACE），重複且非嚴格專名，宜只保留一處並說明其泛指天下。"
+      "message": "「四海」「兆民」為常見詞，加註必要性偏低，屬輕度過度註釋。"
+    },
+    {
+      "severity": "minor",
+      "message": "全段未畫任何 properNames，天子、三公、諸侯、卿大夫、士庶人等身分／官職通稱依規則本不應畫專名線，故 recall 不扣重；但「四海」若視為地名泛稱亦不宜畫線，現狀可接受。"
     }
   ],
-  "revisedAnnotations": null
+  "revisedAnnotations": {
+    "properNames": [],
+    "annotations": [
+      {
+        "exact": "四海",
+        "prefix": "夫以",
+        "suffix": "之廣，兆民之衆，",
+        "layer": 1,
+        "category": "TERM",
+        "text": "古人認為中國四周有海環繞，故以「四海」泛指天下、全國。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "兆民",
+        "prefix": "夫以四海之廣，",
+        "suffix": "之衆，受制於一人",
+        "layer": 1,
+        "category": "TERM",
+        "text": "兆，極言其多；兆民即萬民、眾百姓。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "三公",
+        "prefix": "綱哉！是故天子統",
+        "suffix": "，三公率諸侯，諸",
+        "layer": 1,
+        "category": "TERM",
+        "text": "古代輔佐天子的最高官職合稱，具體所指說法不一，或指太師、太傅、太保等。",
+        "confidence": 0.8
+      },
+      {
+        "exact": "諸侯",
+        "prefix": "子統三公，三公率",
+        "suffix": "，諸侯制卿大夫，",
+        "layer": 1,
+        "category": "TERM",
+        "text": "分封制下受封各國的君主，對天子稱臣，在本國為最高統治者。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "卿大夫",
+        "prefix": "公率諸侯，諸侯制",
+        "suffix": "，卿大夫治士庶人",
+        "layer": 1,
+        "category": "TERM",
+        "text": "卿與大夫的合稱，是諸侯之下、士之上的貴族等級，輔佐諸侯治理國家。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "士庶人",
+        "prefix": "卿大夫，卿大夫治",
+        "suffix": "。貴以臨賤，賤以",
+        "layer": 1,
+        "category": "TERM",
+        "text": "士與庶人的合稱。士為貴族中最低一等，庶人即平民百姓。",
+        "confidence": 0.85
+      }
+    ]
+  }
 }

@@ -261,6 +261,145 @@ def test_locate_span_ambiguous_fails_loudly() -> None:
         locate_span("晉侯晉侯", "晉侯")
 
 
+# --------------------------------------------------------------------------
+# compound (enumerated) spans
+# --------------------------------------------------------------------------
+
+
+def test_enumeration_is_split_into_separate_spans() -> None:
+    """「幽、厲」 is two entities and must not draw one unbroken line."""
+    passage = make_passage("嗚呼！幽、厲失德，周道日衰。")
+    candidate = materialize_candidate(
+        passage,
+        {
+            "properNames": [
+                {"exact": "幽、厲", "prefix": "嗚呼！", "suffix": "失德", "type": "PERSON"}
+            ],
+            "annotations": [],
+        },
+    )
+    assert [span.anchor.exact for span in candidate.properNames] == ["幽", "厲"]
+    # Offsets are contiguous around the separator, so the renderer breaks the line.
+    first, second = candidate.properNames
+    assert passage.text[first.anchor.start : first.anchor.end] == "幽"
+    assert passage.text[second.anchor.start : second.anchor.end] == "厲"
+    # 嗚呼！幽、厲 → 幽 at 3..4, separator at 4, 厲 at 5..6
+    assert (first.anchor.start, first.anchor.end) == (3, 4)
+    assert second.anchor.start == first.anchor.end + 1
+
+
+def test_long_enumeration_splits_into_every_name() -> None:
+    passage = make_passage("雖以晉、楚、齊、秦之強不敢加者。")
+    candidate = materialize_candidate(
+        passage,
+        {
+            "properNames": [
+                {"exact": "晉、楚、齊、秦", "prefix": "雖以", "suffix": "之強", "type": "STATE"}
+            ],
+            "annotations": [],
+        },
+    )
+    assert [span.anchor.exact for span in candidate.properNames] == ["晉", "楚", "齊", "秦"]
+    assert all(span.type == "STATE" for span in candidate.properNames)
+    for span in candidate.properNames:
+        verify_anchor(span.anchor, passage.text)
+
+
+def test_split_span_offsets_match_canonical_even_with_repeats() -> None:
+    """Splitting uses the parent range, so a repeated single char is not ambiguous."""
+    passage = make_passage("周之民不衆於周、滕。")
+    candidate = materialize_candidate(
+        passage,
+        {
+            "properNames": [
+                {"exact": "周、滕", "prefix": "不衆於", "suffix": "。", "type": "PLACE"}
+            ],
+            "annotations": [],
+        },
+    )
+    assert [span.anchor.exact for span in candidate.properNames] == ["周", "滕"]
+    # 周之民不衆於周、滕 → the split must resolve to the second 周 at index 6.
+    assert candidate.properNames[0].anchor.start == 6
+    assert candidate.properNames[1].anchor.start == 8
+
+
+def test_non_enumerated_span_is_untouched() -> None:
+    passage = make_passage()
+    candidate = materialize_candidate(passage, make_raw())
+    assert [span.anchor.exact for span in candidate.properNames] == ["魏斯"]
+
+
+def test_banned_honorifics_are_rejected() -> None:
+    """身分／爵位／官職通稱 must never carry a proper-name line."""
+    passage = make_passage("天子之職莫大於禮，諸侯專征。")
+    for term in ("天子", "諸侯"):
+        with pytest.raises(AnchorError, match="通稱"):
+            materialize_candidate(
+                passage,
+                {
+                    "properNames": [{"exact": term, "type": "PERSON"}],
+                    "annotations": [],
+                },
+            )
+
+
+def test_banned_terms_rejected_under_any_type() -> None:
+    """Including INSTITUTION, which the model tried as a loophole."""
+    passage = make_passage("三家分晉。")
+    for type_ in ("INSTITUTION", "PERSON", "STATE"):
+        with pytest.raises(AnchorError, match="通稱"):
+            materialize_candidate(
+                passage,
+                {
+                    "properNames": [{"exact": "三家", "type": type_}],
+                    "annotations": [],
+                },
+            )
+
+
+def test_banned_term_allowed_as_annotation() -> None:
+    """It may still be explained — just not lined as a proper name."""
+    passage = make_passage("天子之職莫大於禮。")
+    candidate = materialize_candidate(
+        passage,
+        {
+            "properNames": [],
+            "annotations": [
+                {
+                    "exact": "天子",
+                    "layer": 2,
+                    "category": "OFFICE",
+                    "text": "天子，指周王之位。",
+                    "confidence": 0.8,
+                }
+            ],
+        },
+    )
+    assert candidate.properNames == []
+    assert [item.anchor.exact for item in candidate.annotations] == ["天子"]
+
+
+def test_genuine_proper_names_are_not_banned() -> None:
+    """Real names and states must survive the ban list."""
+    passage = make_passage("周威烈王二十三年，初命晉大夫魏斯爲諸侯。")
+    candidate = materialize_candidate(
+        passage,
+        {
+            "properNames": [
+                {"exact": "晉", "type": "STATE"},
+                {"exact": "魏斯", "type": "PERSON"},
+                {"exact": "周威烈王", "type": "PERSON"},
+            ],
+            "annotations": [],
+        },
+    )
+    assert [span.anchor.exact for span in candidate.properNames] == [
+        "晉",
+        "魏斯",
+        "周威烈王",
+    ]
+
+
 def test_materialize_rejects_unresolvable_span() -> None:
     with pytest.raises(AnchorError):
         materialize_candidate(

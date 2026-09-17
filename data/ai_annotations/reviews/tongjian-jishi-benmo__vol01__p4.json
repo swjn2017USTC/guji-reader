@@ -6,7 +6,7 @@
     "proper_name_recall": 4,
     "entity_resolution": 4,
     "place_accuracy": 5,
-    "term_necessity": 3,
+    "term_necessity": 4,
     "office_accuracy": 5,
     "first_appearance_accuracy": 3,
     "verbosity_control": 4,
@@ -14,20 +14,20 @@
   },
   "issues": [
     {
-      "severity": "major",
-      "message": "「春秋」在 properNames 中標為 DYNASTY，但此處指《春秋》一書（TERM），非朝代；同一 span 在 annotations 中又標為 TERM，前後矛盾。"
-    },
-    {
-      "severity": "major",
-      "message": "「微子」「季札」「太伯」皆為首次出現的重要人物，卻標為 layer=2 的 FIRST_APPEARANCE，而 layer=2 依規則僅限 OFFICE / FIRST_APPEARANCE 且 category 須匹配；此處 category 用 FIRST_APPEARANCE 尚可，但 layer 與 category 對應規則要求 layer=2 → OFFICE / FIRST_APPEARANCE，勉強可通，惟「微子」「季札」「太伯」同時已列入 properNames，重複且 layer 標示不一致，屬類型標錯。"
+      "severity": "minor",
+      "message": "「微子」「季札」標為 layer=2 FIRST_APPEARANCE 不當：二者皆為人名，屬 layer=1 PERSON；FIRST_APPEARANCE 應保留給首次出現的重要專名，且不應與 PERSON 類別混用。"
     },
     {
       "severity": "minor",
-      "message": "「繫」單字加註為《繫辭》，span 過短且易與動詞「繫」混淆，宜改註「繫之」或直接不註。"
+      "message": "「繫」註為「繫辭」尚可，但原文「孔子繫之曰」之「繫」為動詞（繫辭、繫屬卦爻辭），註文宜說明其動詞用法，避免讀者誤以為是書名《繫辭》。"
     },
     {
       "severity": "minor",
-      "message": "「王人」註為周天子使者，準確；但「王人雖微」之「微」指地位微賤，未註不影響理解，可保留。"
+      "message": "「王人」註為「周天子派出的使者或地位低微的王室之臣」大致可通，但《春秋》「王人」多指天子之微者，宜更精確限定，避免「或」字含糊。"
+    },
+    {
+      "severity": "minor",
+      "message": "「微子」註稱「商紂王庶兄」，《史記》作紂之庶兄，然亦有異說作諸父，宜加「一說」或改為較寬泛表述，以免斷言過實。"
     }
   ],
   "revisedAnnotations": {
@@ -81,6 +81,12 @@
         "type": "PERSON"
       },
       {
+        "exact": "吳",
+        "prefix": "天矣，以季札而君",
+        "suffix": "則太伯血食矣，然",
+        "type": "STATE"
+      },
+      {
         "exact": "太伯",
         "prefix": "，以季札而君吳則",
         "suffix": "血食矣，然二子寧",
@@ -98,31 +104,13 @@
         "confidence": 0.95
       },
       {
-        "exact": "孔子",
-        "prefix": "，以乾、坤為首。",
-        "suffix": "繫之曰：「天尊地",
-        "layer": 1,
-        "category": "PERSON",
-        "text": "孔丘，春秋魯國人，儒家創始者，相傳作《易》之《繫辭》。",
-        "confidence": 0.97
-      },
-      {
-        "exact": "繫之",
+        "exact": "繫",
         "prefix": "乾、坤為首。孔子",
-        "suffix": "曰：「天尊地卑，",
+        "suffix": "之曰：「天尊地卑",
         "layer": 1,
         "category": "TERM",
-        "text": "指《易》之《繫辭》，附於卦爻之下以闡發義理。",
+        "text": "此為動詞，指繫屬、綴附卦爻辭以作解說，即《易傳》所謂繫辭。",
         "confidence": 0.85
-      },
-      {
-        "exact": "春秋",
-        "prefix": "天地之不可易也。",
-        "suffix": "抑諸侯，尊王室，",
-        "layer": 1,
-        "category": "TERM",
-        "text": "此指《春秋》一書，孔子所修魯史，以褒貶抑諸侯、尊王室。",
-        "confidence": 0.9
       },
       {
         "exact": "王人",
@@ -130,35 +118,53 @@
         "suffix": "雖微，序於諸侯之",
         "layer": 1,
         "category": "TERM",
-        "text": "指周天子派出的使者，雖地位微賤，仍列於諸侯之上。",
-        "confidence": 0.85
+        "text": "指周天子派出的使者，多為地位微末的王室之臣。",
+        "confidence": 0.8
+      },
+      {
+        "exact": "惓惓",
+        "prefix": "於君臣之際未嘗不",
+        "suffix": "也。非有桀、紂之",
+        "layer": 1,
+        "category": "TERM",
+        "text": "同「拳拳」，懇切、殷切之意，形容聖人對君臣名分的關切。",
+        "confidence": 0.9
       },
       {
         "exact": "微子",
         "prefix": "死而已矣。是故以",
         "suffix": "而代紂則成湯配天",
-        "layer": 2,
-        "category": "FIRST_APPEARANCE",
-        "text": "商紂王之庶兄，名啟，封於微；此處首次出現，用以假設其代紂為君。",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "商紂王之庶兄（一說諸父），名啟，因紂無道而離去，後受周封於宋。此處設想若由他取代紂王，則商湯可永享配天之祀。",
         "confidence": 0.9
       },
       {
         "exact": "季札",
         "prefix": "則成湯配天矣，以",
         "suffix": "而君吳則太伯血食",
-        "layer": 2,
-        "category": "FIRST_APPEARANCE",
-        "text": "吳國公子，賢而讓國；此處首次出現，用以假設其君吳。",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "春秋時吳國公子，賢而讓國，此處設想若他為吳君，則太伯之祀可長存。",
         "confidence": 0.9
       },
       {
         "exact": "太伯",
         "prefix": "，以季札而君吳則",
         "suffix": "血食矣，然二子寧",
-        "layer": 2,
-        "category": "FIRST_APPEARANCE",
-        "text": "周太王長子，讓位南奔，為吳國始祖；此處首次出現。",
-        "confidence": 0.88
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即吳太伯，周太王長子，讓位南奔，為吳國始祖。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "血食",
+        "prefix": "季札而君吳則太伯",
+        "suffix": "矣，然二子寧亡國",
+        "layer": 1,
+        "category": "TERM",
+        "text": "指受祭祀。古代祭祀用牲血，故稱血食，引申為保持宗廟祭祀不絕。",
+        "confidence": 0.9
       }
     ]
   }

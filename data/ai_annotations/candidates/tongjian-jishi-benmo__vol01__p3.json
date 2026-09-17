@@ -1,62 +1,6 @@
 {
   "passageId": "tongjian-jishi-benmo:vol01:p3",
-  "properNames": [
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p3",
-        "start": 2,
-        "end": 4,
-        "exact": "四海",
-        "prefix": "夫以",
-        "suffix": "之廣，兆民之衆，"
-      },
-      "type": "PLACE"
-    },
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p3",
-        "start": 51,
-        "end": 53,
-        "exact": "天子",
-        "prefix": "為之紀綱哉！是故",
-        "suffix": "統三公，三公率諸"
-      },
-      "type": "PERSON"
-    },
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p3",
-        "start": 60,
-        "end": 62,
-        "exact": "諸侯",
-        "prefix": "子統三公，三公率",
-        "suffix": "，諸侯制卿大夫，"
-      },
-      "type": "PERSON"
-    },
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p3",
-        "start": 66,
-        "end": 69,
-        "exact": "卿大夫",
-        "prefix": "公率諸侯，諸侯制",
-        "suffix": "，卿大夫治士庶人"
-      },
-      "type": "PERSON"
-    },
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p3",
-        "start": 74,
-        "end": 77,
-        "exact": "士庶人",
-        "prefix": "卿大夫，卿大夫治",
-        "suffix": "。貴以臨賤，賤以"
-      },
-      "type": "PERSON"
-    }
-  ],
+  "properNames": [],
   "annotations": [
     {
       "anchor": {
@@ -68,8 +12,8 @@
         "suffix": "之廣，兆民之衆，"
       },
       "layer": 1,
-      "category": "PLACE",
-      "text": "古人以四海指天下、全國，非實指某一海域。",
+      "category": "TERM",
+      "text": "古人認為中國四周有海環繞，故以「四海」指天下、全國。",
       "confidence": 0.95
     },
     {
@@ -83,7 +27,7 @@
       },
       "layer": 1,
       "category": "TERM",
-      "text": "兆民即萬民、眾百姓。兆為極言其多之數。",
+      "text": "兆，極言其多；兆民即萬民、眾百姓。",
       "confidence": 0.95
     },
     {
@@ -97,7 +41,7 @@
       },
       "layer": 2,
       "category": "OFFICE",
-      "text": "周代最高官職，指太師、太傅、太保（或司徒、司馬、司空），位在諸侯之上，輔佐天子。",
+      "text": "周代最高官職的合稱，指太師、太傅、太保（或司徒、司馬、司空），位在諸侯之上，輔佐天子。",
       "confidence": 0.85
     },
     {
@@ -111,7 +55,7 @@
       },
       "layer": 2,
       "category": "OFFICE",
-      "text": "周代分封制下受封的列國君主，此處指其爵位身分，非具體某人。",
+      "text": "周代分封制下受封各國的君主，對天子稱臣，在本國為最高統治者。",
       "confidence": 0.9
     },
     {
@@ -125,7 +69,7 @@
       },
       "layer": 2,
       "category": "OFFICE",
-      "text": "卿與大夫的合稱，為諸侯之下、士之上的貴族等級與官職。",
+      "text": "卿與大夫的合稱，是諸侯之下、士之上的貴族等級，輔佐諸侯治理國家。",
       "confidence": 0.9
     },
     {
@@ -137,38 +81,10 @@
         "prefix": "卿大夫，卿大夫治",
         "suffix": "。貴以臨賤，賤以"
       },
-      "layer": 2,
-      "category": "OFFICE",
-      "text": "士與庶人的合稱。士為低級貴族，庶人為平民，此處泛指被統治的下層。",
+      "layer": 1,
+      "category": "TERM",
+      "text": "士與庶人的合稱。士為最低一級的貴族，庶人即平民百姓。",
       "confidence": 0.85
-    },
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p3",
-        "start": 45,
-        "end": 47,
-        "exact": "紀綱",
-        "prefix": "者，豈非以禮為之",
-        "suffix": "哉！是故天子統三"
-      },
-      "layer": 1,
-      "category": "TERM",
-      "text": "紀綱本指網的總繩，引申為法度、準則、統紀。",
-      "confidence": 0.9
-    },
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p3",
-        "start": 141,
-        "end": 150,
-        "exact": "天子之職莫大於禮也",
-        "prefix": "而國家治安。故曰",
-        "suffix": "。"
-      },
-      "layer": 1,
-      "category": "TERM",
-      "text": "此句為全段主旨：天子最重要的職責在於維護禮制。",
-      "confidence": 0.9
     }
   ]
 }

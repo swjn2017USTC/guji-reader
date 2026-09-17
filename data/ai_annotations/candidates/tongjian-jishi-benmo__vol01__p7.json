@@ -26,21 +26,32 @@
     {
       "anchor": {
         "passageId": "tongjian-jishi-benmo:vol01:p7",
-        "start": 57,
-        "end": 59,
-        "exact": "天子",
-        "prefix": "義侵禮，則不請於",
-        "suffix": "而自立矣。不請於"
+        "start": 35,
+        "end": 37,
+        "exact": "三晉",
+        "prefix": "乎！是大不然。夫",
+        "suffix": "雖強，苟不顧天下"
       },
-      "type": "INSTITUTION"
+      "type": "STATE"
     },
     {
       "anchor": {
         "passageId": "tongjian-jishi-benmo:vol01:p7",
         "start": 84,
-        "end": 87,
-        "exact": "桓、文",
+        "end": 85,
+        "exact": "桓",
         "prefix": "逆之臣，天下苟有",
+        "suffix": "、文之君，必奉禮"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 86,
+        "end": 87,
+        "exact": "文",
+        "prefix": "臣，天下苟有桓、",
         "suffix": "之君，必奉禮義而"
       },
       "type": "PERSON"
@@ -48,13 +59,13 @@
     {
       "anchor": {
         "passageId": "tongjian-jishi-benmo:vol01:p7",
-        "start": 117,
-        "end": 119,
-        "exact": "諸侯",
-        "prefix": "是受天子之命而為",
-        "suffix": "也，誰得而討之！"
+        "start": 128,
+        "end": 130,
+        "exact": "三晉",
+        "prefix": "，誰得而討之！故",
+        "suffix": "之列於諸侯，非三"
       },
-      "type": "INSTITUTION"
+      "type": "STATE"
     }
   ],
   "annotations": [
@@ -68,8 +79,8 @@
         "suffix": "微弱，三晉強盛，"
       },
       "layer": 1,
-      "category": "PLACE",
-      "text": "指周王室、周王朝。周室東遷後王畿狹小、號令不行，此處言其衰微。",
+      "category": "TERM",
+      "text": "周王室、周王朝。室指王室政權。",
       "confidence": 0.95
     },
     {
@@ -83,36 +94,36 @@
       },
       "layer": 1,
       "category": "TERM",
-      "text": "指晉國分裂而成的韓、趙、魏三家。此段論其請命於天子而得列為諸侯之事。",
+      "text": "指晉國分裂而成的韓、趙、魏三國。",
       "confidence": 0.95
-    },
-    {
-      "anchor": {
-        "passageId": "tongjian-jishi-benmo:vol01:p7",
-        "start": 57,
-        "end": 59,
-        "exact": "天子",
-        "prefix": "義侵禮，則不請於",
-        "suffix": "而自立矣。不請於"
-      },
-      "layer": 2,
-      "category": "OFFICE",
-      "text": "此指周天子，天下共主。戰國時周天子名義上仍為諸侯所共奉之最高君主。",
-      "confidence": 0.9
     },
     {
       "anchor": {
         "passageId": "tongjian-jishi-benmo:vol01:p7",
         "start": 84,
-        "end": 87,
-        "exact": "桓、文",
+        "end": 85,
+        "exact": "桓",
         "prefix": "逆之臣，天下苟有",
+        "suffix": "、文之君，必奉禮"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "指齊桓公，春秋五霸之首，以尊王攘夷為號召。",
+      "confidence": 0.9
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 86,
+        "end": 87,
+        "exact": "文",
+        "prefix": "臣，天下苟有桓、",
         "suffix": "之君，必奉禮義而"
       },
       "layer": 1,
       "category": "PERSON",
-      "text": "指齊桓公、晉文公，春秋時以尊王攘夷、主持會盟著稱的霸主。此借指能奉禮義以征討悖逆之臣的強君。",
-      "confidence": 0.95
+      "text": "指晉文公，春秋五霸之一，曾尊周室、稱霸諸侯。",
+      "confidence": 0.9
     },
     {
       "anchor": {
@@ -125,8 +136,22 @@
       },
       "layer": 2,
       "category": "OFFICE",
-      "text": "此指經天子冊命而取得諸侯身分的封國君主。三晉得天子之命，遂取得合法諸侯地位。",
-      "confidence": 0.9
+      "text": "周代分封制下受天子冊命、有封國的君主，此處指正式受封的諸侯身分。",
+      "confidence": 0.85
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p7",
+        "start": 57,
+        "end": 59,
+        "exact": "天子",
+        "prefix": "義侵禮，則不請於",
+        "suffix": "而自立矣。不請於"
+      },
+      "layer": 2,
+      "category": "OFFICE",
+      "text": "此處指周天子，天下共主，名義上握有冊封諸侯之權。",
+      "confidence": 0.85
     }
   ]
 }

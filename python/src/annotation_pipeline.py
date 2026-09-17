@@ -43,6 +43,35 @@ MAX_PROPER_NAMES_PER_PASSAGE = 40
 # Width of the canonical prefix/suffix window stored on every anchor, in code points.
 CONTEXT_WINDOW = 8
 
+# Enumeration separator in classical Chinese. A span covering 「幽、厲」 or
+# 「晉、楚、齊、秦」 is several entities, and must not draw one unbroken line.
+ENUMERATION_SEPARATOR = "、"
+
+# The spec states 官職本身不自動畫專名線. These are 身分／爵位／官職通稱 and
+# 氏族／卿族泛稱: categories that must never carry a proper-name line under any
+# type, INSTITUTION included. The model kept drawing lines on them across
+# several runs, so the ban is enforced structurally and surfaced through the
+# repair round rather than trusted to the prompt.
+BANNED_PROPER_NAME_TERMS: frozenset[str] = frozenset(
+    {
+        "天子",
+        "諸侯",
+        "公",
+        "侯",
+        "卿",
+        "大夫",
+        "士",
+        "士庶人",
+        "君",
+        "臣",
+        "先王",
+        "季氏",
+        "三桓",
+        "田氏",
+        "三家",
+    }
+)
+
 
 class AnchorError(ValueError):
     """Raised when a span cannot be located in the canonical passage text."""
@@ -106,14 +135,31 @@ GENERATOR_SYSTEM_PROMPT = f"""\
 
 嚴格規則：
 {_SPAN_RULES}
-- 專名線只畫**具體專名**。下列詞一律不畫專名線，也不得當成 PERSON：
-  天子、諸侯、公、侯、卿、大夫、士、士庶人、君、臣、先王、三家 等
-  身分／爵位／官職／泛稱。若這些詞需要說明，用 layer=2 OFFICE（官職、爵位、身分稱號）
-  或 layer=1 TERM（制度、泛稱）。
+- 專名線只畫**具體專名**。允許的類型僅限：具體人物 PERSON、具體地名 PLACE、
+  具體國名或政權 STATE、朝代 DYNASTY、民族 ETHNICITY、年號 REIGN、宗教 RELIGION、
+  真正的機構或學派 INSTITUTION（如太學、稷下）。
+- 下列詞**一律不畫專名線**，任何 type 都不行（包括 INSTITUTION）：
+  - 身分／爵位／官職通稱：天子、諸侯、公、侯、卿、大夫、士、士庶人、君、臣、先王
+  - 氏族／家族／卿族泛稱：季氏、三桓、田氏、三家
+  - 事件名稱、篇題、成語、普通短語：如「三家分晉」「請隧」「履霜堅冰至」「悖逆之臣」
+    ——事件與短語不是專名，整段也不可以因為它是標題就畫線
+  - 典籍書名：如「易」「書」「春秋」「詩」
+  這些詞若需說明，用 layer=2 OFFICE（官職、爵位、身分稱號）或 layer=1 TERM（制度、泛稱）。
+- **不要為了繞過上述限制而擴大 span**：把「三家」改成「三家分晉」再標 INSTITUTION 同樣違規。
+  規則看的是概念，不是字串。
 - PERSON 必須是具體人物，例如「魏斯」「周威烈王」「智伯」「豫讓」。
   凡不能對應到具體某人的泛稱，不要畫線。
-- 避免單字 span。單字（如「晉」「周」「分」「名」）極易誤標與歧義；除非確實必要且能唯一確定，
-  否則改用更長的詞組，或乾脆不註。
+- **合稱必須拆開**：並列多個名字時，一個 span 只能放一個名字。
+  「幽、厲」要輸出成兩個 span（幽 / 厲），「晉、楚、齊、秦」要輸出成四個 span。
+  exact 中絕對不可以包含頓號「、」或連接詞「與」「及」「暨」。
+  若無法確定其中某一個名字，就整組都不要輸出。
+- **自稱不得與名字合併**：「臣光」的「臣」是自稱，不是姓名的一部分。
+  應只標「光」，或整體不標。
+- 允許單字 span，但**僅限**無疑的專名簡稱，例如以「桀」「紂」「湯」「武」
+  指夏桀、商紂、商湯、周武王，以「幽」「厲」「桓」「文」指周幽王、周厲王、
+  齊桓公、晉文公，以「晉」「衞」指晉國、衞國。
+  這類單字必須在對應註文中說明所指為誰／何國。
+  除此之外的單字（如「周」「分」「名」）容易誤標，改用更長的詞組或乾脆不註。
 - 節制數量：一百字以內的短段，annotations 不超過 6 條；長段每百字不超過 5 條。
   優先註解真正影響理解的專名與難詞，不要逐詞加註。
 - PERSON：字、號、官職、爵位、籍貫等代稱，盡量歸一到同一人；只寫本段閱讀所需，以 30–80 字為主。
@@ -134,6 +180,21 @@ REVIEWER_SYSTEM_PROMPT = f"""\
 嚴格規則：
 - 逐項核對：exact 是否真的是原文子串；該詞是否真的需要註；註文是否準確；
   地名是否裝精確；官職是否時代錯置；是否過度註釋普通詞；是否出現原文沒有的斷言。
+- 專名線額外核對（這幾項最常出錯，務必逐條檢查）：
+  - 一個 properNames span 只能有一個名字。若 exact 含頓號「、」或「與」「及」「暨」，
+    就是合稱沒拆開，屬 major 問題。
+  - 身分／爵位／官職通稱（天子、諸侯、公、侯、卿、大夫、士、士庶人、君、臣、先王）
+    與氏族／家族／卿族泛稱（季氏、三桓、田氏、三家）**不得畫專名線**，
+    任何 type 都不行，包括 INSTITUTION。用 INSTITUTION 標這類詞同屬 major 問題。
+  - 事件名稱、篇題、成語、普通短語（三家分晉、請隧、悖逆之臣）與典籍書名（易、書、春秋）
+    不是專名，不得畫線；藉由擴大 span 來規避限制（把「三家」寫成「三家分晉」）同屬違規。
+  - 自稱（臣、僕、愚）不得與名字併成一個 PERSON span。
+- **以下不是問題，不要列為 issue、不要因此扣分或 reject**：
+  - 合稱已拆成多個單字 span，例如「幽、厲」拆成「幽」「厲」，「桓、文」拆成「桓」「文」。
+    這是規定的正確做法：不同實體之間必須斷線。**拆開是要求，合併才是錯誤。**
+  - 單字 span 只要是無疑的專名簡稱（桀、紂、湯、武、幽、厲、桓、文、晉、衞），即屬正常，
+    不得因「邊界過窄」或「單字」而視為缺陷。
+- 若註文有事實錯誤（人物、年代、制度、方向、因果顛倒），一律記為 major。
 - 評分為 1–5 整數。
 - 結論：
   - accept：候選可直接發布
@@ -141,12 +202,14 @@ REVIEWER_SYSTEM_PROMPT = f"""\
   - reject：整體不可用，不要給 revisedAnnotations
 - 以下情形必須 reject，不得用 revise 帶過：
   - 任何 severity=blocker 的問題（原文沒有的斷言、錨定到錯誤文字、史實硬傷）
-  - 三條或以上 severity=major 的問題
-  - 多數條目（超過一半）類型標錯，例如把官職、爵位、身分通稱（天子、諸侯、公、侯、卿、大夫）
-    畫成 PERSON 專名
+  - 系統性錯誤：多數條目（超過一半）類型標錯，或整體可信度不足
   - 嚴重過度註釋：一百字以內短段的 annotations 超過 8 條
-- 若只是少數（1–2 條）局部缺陷，用 revise 並直接修正，不要 reject。
-- 不要為了覆蓋率而放寬標準。寧可 reject，也不要發布錯誤註釋。
+- **多數缺陷都是可以逐條修正的**，這種情況用 revise 並直接改好，不要 reject。
+  例如：某個 span 類型標錯、某個詞不該畫線、某條註文有事實錯誤、某個合稱未拆開——
+  這些都屬於「局部可修正」，必須用 revise 並在 revisedAnnotations 中改對。
+  只有當你認為改不動、或整段都不可信時，才用 reject。
+- 不要為了覆蓋率而放寬標準，但也不要因為問題數量多就放棄可修正的候選。
+  判準是「修正後是否可用」，不是「問題有幾條」。
 
 當你輸出 revisedAnnotations 時，適用同樣的 span 規則：
 {_SPAN_RULES}
@@ -221,6 +284,54 @@ def locate_span(
     )
 
 
+def anchor_from_range(passage: Passage, start: int, end: int) -> TextAnchor:
+    """Build a verified anchor from a known, already-resolved range.
+
+    Unlike ``build_anchor`` this never searches for the substring, so it is
+    unambiguous even for a single character. Used when splitting a compound span,
+    where each part's position is derived from the parent's known offset.
+    """
+    anchor = TextAnchor(
+        passageId=passage.id,
+        start=start,
+        end=end,
+        exact=passage.text[start:end],
+        prefix=passage.text[max(0, start - CONTEXT_WINDOW) : start],
+        suffix=passage.text[end : end + CONTEXT_WINDOW],
+    )
+    verify_anchor(anchor, passage.text)
+    return anchor
+
+
+def split_enumerated_span(
+    passage: Passage, anchor: TextAnchor, type_: str
+) -> list[ProperNameSpan]:
+    """Split a 頓號-joined proper-name span into one span per name.
+
+    The V0.1 spec requires a break between two consecutive but different
+    entities. A single span covering 「幽、厲」 would draw one unbroken line
+    across both, so enumeration is split deterministically rather than trusted
+    to the model. Part offsets come from the parent range, so even single-
+    character parts such as 「幽」 are located without ambiguity.
+    """
+    parts = anchor.exact.split(ENUMERATION_SEPARATOR)
+    if len(parts) == 1:
+        return [ProperNameSpan(anchor=anchor, type=type_)]
+
+    spans: list[ProperNameSpan] = []
+    cursor = anchor.start
+    for part in parts:
+        if part:
+            spans.append(
+                ProperNameSpan(
+                    anchor=anchor_from_range(passage, cursor, cursor + len(part)),
+                    type=type_,
+                )
+            )
+        cursor += len(part) + len(ENUMERATION_SEPARATOR)
+    return spans
+
+
 def build_anchor(
     passage: Passage, exact: str, prefix: str = "", suffix: str = ""
 ) -> TextAnchor:
@@ -278,15 +389,16 @@ def materialize_candidate(passage: Passage, raw: Any) -> AnnotationCandidate:
     if len(payload.annotations) > MAX_ANNOTATIONS_PER_PASSAGE:
         raise AnchorError(f"too many annotations: {len(payload.annotations)}")
 
-    proper_names = [
-        ProperNameSpan(
-            anchor=build_anchor(
-                passage, span.exact, span.prefix, span.suffix
-            ),
-            type=span.type,
+    proper_names: list[ProperNameSpan] = []
+    for span in payload.properNames:
+        anchor = build_anchor(passage, span.exact, span.prefix, span.suffix)
+        proper_names.extend(split_enumerated_span(passage, anchor, span.type))
+
+    if len(proper_names) > MAX_PROPER_NAMES_PER_PASSAGE:
+        raise AnchorError(
+            f"too many proper-name spans after splitting enumeration: {len(proper_names)}"
         )
-        for span in payload.properNames
-    ]
+
     annotations = [
         CandidateAnnotation(
             anchor=build_anchor(
@@ -304,7 +416,30 @@ def materialize_candidate(passage: Passage, raw: Any) -> AnnotationCandidate:
         passageId=passage.id, properNames=proper_names, annotations=annotations
     )
     verify_candidate(candidate, passage.text)
+    _reject_banned_proper_names(candidate)
     return candidate
+
+
+def _reject_banned_proper_names(candidate: AnnotationCandidate) -> None:
+    """Fail loudly when a 通稱 or 氏族泛稱 carries a proper-name line.
+
+    Raising here routes the problem into the generator's repair round, which
+    tells the model exactly which term was wrong and how to express it instead.
+    """
+    offending = sorted(
+        {
+            span.anchor.exact
+            for span in candidate.properNames
+            if span.anchor.exact in BANNED_PROPER_NAME_TERMS
+        }
+    )
+    if offending:
+        raise AnchorError(
+            "properNames must not contain 身分／爵位／官職通稱 or 氏族泛稱: "
+            + ", ".join(repr(term) for term in offending)
+            + ". Remove it from properNames; if it needs explaining, use an "
+            "annotation with layer=2 category=OFFICE or layer=1 category=TERM."
+        )
 
 
 def candidate_to_raw(candidate: AnnotationCandidate) -> dict[str, Any]:

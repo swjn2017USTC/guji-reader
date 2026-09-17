@@ -37,13 +37,24 @@
     {
       "anchor": {
         "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 121,
+        "end": 123,
+        "exact": "衞君",
+        "prefix": "政亡則國家從之。",
+        "suffix": "待孔子而為政，孔"
+      },
+      "type": "PERSON"
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
         "start": 260,
         "end": 261,
         "exact": "易",
         "prefix": "竭力而不能及也。",
         "suffix": "曰：「履霜堅冰至"
       },
-      "type": "DYNASTY"
+      "type": "INSTITUTION"
     },
     {
       "anchor": {
@@ -54,7 +65,7 @@
         "prefix": "「履霜堅冰至，」",
         "suffix": "曰：「一日二日萬"
       },
-      "type": "DYNASTY"
+      "type": "INSTITUTION"
     }
   ],
   "annotations": [
@@ -69,8 +80,8 @@
       },
       "layer": 1,
       "category": "PERSON",
-      "text": "春秋時衛國大夫，以有功於衛而辭邑，請得繁纓（諸侯之馬飾），孔子譏其僭越。",
-      "confidence": 0.85
+      "text": "春秋時衞國大夫，因有功於衞國，辭去封邑而請求繁纓（諸侯之馬飾），孔子認為寧可多給他封邑，也不可輕授名器。",
+      "confidence": 0.9
     },
     {
       "anchor": {
@@ -83,8 +94,8 @@
       },
       "layer": 1,
       "category": "TERM",
-      "text": "古代諸侯馬匹的裝飾，用以別尊卑；非諸侯而請繁纓，即僭越名器。",
-      "confidence": 0.9
+      "text": "古代諸侯馬匹上的裝飾，是諸侯身分的象徵，不應賜給大夫。",
+      "confidence": 0.95
     },
     {
       "anchor": {
@@ -97,8 +108,36 @@
       },
       "layer": 1,
       "category": "TERM",
-      "text": "名號與器物，古代用以區別貴賤等級的制度象徵。",
-      "confidence": 0.9
+      "text": "名號與器物，古代用以區別貴賤等級，是禮制的核心。",
+      "confidence": 0.95
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 121,
+        "end": 123,
+        "exact": "衞君",
+        "prefix": "政亡則國家從之。",
+        "suffix": "待孔子而為政，孔"
+      },
+      "layer": 1,
+      "category": "PERSON",
+      "text": "指衞國國君，此處當指衞出公輒，孔子曾欲在衞國為政。",
+      "confidence": 0.7
+    },
+    {
+      "anchor": {
+        "passageId": "tongjian-jishi-benmo:vol01:p5",
+        "start": 134,
+        "end": 136,
+        "exact": "正名",
+        "prefix": "而為政，孔子欲先",
+        "suffix": "，以為名不正則民"
+      },
+      "layer": 1,
+      "category": "TERM",
+      "text": "糾正名分，使名實相符，是孔子政治思想的重要主張。",
+      "confidence": 0.95
     },
     {
       "anchor": {
@@ -111,8 +150,8 @@
       },
       "layer": 1,
       "category": "TERM",
-      "text": "《易·坤卦》爻辭，喻見微知著，防微杜漸。",
-      "confidence": 0.9
+      "text": "《易經·坤卦》爻辭，意為踩到霜就知堅冰將至，比喻見微知著。",
+      "confidence": 0.95
     },
     {
       "anchor": {
@@ -125,8 +164,8 @@
       },
       "layer": 1,
       "category": "TERM",
-      "text": "《書·皋陶謨》語，謂每日處理萬端政務，當謹慎於微。",
-      "confidence": 0.85
+      "text": "《尚書·皋陶謨》文，意為每日處理萬端事務，須謹慎對待細微之事。",
+      "confidence": 0.9
     }
   ]
 }

@@ -2,44 +2,88 @@
   "passageId": "tongjian-jishi-benmo:vol01:p6",
   "overall": "revise",
   "scores": {
-    "proper_name_precision": 4,
+    "proper_name_precision": 3,
     "proper_name_recall": 4,
     "entity_resolution": 4,
     "place_accuracy": 4,
     "term_necessity": 3,
-    "office_accuracy": 3,
+    "office_accuracy": 2,
     "first_appearance_accuracy": 3,
     "verbosity_control": 4,
-    "unsupported_claim_risk": 3
+    "unsupported_claim_risk": 4
   },
   "issues": [
     {
       "severity": "major",
-      "message": "「天子」被標為 layer=2 category=OFFICE，但「天子」是身分通稱而非官職，且註文斷言「此指周威烈王」屬原文未明言的具體指涉，屬過度斷言。"
+      "message": "「諸侯」「大夫」「天子」屬身分／官職通稱，不應畫專名線；且以 OFFICE 作 annotations 尚可，但 properNames 未列即可，重點是這類通稱不得作專名。候選雖未列入 properNames，但 annotations 以 OFFICE 標「諸侯」「大夫」「天子」屬過度註釋，且「諸侯」非官職，為明顯詞語強行加註。"
     },
     {
       "severity": "major",
-      "message": "「大夫」標為 OFFICE 尚可，但註文「位次於卿的官員」與本段「大夫擅政」「晉大夫暴蔑其君」語境（把持國政的卿大夫階層）略有偏差，且與 layer=2 的首次出場判斷重疊不清。"
+      "message": "「季氏」為魯國卿族泛稱，不得畫專名線；候選以 TERM 作 annotation 尚可接受，但若視為專名則屬錯誤。此處以 TERM 處理可保留，但需確認不列 properNames。"
     },
     {
       "severity": "minor",
-      "message": "「季氏」type=PERSON 但實為家族/世卿集團，宜作 PERSON 或 INSTITUTION 的處理需一致；註文「此指其勢力足以逐君自為」尚可。"
+      "message": "「周」在「周道日衰」中指周王朝，標 DYNASTY 可接受，但「周道」為抽象概念，畫線邊界略窄，宜改為不畫或改註「周道」。"
     },
     {
       "severity": "minor",
-      "message": "「幽、厲」註文補充幽王寵褒姒、厲王致國人暴動等細節，雖屬常見史實，但已超出原文所需，稍嫌冗長。"
+      "message": "「請隧」為動賓詞組，作 TERM 註釋可，但「隧」本身即葬制專名，宜以「隧」或「請隧」統一，避免與「名分」等普通詞並列造成過度註釋。"
     },
     {
       "severity": "minor",
-      "message": "「隧」註文正確，但「請隧」之「隧」是否需獨立加註可斟酌；整體尚可。"
+      "message": "「名分」為普通詞語，雖為本文關鍵概念，但非難詞，加註略顯冗餘；可保留但屬 minor。"
+    },
+    {
+      "severity": "minor",
+      "message": "「晉國」與「晉」重複畫線，同一實體在同一段多次出現，應擇要標註，避免冗餘。"
+    },
+    {
+      "severity": "minor",
+      "message": "「曹」「滕」「邾」「莒」為國名，標 STATE 正確；但「曹」「滕」等單字國名邊界無誤，屬正常。"
+    },
+    {
+      "severity": "minor",
+      "message": "「文」「武」指周文王、周武王，標 PERSON 正確；「幽」「厲」亦然，拆開處理正確。"
+    },
+    {
+      "severity": "minor",
+      "message": "「襄王」首次出現時應作「周襄王」較精確，但原文作「襄王」，註文已補「周襄王」，可接受。"
+    },
+    {
+      "severity": "minor",
+      "message": "「白公」註為白公勝，正確；但「白公」為封號，非純人名，標 PERSON 可接受。"
     }
   ],
   "revisedAnnotations": {
     "properNames": [
       {
-        "exact": "幽、厲",
+        "exact": "幽",
         "prefix": "嗚呼！",
+        "suffix": "、厲失德，周道日",
+        "type": "PERSON"
+      },
+      {
+        "exact": "厲",
+        "prefix": "嗚呼！幽、",
         "suffix": "失德，周道日衰，",
+        "type": "PERSON"
+      },
+      {
+        "exact": "周",
+        "prefix": "呼！幽、厲失德，",
+        "suffix": "道日衰，綱紀散壞",
+        "type": "DYNASTY"
+      },
+      {
+        "exact": "文",
+        "prefix": "體什喪七八矣，然",
+        "suffix": "、武之祀猶緜緜相",
+        "type": "PERSON"
+      },
+      {
+        "exact": "武",
+        "prefix": "喪七八矣，然文、",
+        "suffix": "之祀猶緜緜相屬者",
         "type": "PERSON"
       },
       {
@@ -55,28 +99,58 @@
         "type": "PERSON"
       },
       {
-        "exact": "曹、滕",
+        "exact": "曹",
         "prefix": "以周之地則不大於",
+        "suffix": "、滕，以周之民則",
+        "type": "STATE"
+      },
+      {
+        "exact": "滕",
+        "prefix": "之地則不大於曹、",
         "suffix": "，以周之民則不衆",
-        "type": "PLACE"
+        "type": "STATE"
       },
       {
-        "exact": "邾、莒",
+        "exact": "邾",
         "prefix": "以周之民則不衆於",
-        "suffix": "，然歷數百年，宗",
-        "type": "PLACE"
+        "suffix": "、莒，然歷數百年",
+        "type": "STATE"
       },
       {
-        "exact": "晉、楚、齊、秦",
+        "exact": "莒",
+        "prefix": "之民則不衆於邾、",
+        "suffix": "，然歷數百年，宗",
+        "type": "STATE"
+      },
+      {
+        "exact": "晉",
         "prefix": "，宗主天下，雖以",
+        "suffix": "、楚、齊、秦之強",
+        "type": "STATE"
+      },
+      {
+        "exact": "楚",
+        "prefix": "主天下，雖以晉、",
+        "suffix": "、齊、秦之強不敢",
+        "type": "STATE"
+      },
+      {
+        "exact": "齊",
+        "prefix": "下，雖以晉、楚、",
+        "suffix": "、秦之強不敢加者",
+        "type": "STATE"
+      },
+      {
+        "exact": "秦",
+        "prefix": "雖以晉、楚、齊、",
         "suffix": "之強不敢加者，何",
         "type": "STATE"
       },
       {
-        "exact": "季氏",
-        "prefix": "分尚存故也。至於",
-        "suffix": "之於魯，田常之於",
-        "type": "PERSON"
+        "exact": "魯",
+        "prefix": "也。至於季氏之於",
+        "suffix": "，田常之於齊，白",
+        "type": "STATE"
       },
       {
         "exact": "田常",
@@ -85,26 +159,83 @@
         "type": "PERSON"
       },
       {
+        "exact": "齊",
+        "prefix": "之於魯，田常之於",
+        "suffix": "，白公之於楚，智",
+        "type": "STATE"
+      },
+      {
         "exact": "白公",
         "prefix": "魯，田常之於齊，",
         "suffix": "之於楚，智伯之於",
         "type": "PERSON"
       },
       {
+        "exact": "楚",
+        "prefix": "之於齊，白公之於",
+        "suffix": "，智伯之於晉，其",
+        "type": "STATE"
+      },
+      {
         "exact": "智伯",
         "prefix": "齊，白公之於楚，",
         "suffix": "之於晉，其勢皆足",
         "type": "PERSON"
+      },
+      {
+        "exact": "晉",
+        "prefix": "之於楚，智伯之於",
+        "suffix": "，其勢皆足以逐君",
+        "type": "STATE"
+      },
+      {
+        "exact": "晉",
+        "prefix": "天下共誅之也。今",
+        "suffix": "大夫暴蔑其君，剖",
+        "type": "STATE"
+      },
+      {
+        "exact": "晉國",
+        "prefix": "夫暴蔑其君，剖分",
+        "suffix": "，天子旣不能討，",
+        "type": "STATE"
       }
     ],
     "annotations": [
       {
-        "exact": "幽、厲",
+        "exact": "幽",
         "prefix": "嗚呼！",
+        "suffix": "、厲失德，周道日",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "指周幽王，西周最後一位君主，因寵褒姒、廢申后及太子，導致犬戎之禍，西周滅亡。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "厲",
+        "prefix": "嗚呼！幽、",
         "suffix": "失德，周道日衰，",
         "layer": 1,
         "category": "PERSON",
-        "text": "周幽王與周厲王，西周兩位失德之君，後世常並稱以喻衰世。",
+        "text": "指周厲王，西周君主，因暴虐專利、監謗，引發國人暴動，出奔於彘。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "文",
+        "prefix": "體什喪七八矣，然",
+        "suffix": "、武之祀猶緜緜相",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "指周文王，周朝奠基者，姬姓，名昌，商末諸侯，以仁德著稱。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "武",
+        "prefix": "喪七八矣，然文、",
+        "suffix": "之祀猶緜緜相屬者",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "指周武王，周朝開國君主，姬發，繼文王遺志，伐紂滅商。",
         "confidence": 0.95
       },
       {
@@ -113,8 +244,8 @@
         "suffix": "有大功於王室，請",
         "layer": 1,
         "category": "PERSON",
-        "text": "春秋五霸之一，名重耳，曾平定周王室之亂，有功於周襄王。",
-        "confidence": 0.95
+        "text": "春秋五霸之一，晉國君主，名重耳，曾平定周王室內亂，有大功於周。",
+        "confidence": 0.98
       },
       {
         "exact": "襄王",
@@ -122,16 +253,43 @@
         "suffix": "，襄王不許，曰：",
         "layer": 1,
         "category": "PERSON",
-        "text": "周襄王，名鄭，東周天子，曾遭弟弟子帶之亂，賴晉文公相助復位。",
+        "text": "指周襄王，東周君主，名鄭，曾因內亂出奔，賴晉文公護送復位。",
+        "confidence": 0.98
+      },
+      {
+        "exact": "田常",
+        "prefix": "至於季氏之於魯，",
+        "suffix": "之於齊，白公之於",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即田成子，齊國大夫，以大斗借貸、小斗收還收買民心，後弒齊簡公，專齊政。",
         "confidence": 0.95
       },
       {
-        "exact": "隧",
-        "prefix": "有大功於王室，請",
+        "exact": "白公",
+        "prefix": "魯，田常之於齊，",
+        "suffix": "之於楚，智伯之於",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "指白公勝，楚平王之孫，曾發動白公之亂，欲奪楚國政權。",
+        "confidence": 0.9
+      },
+      {
+        "exact": "智伯",
+        "prefix": "齊，白公之於楚，",
+        "suffix": "之於晉，其勢皆足",
+        "layer": 1,
+        "category": "PERSON",
+        "text": "即智襄子，名瑤，晉國卿族智氏首領，勢強而驕，後為韓、趙、魏所滅。",
+        "confidence": 0.95
+      },
+      {
+        "exact": "請隧",
+        "prefix": "公有大功於王室，",
         "suffix": "於襄王，襄王不許",
         "layer": 1,
         "category": "TERM",
-        "text": "此指天子葬禮所用之隧葬之禮，諸侯請用隧葬即僭越天子之禮。",
+        "text": "請求死後以天子之禮葬，即開隧道下棺。隧葬為天子葬制，諸侯不得使用。",
         "confidence": 0.9
       },
       {
@@ -140,53 +298,8 @@
         "suffix": "故也。何以言之？",
         "layer": 1,
         "category": "TERM",
-        "text": "名位與職分，指周天子與諸侯之間上下尊卑的禮制秩序。",
+        "text": "指名位與職分，即君臣上下之等級名義，為周代禮制核心。",
         "confidence": 0.9
-      },
-      {
-        "exact": "季氏",
-        "prefix": "分尚存故也。至於",
-        "suffix": "之於魯，田常之於",
-        "layer": 1,
-        "category": "PERSON",
-        "text": "魯國世卿家族，長期把持魯國國政，此指其勢力足以逐君自為。",
-        "confidence": 0.85
-      },
-      {
-        "exact": "田常",
-        "prefix": "至於季氏之於魯，",
-        "suffix": "之於齊，白公之於",
-        "layer": 1,
-        "category": "PERSON",
-        "text": "即田成子，春秋末齊國權臣，殺齊簡公，專齊國之政，為田氏代齊奠定基礎。",
-        "confidence": 0.9
-      },
-      {
-        "exact": "白公",
-        "prefix": "魯，田常之於齊，",
-        "suffix": "之於楚，智伯之於",
-        "layer": 1,
-        "category": "PERSON",
-        "text": "即白公勝，楚平王之孫，曾發動白公之亂，一度劫持楚惠王而專楚政。",
-        "confidence": 0.9
-      },
-      {
-        "exact": "智伯",
-        "prefix": "齊，白公之於楚，",
-        "suffix": "之於晉，其勢皆足",
-        "layer": 1,
-        "category": "PERSON",
-        "text": "即智襄子荀瑤，春秋末晉國四卿之一，勢力最強，後為韓、趙、魏所滅。",
-        "confidence": 0.9
-      },
-      {
-        "exact": "大夫",
-        "prefix": "上替，諸侯專征，",
-        "suffix": "擅政，禮之大體什",
-        "layer": 2,
-        "category": "OFFICE",
-        "text": "周代諸侯國中位次於卿的官員，此泛指把持國政的卿大夫階層。",
-        "confidence": 0.85
       }
     ]
   }
