@@ -79,7 +79,9 @@ function selectInPassage(passageId: string, start: number, end: number): void {
   selection.addRange(range);
 
   const scroller = document.querySelector("[data-reader-scroll]")!;
-  fireEvent.mouseUp(scroller, { target: scroller });
+  act(() => {
+    fireEvent.mouseUp(scroller, { target: scroller });
+  });
 }
 
 async function createMark(style: "highlight" | "wavy" = "highlight") {

@@ -60,10 +60,13 @@ npm run dev      # http://localhost:5173
 ```bash
 .venv/bin/pytest python/tests/ -q
 npm test
-env -u CI npx playwright test --project=chromium
+npm run test:e2e
+npm run check:secrets
 ```
 
-Playwright 会自行启动 dev server；若已有 server 在跑，用 `env -u CI` 复用它。
+Playwright 会自行启动隔离的 dev server，不会复用其他项目占用的端口。
+若需要使用已启动的 Guji server，显式设置 `GUJI_READER_REUSE_SERVER=1`；若 5173 已占用，
+可使用 `GUJI_READER_PORT=5174 npm run test:e2e`。
 
 ## 7. Build
 

@@ -26,7 +26,7 @@ const FIXTURES: Record<string, object> = {
  */
 export function mockFetch(overrides: Record<string, object> = {}): void {
   const fixtures = { ...FIXTURES, ...overrides };
-  global.fetch = vi.fn(async (input: RequestInfo | URL) => {
+  globalThis.fetch = vi.fn(async (input: RequestInfo | URL) => {
     const url = typeof input === "string" ? input : input.toString();
     const data = fixtures[url];
     if (data === undefined) {
@@ -36,7 +36,7 @@ export function mockFetch(overrides: Record<string, object> = {}): void {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  }) as typeof global.fetch;
+  }) as typeof globalThis.fetch;
 }
 
 export function resetFetchMock(): void {
