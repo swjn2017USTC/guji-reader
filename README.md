@@ -51,9 +51,13 @@ cp .env.example .env     # 填入 GUJI_LLM_BASE_URL / GUJI_LLM_API_KEY / GUJI_LL
 
 ```bash
 .venv/bin/python scripts/build_annotation_quality_report.py
+.venv/bin/python scripts/import_source_notes.py --volume vol01 \
+  --input /path/to/hu-sanxing-vol01.json \
+  --output /tmp/validated-vol01-source-notes.json
 ```
 
 该命令生成 `data/review_reports/v0.2_annotation_quality_report.json`，按卷报告正文段数、候选、复核 verdict、已发布数量和 anchor 失败；部分覆盖会明确标为 `partial`。
+`import_source_notes.py` 是胡三省注试点导入器：校验 passage、锚点、重复 ID 和 provenance，默认拒绝覆盖已有文件。
 阅读器「設置 → 個人標記備份」可导出/导入版本化 JSON。导入只接受相同 work/edition，按段落锚点去重，不覆盖已有标记。
 
 ## 6. Run dev
