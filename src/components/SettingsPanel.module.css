@@ -36,3 +36,44 @@
   color: var(--text-muted);
   text-align: right;
 }
+
+.backup {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.backupTitle {
+  margin: 0 0 0.65rem;
+  font-size: 0.9rem;
+}
+
+.backupActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.backupActions button,
+.importButton {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.55rem;
+  color: var(--text-primary);
+  background: var(--button-bg);
+  cursor: pointer;
+}
+
+.importButton input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.importStatus {
+  margin: 0.55rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}

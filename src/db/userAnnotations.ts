@@ -97,6 +97,12 @@ export async function deleteUserAnnotation(id: string): Promise<void> {
   await getDatabase().userAnnotations.delete(id);
 }
 
+export async function importUserAnnotations(annotations: UserAnnotation[]): Promise<void> {
+  if (annotations.length > 0) {
+    await getDatabase().userAnnotations.bulkAdd(annotations);
+  }
+}
+
 /**
  * Load every annotation for a work.
  *

@@ -11,6 +11,9 @@ type SettingsPanelProps = {
   lineHeight: number;
   onFontSizeChange: (size: number) => void;
   onLineHeightChange: (height: number) => void;
+  onExportAnnotations: () => void;
+  onImportAnnotations: (file: File) => void;
+  importStatus: string | null;
 };
 
 export function SettingsPanel({
@@ -18,6 +21,9 @@ export function SettingsPanel({
   lineHeight,
   onFontSizeChange,
   onLineHeightChange,
+  onExportAnnotations,
+  onImportAnnotations,
+  importStatus,
 }: SettingsPanelProps) {
   return (
     <aside className={styles.panel} aria-label="閱讀設置">
@@ -35,6 +41,26 @@ export function SettingsPanel({
           onChange={(e) => onFontSizeChange(Number(e.target.value))}
         />
         <span className={styles.value}>{fontSize}px</span>
+      </div>
+
+      <div className={styles.backup}>
+        <h3 className={styles.backupTitle}>個人標記備份</h3>
+        <div className={styles.backupActions}>
+          <button type="button" onClick={onExportAnnotations}>匯出 JSON</button>
+          <label className={styles.importButton}>
+            匯入 JSON
+            <input
+              type="file"
+              accept="application/json,.json"
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                if (file) onImportAnnotations(file);
+                event.target.value = "";
+              }}
+            />
+          </label>
+        </div>
+        {importStatus && <p className={styles.importStatus} role="status">{importStatus}</p>}
       </div>
 
       <div className={styles.row}>

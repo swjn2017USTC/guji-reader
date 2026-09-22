@@ -47,7 +47,16 @@ cp .env.example .env     # 填入 GUJI_LLM_BASE_URL / GUJI_LLM_API_KEY / GUJI_LL
 两个脚本都支持 `--passage` / `--volume` / `--limit`；已有结果会复用，加 `--force` 才重跑。
 不指定 `--volume` 时范围是全书。
 
-## 5. Run dev
+## 5. Annotation quality and personal backup
+
+```bash
+.venv/bin/python scripts/build_annotation_quality_report.py
+```
+
+该命令生成 `data/review_reports/v0.2_annotation_quality_report.json`，按卷报告正文段数、候选、复核 verdict、已发布数量和 anchor 失败；部分覆盖会明确标为 `partial`。
+阅读器「設置 → 個人標記備份」可导出/导入版本化 JSON。导入只接受相同 work/edition，按段落锚点去重，不覆盖已有标记。
+
+## 6. Run dev
 
 ```bash
 npm run dev      # http://localhost:5173
@@ -55,7 +64,7 @@ npm run dev      # http://localhost:5173
 
 用 `localhost` 而非 `127.0.0.1`：Vite 只绑 IPv6 loopback。
 
-## 6. Run tests
+## 7. Run tests
 
 ```bash
 .venv/bin/pytest python/tests/ -q
@@ -68,7 +77,7 @@ Playwright 会自行启动隔离的 dev server，不会复用其他项目占用�
 若需要使用已启动的 Guji server，显式设置 `GUJI_READER_REUSE_SERVER=1`；若 5173 已占用，
 可使用 `GUJI_READER_PORT=5174 npm run test:e2e`。
 
-## 7. Build
+## 8. Build
 
 ```bash
 npm run build      # 产物在 dist/，可直接静态部署

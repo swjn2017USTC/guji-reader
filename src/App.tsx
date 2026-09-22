@@ -8,9 +8,11 @@ import { loadPublishedAnnotations } from "./data/annotations";
 import {
   createUserAnnotation,
   deleteUserAnnotation,
+  importUserAnnotations,
   loadUserAnnotations,
   updateUserAnnotation,
 } from "./db/userAnnotations";
+import { createAnnotationBackup, parseAnnotationBackupText } from "./data/annotationBackup";
 import { loadSourceNotes } from "./data/sourceNotes";
 import { loadVolume } from "./data/volume";
 import { usePreferences } from "./hooks/usePreferences";
@@ -62,6 +64,7 @@ function App() {
    * error (plan §1.1 — the UI must not depend on any one layer being present).
    */
   const [annotationStoreError, setAnnotationStoreError] = useState<string | null>(null);
+  const [importStatus, setImportStatus] = useState<string | null>(null);
   const [initialPassageId] = useState(readPassageFromHash);
 
   const reportAnnotationStoreFailure = useCallback((err: unknown) => {
@@ -190,6 +193,46 @@ function App() {
     [refreshUserAnnotations, reportAnnotationStoreFailure],
   );
 
+  const handleExportAnnotations = useCallback(async () => {
+    if (!work) return;
+    try {
+      const annotations = await loadUserAnnotations(work.id);
+      const blob = new Blob(
+        [JSON.stringify(createAnnotationBackup(work.id, work.editionId, annotations), null, 2)],
+        { type: "application/json" },
+      );
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${work.id}-annotations-v1.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      setImportStatus(`已匯出 ${annotations.length} 筆個人標記。`);
+    } catch (err) {
+      setImportStatus(err instanceof Error ? `匯出失敗：${err.message}` : "匯出失敗。");
+    }
+  }, [work]);
+
+  const handleImportAnnotations = useCallback(async (file: File) => {
+    if (!work) return;
+    try {
+      const existing = await loadUserAnnotations(work.id);
+      const result = parseAnnotationBackupText(
+        await file.text(),
+        work.id,
+        work.editionId,
+        existing,
+      );
+      await importUserAnnotations(result.annotations);
+      await refreshUserAnnotations();
+      setImportStatus(
+        `已匯入 ${result.annotations.length} 筆，略過 ${result.skippedDuplicates} 筆重複標記。`,
+      );
+    } catch (err) {
+      setImportStatus(err instanceof Error ? `匯入失敗：${err.message}` : "匯入失敗：格式無法識別。");
+    }
+  }, [refreshUserAnnotations, work]);
+
   const handleSelectVolume = (volume: VolumeRef) => {
     setCurrentVolume(volume);
     window.history.replaceState(
@@ -290,6 +333,9 @@ function App() {
             lineHeight={preferences.lineHeight}
             onFontSizeChange={setFontSize}
             onLineHeightChange={setLineHeight}
+            onExportAnnotations={handleExportAnnotations}
+            onImportAnnotations={handleImportAnnotations}
+            importStatus={importStatus}
           />
         </div>
       </div>

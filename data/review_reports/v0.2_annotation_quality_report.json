@@ -1,0 +1,861 @@
+{
+  "schemaVersion": "g4-1",
+  "generatedAt": "2026-09-22T07:10:43.181407+00:00",
+  "workId": "tongjian-jishi-benmo",
+  "editionId": "zh.wikisource.org",
+  "volumes": [
+    {
+      "volumeId": "vol01",
+      "title": "第一卷",
+      "passageCount": 343,
+      "candidatePassages": 8,
+      "reviewedPassages": 8,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 1,
+        "revise": 7,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 51,
+        "properNames": 49,
+        "passages": 7
+      },
+      "anchorFailures": [],
+      "status": "ready"
+    },
+    {
+      "volumeId": "vol02",
+      "title": "第二卷",
+      "passageCount": 240,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol03",
+      "title": "第三卷",
+      "passageCount": 232,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol04",
+      "title": "第四卷",
+      "passageCount": 217,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol05",
+      "title": "第五卷",
+      "passageCount": 282,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol06",
+      "title": "第六卷",
+      "passageCount": 247,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol07",
+      "title": "第七卷",
+      "passageCount": 279,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol08",
+      "title": "第八卷",
+      "passageCount": 294,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol09",
+      "title": "第九卷",
+      "passageCount": 327,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol10",
+      "title": "第十卷",
+      "passageCount": 235,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol11",
+      "title": "第十一卷",
+      "passageCount": 222,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol12",
+      "title": "第十二卷",
+      "passageCount": 290,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol13",
+      "title": "第十三卷",
+      "passageCount": 288,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol14",
+      "title": "第十四卷",
+      "passageCount": 282,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol15",
+      "title": "第十五卷",
+      "passageCount": 285,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol16",
+      "title": "第十六卷",
+      "passageCount": 380,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol17",
+      "title": "第十七卷",
+      "passageCount": 344,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol18",
+      "title": "第十八卷",
+      "passageCount": 351,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol19",
+      "title": "第十九卷",
+      "passageCount": 388,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol20",
+      "title": "第二十卷",
+      "passageCount": 361,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol21",
+      "title": "第二十一卷",
+      "passageCount": 321,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol22",
+      "title": "第二十二卷",
+      "passageCount": 327,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol23",
+      "title": "第二十三卷",
+      "passageCount": 409,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol24",
+      "title": "第二十四卷",
+      "passageCount": 397,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol25",
+      "title": "第二十五卷",
+      "passageCount": 337,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol26",
+      "title": "第二十六卷",
+      "passageCount": 245,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol27",
+      "title": "第二十七卷",
+      "passageCount": 295,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol28",
+      "title": "第二十八卷",
+      "passageCount": 325,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol29",
+      "title": "第二十九卷",
+      "passageCount": 439,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol30",
+      "title": "第三十卷",
+      "passageCount": 394,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol31",
+      "title": "第三十一卷",
+      "passageCount": 368,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol32",
+      "title": "第三十二卷",
+      "passageCount": 274,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol33",
+      "title": "第三十三卷",
+      "passageCount": 342,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol34",
+      "title": "第三十四卷",
+      "passageCount": 372,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol35",
+      "title": "第三十五卷",
+      "passageCount": 311,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol36",
+      "title": "第三十六卷",
+      "passageCount": 287,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol37",
+      "title": "第三十七卷",
+      "passageCount": 445,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol38",
+      "title": "第三十八卷",
+      "passageCount": 426,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol39",
+      "title": "第三十九卷",
+      "passageCount": 483,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol40",
+      "title": "第四十卷",
+      "passageCount": 417,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol41",
+      "title": "第四十一卷",
+      "passageCount": 412,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    },
+    {
+      "volumeId": "vol42",
+      "title": "第四十二卷",
+      "passageCount": 469,
+      "candidatePassages": 0,
+      "reviewedPassages": 0,
+      "unreviewedCandidatePassages": 0,
+      "verdicts": {
+        "accept": 0,
+        "revise": 0,
+        "reject": 0
+      },
+      "published": {
+        "annotations": 0,
+        "properNames": 0,
+        "passages": 0
+      },
+      "anchorFailures": [],
+      "status": "partial"
+    }
+  ],
+  "totals": {
+    "passages": 13982,
+    "candidatePassages": 8,
+    "reviewedPassages": 8,
+    "anchorFailures": 0,
+    "annotations": 51,
+    "properNames": 49
+  },
+  "releaseGate": {
+    "passed": true,
+    "blockers": [],
+    "note": "partial coverage is reported explicitly; it is not treated as zero quality"
+  }
+}
