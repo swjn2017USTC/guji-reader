@@ -78,6 +78,13 @@ npm run preview    # http://localhost:4173
 **先跑 `build_catalog.py` 再 `npm run build`**：构建会把 `public/data/` 一并拷进 `dist/`，
 顺序反了 `dist/` 里就没有正文。
 
+## License and data
+
+Original project code is released under the [MIT License](LICENSE)。
+Wikisource-derived corpus text, source-derived files, and AI annotation
+artifacts have separate provenance and reuse conditions；see
+[NOTICE-DATA.md](NOTICE-DATA.md) before redistribution。
+
 ## 已知限制
 
 见 `docs/V0.1_RELEASE_REPORT.md` §4。
