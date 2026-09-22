@@ -79,3 +79,39 @@
   background-color: var(--accent-hover);
   color: #fff;
 }
+
+@media (max-width: 700px) {
+  .topbar {
+    height: auto;
+    min-height: 3rem;
+    padding: 0.45rem 0.65rem;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+
+  .left {
+    min-width: 0;
+    flex: 1 1 45%;
+    gap: 0.4rem;
+  }
+
+  .right {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    overflow-x: auto;
+  }
+
+  .bookTitle,
+  .volumeTitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .textButton,
+  .textButtonActive {
+    padding-inline: 0.5rem;
+    white-space: nowrap;
+  }
+}

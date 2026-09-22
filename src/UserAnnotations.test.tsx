@@ -148,6 +148,18 @@ describe("personal annotations", () => {
     });
   });
 
+  it("opens a personal mark with the keyboard", async () => {
+    await createMark();
+    await waitFor(() =>
+      expect(document.querySelector("[data-user-annotation-id]")).not.toBeNull(),
+    );
+
+    const mark = document.querySelector("[data-user-annotation-id]") as HTMLElement;
+    expect(mark).toHaveAttribute("role", "button");
+    fireEvent.keyDown(mark, { key: "Enter" });
+    expect(screen.getByRole("dialog", { name: "個人標記" })).toBeInTheDocument();
+  });
+
   it("persists annotations and restores them after a reload", async () => {
     await createMark();
     await waitFor(() =>

@@ -25,6 +25,11 @@ import "./styles/themes.css";
 import "./styles/layout.css";
 import styles from "./App.module.css";
 
+function readPassageFromHash(): string | null {
+  const value = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("passage");
+  return value ? value : null;
+}
+
 function App() {
   const {
     preferences,
@@ -57,6 +62,7 @@ function App() {
    * error (plan §1.1 — the UI must not depend on any one layer being present).
    */
   const [annotationStoreError, setAnnotationStoreError] = useState<string | null>(null);
+  const [initialPassageId] = useState(readPassageFromHash);
 
   const reportAnnotationStoreFailure = useCallback((err: unknown) => {
     setAnnotationStoreError(err instanceof Error ? err.message : String(err));
@@ -66,10 +72,15 @@ function App() {
     loadCatalog()
       .then((loadedWork) => {
         setWork(loadedWork);
-        setCurrentVolume(loadedWork.volumes[0] ?? null);
+        const hashVolume = initialPassageId
+          ? loadedWork.volumes.find((volume) =>
+              initialPassageId.startsWith(`${loadedWork.id}:${volume.id}:`),
+            )
+          : null;
+        setCurrentVolume(hashVolume ?? loadedWork.volumes[0] ?? null);
       })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
-  }, []);
+  }, [initialPassageId]);
 
   useEffect(() => {
     if (!work || !currentVolume) {
@@ -181,6 +192,11 @@ function App() {
 
   const handleSelectVolume = (volume: VolumeRef) => {
     setCurrentVolume(volume);
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}#volume=${encodeURIComponent(volume.id)}`,
+    );
   };
 
   useEffect(() => {
@@ -256,6 +272,7 @@ function App() {
             writingMode={preferences.writingMode}
             showProperNames={preferences.showProperNames}
             scrollKey={scrollKey}
+            initialPassageId={initialPassageId}
             onCreateUserAnnotation={handleCreateUserAnnotation}
             onUpdateUserAnnotation={handleUpdateUserAnnotation}
             onDeleteUserAnnotation={handleDeleteUserAnnotation}

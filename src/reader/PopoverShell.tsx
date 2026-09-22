@@ -1,5 +1,5 @@
 import { useFloating } from "@floating-ui/react";
-import { useEffect, useMemo, type ReactNode } from "react";
+import { useEffect, useMemo, type KeyboardEvent, type ReactNode } from "react";
 import { PANEL_MIDDLEWARE } from "./floatingPlacement";
 import styles from "./PopoverShell.module.css";
 
@@ -29,6 +29,11 @@ export function PopoverShell({
   const { refs, floatingStyles } = useFloating({ elements, middleware: PANEL_MIDDLEWARE });
 
   useEffect(() => {
+    const firstControl = refs.floating.current?.querySelector<HTMLElement>(
+      "button, textarea, input, [tabindex]:not([tabindex='-1'])",
+    );
+    firstControl?.focus();
+
     const handlePointerDown = (event: MouseEvent) => {
       const target = event.target as Node;
       if (refs.floating.current?.contains(target)) {
@@ -40,8 +45,20 @@ export function PopoverShell({
       onClose();
     };
     document.addEventListener("mousedown", handlePointerDown);
-    return () => document.removeEventListener("mousedown", handlePointerDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      if (referenceElement?.isConnected) {
+        referenceElement.focus();
+      }
+    };
   }, [onClose, referenceElement, refs.floating]);
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      onClose();
+    }
+  };
 
   return (
     <div
@@ -50,6 +67,7 @@ export function PopoverShell({
       className={styles.shell}
       role="dialog"
       aria-label={label}
+      onKeyDown={handleKeyDown}
     >
       {children}
     </div>

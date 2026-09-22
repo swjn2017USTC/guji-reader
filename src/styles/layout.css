@@ -16,6 +16,18 @@ body {
   overflow: hidden;
 }
 
+button,
+input,
+textarea,
+[role="button"] {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .reader-app {
   display: flex;
   flex-direction: column;
@@ -26,6 +38,7 @@ body {
   display: flex;
   flex: 1;
   overflow: hidden;
+  position: relative;
 }
 
 .reader-sidebar,
@@ -70,6 +83,7 @@ body {
     bottom: 0;
     z-index: 10;
     box-shadow: var(--shadow-md);
+    width: min(260px, 84vw);
   }
 
   .reader-sidebar {
@@ -78,5 +92,16 @@ body {
 
   .reader-settings {
     right: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .reader-sidebar,
+  .reader-settings {
+    width: min(280px, 86vw);
+  }
+
+  .reader-body {
+    min-width: 0;
   }
 }

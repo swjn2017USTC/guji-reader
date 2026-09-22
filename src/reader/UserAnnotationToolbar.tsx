@@ -47,6 +47,10 @@ export function UserAnnotationToolbar({
     });
   }, [rect, refs]);
 
+  useEffect(() => {
+    refs.floating.current?.querySelector<HTMLButtonElement>("button")?.focus();
+  }, [refs.floating]);
+
   return (
     <div
       ref={refs.setFloating}
@@ -54,6 +58,12 @@ export function UserAnnotationToolbar({
       className={styles.toolbar}
       role="toolbar"
       aria-label="標記工具"
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          onCancel();
+        }
+      }}
     >
       <div className={styles.row}>
         <div className={styles.styles}>

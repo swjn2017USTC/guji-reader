@@ -21,11 +21,13 @@ async function renderReader() {
 
 describe("Reader UI", () => {
   beforeEach(() => {
+    window.history.replaceState(null, "", "/");
     localStorage.clear();
     mockFetch();
   });
 
   afterEach(() => {
+    window.history.replaceState(null, "", "/");
     resetFetchMock();
     localStorage.clear();
   });
@@ -42,6 +44,32 @@ describe("Reader UI", () => {
     await waitFor(() => {
       expect(screen.getByText("第二卷正文。")).toBeInTheDocument();
     });
+    expect(screen.queryByText("第一卷正文第一段。")).not.toBeInTheDocument();
+  });
+
+  it("searches the current volume and cycles result focus", async () => {
+    await renderReader();
+    const search = screen.getByRole("search");
+    const input = within(search).getByRole("searchbox");
+
+    await userEvent.type(input, "一");
+    expect(within(search).getByText("1/2")).toBeInTheDocument();
+    expect(document.querySelectorAll("[data-search-match]")).toHaveLength(2);
+
+    await userEvent.click(within(search).getByRole("button", { name: "下一個搜尋結果" }));
+    expect(within(search).getByText("2/2")).toBeInTheDocument();
+    expect(window.location.hash).toContain("passage=test-work%3Avol01%3Ap0");
+
+    await userEvent.click(input);
+    await userEvent.keyboard("{Escape}");
+    expect(input).toHaveValue("");
+    expect(document.querySelectorAll("[data-search-match]")).toHaveLength(0);
+  });
+
+  it("opens a stable passage hash on the matching volume", async () => {
+    window.history.replaceState(null, "", "#passage=test-work%3Avol02%3Ap0");
+    render(<App />);
+    await waitFor(() => expect(screen.getByText("第二卷正文。")).toBeInTheDocument());
     expect(screen.queryByText("第一卷正文第一段。")).not.toBeInTheDocument();
   });
 
@@ -201,6 +229,11 @@ describe("Reader UI", () => {
     expect(
       within(popover).getByText("魏斯，即魏文侯，戰國魏國開國君主。"),
     ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: "關閉注釋" })).toHaveFocus(),
+    );
+    fireEvent.keyDown(popover, { key: "Escape" });
+    expect(screen.queryByRole("dialog", { name: "AI 注釋" })).not.toBeInTheDocument();
   });
 
   it("closes the popover when clicking outside", async () => {

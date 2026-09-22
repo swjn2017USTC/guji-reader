@@ -27,6 +27,12 @@ test.describe("smoke-2 AI 註釋", () => {
     const sourceNote = page.locator("[data-source-note-id]").first();
     await expect(sourceNote).toBeVisible();
     await expect(sourceNote).not.toHaveAttribute("data-annotation-marker", /.+/);
+
+    await marker.click();
+    await expect(page.getByRole("dialog", { name: "AI 注釋" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "關閉注釋" })).toBeFocused();
+    await page.getByRole("dialog", { name: "AI 注釋" }).press("Escape");
+    await expect(page.getByRole("dialog", { name: "AI 注釋" })).toBeHidden();
   });
 
   test("專名線可開關", async ({ page }) => {

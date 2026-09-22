@@ -1,0 +1,81 @@
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 1rem;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.label {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.input {
+  min-width: 12rem;
+  width: min(24rem, 55vw);
+  height: 2rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--button-bg);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.clear,
+.navButton {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--button-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.clear {
+  margin-left: -2.2rem;
+  border-color: transparent;
+  background: transparent;
+  font-size: 1.1rem;
+}
+
+.navButton:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.clear:not(:disabled):hover,
+.navButton:not(:disabled):hover {
+  background: var(--button-hover);
+  color: var(--text-primary);
+}
+
+.count {
+  min-width: 2.8rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .search {
+    padding-inline: 0.65rem;
+  }
+
+  .input {
+    min-width: 0;
+    width: auto;
+    flex: 1;
+  }
+}

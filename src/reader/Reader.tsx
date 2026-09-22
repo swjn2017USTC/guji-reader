@@ -7,6 +7,8 @@ import { SourceNotePopover } from "./SourceNotePopover";
 import { PassageView } from "./PassageView";
 import { UserAnnotationToolbar } from "./UserAnnotationToolbar";
 import { UserMarkPopover } from "./UserMarkPopover";
+import { SearchBar } from "./SearchBar";
+import { findSearchMatches, type SearchMatch } from "./search";
 import {
   rangesOverlap,
   selectionToAnchor,
@@ -28,6 +30,7 @@ type ReaderProps = {
   writingMode: WritingMode;
   showProperNames: boolean;
   scrollKey: string;
+  initialPassageId?: string | null;
   onCreateUserAnnotation: (draft: {
     anchor: UserAnnotation["anchor"];
     style: UserAnnotation["style"];
@@ -87,12 +90,16 @@ export function Reader({
   writingMode,
   showProperNames,
   scrollKey,
+  initialPassageId = null,
   onCreateUserAnnotation,
   onUpdateUserAnnotation,
   onDeleteUserAnnotation,
 }: ReaderProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const anchorPassageRef = useRef<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeSearchIndex, setActiveSearchIndex] = useState(0);
   const [openAnnotation, setOpenAnnotation] = useState<PublishedAnnotation | null>(null);
   const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
 
@@ -124,6 +131,63 @@ export function Reader({
     () => new Map(passages.map((passage) => [passage.id, passage])),
     [passages],
   );
+
+  const searchMatches = useMemo(
+    () => findSearchMatches(passages, searchQuery),
+    [passages, searchQuery],
+  );
+  const searchMatchesByPassage = useMemo(() => {
+    const grouped = new Map<string, SearchMatch[]>();
+    for (const match of searchMatches) {
+      const list = grouped.get(match.passageId);
+      if (list) list.push(match);
+      else grouped.set(match.passageId, [match]);
+    }
+    return grouped;
+  }, [searchMatches]);
+  const activeSearchOrdinal = searchMatches[activeSearchIndex]?.ordinal ?? null;
+  const activeSearchMatch = searchMatches[activeSearchIndex] ?? null;
+
+  useEffect(() => {
+    setActiveSearchIndex(0);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (searchMatches.length === 0) {
+      setActiveSearchIndex(0);
+      return;
+    }
+    setActiveSearchIndex((current) => Math.min(current, searchMatches.length - 1));
+  }, [searchMatches.length]);
+
+  useEffect(() => {
+    if (!activeSearchMatch) return;
+    const target = scrollRef.current?.querySelector<HTMLElement>(
+      `[data-search-match="${activeSearchMatch.ordinal}"]`,
+    );
+    target?.scrollIntoView?.({ block: "center", inline: "center", behavior: "smooth" });
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}#passage=${encodeURIComponent(activeSearchMatch.passageId)}`,
+    );
+  }, [activeSearchMatch]);
+
+  const moveSearch = useCallback(
+    (direction: -1 | 1) => {
+      if (searchMatches.length === 0) return;
+      setActiveSearchIndex((current) =>
+        (current + direction + searchMatches.length) % searchMatches.length,
+      );
+    },
+    [searchMatches.length],
+  );
+
+  const clearSearch = useCallback(() => {
+    setSearchQuery("");
+    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    searchInputRef.current?.focus();
+  }, []);
 
   const findPassageByElement = useCallback(
     (element: HTMLElement) => passagesById.get(element.getAttribute("data-passage-id") ?? ""),
@@ -243,12 +307,15 @@ export function Reader({
       return;
     }
     const frame = requestAnimationFrame(() => {
-      const anchorId = anchorPassageRef.current;
+      const anchorId =
+        initialPassageId && initialPassageId.startsWith(`${scrollKey}:`)
+          ? initialPassageId
+          : anchorPassageRef.current;
       const target = anchorId
         ? scroller.querySelector<HTMLElement>(`[data-passage-id="${anchorId}"]`)
         : null;
       if (target) {
-        target.scrollIntoView({ block: "start", inline: "start" });
+        target.scrollIntoView?.({ block: "start", inline: "start" });
         return;
       }
       // Vertical CJK flows right-to-left, so the start of the text is the right
@@ -261,7 +328,7 @@ export function Reader({
       }
     });
     return () => cancelAnimationFrame(frame);
-  }, [writingMode, scrollKey]);
+  }, [initialPassageId, writingMode, scrollKey]);
 
   useEffect(() => {
     // A new volume always starts at its beginning.
@@ -441,8 +508,19 @@ export function Reader({
   }, [onDeleteUserAnnotation, openNote]);
 
   return (
-    <div ref={scrollRef} className={styles.scroll} data-reader-scroll>
-      <div
+    <>
+      <SearchBar
+        query={searchQuery}
+        resultIndex={activeSearchIndex}
+        resultCount={searchMatches.length}
+        inputRef={searchInputRef}
+        onQueryChange={setSearchQuery}
+        onPrevious={() => moveSearch(-1)}
+        onNext={() => moveSearch(1)}
+        onClear={clearSearch}
+      />
+      <div ref={scrollRef} className={styles.scroll} data-reader-scroll>
+        <div
         className={
           writingMode === "vertical" ? styles.contentVertical : styles.contentHorizontal
         }
@@ -462,49 +540,52 @@ export function Reader({
             onOpenAnnotation={handleOpenAnnotation}
             onOpenSourceNote={handleOpenSourceNote}
             onOpenMark={handleOpenMark}
+            searchMatches={searchMatchesByPassage.get(passage.id) ?? EMPTY_LAYER}
+            activeSearchOrdinal={activeSearchOrdinal}
           />
         ))}
+        </div>
+        {openAnnotation && (
+          <AnnotationPopover
+            annotation={openAnnotation}
+            referenceElement={anchorElement}
+            onClose={closeAnnotation}
+          />
+        )}
+        {openSourceNote && (
+          <SourceNotePopover
+            note={openSourceNote.note}
+            referenceElement={openSourceNote.element}
+            onClose={() => setOpenSourceNote(null)}
+          />
+        )}
+        {pending && (
+          <UserAnnotationToolbar
+            rect={pending.rect}
+            style={pendingStyle}
+            color={pendingColor}
+            opacity={pendingOpacity}
+            notice={pendingNotice}
+            onStyleChange={handleStyleChange}
+            onColorChange={setPendingColor}
+            onOpacityChange={setPendingOpacity}
+            onApply={() => void handleApply()}
+            onWriteNote={() => void handleWriteNote()}
+            onCancel={dismissPending}
+          />
+        )}
+        {openNote && (
+          <UserMarkPopover
+            annotation={openNote.annotation}
+            referenceElement={openNote.element}
+            startEditing={openNote.startEditing}
+            onSave={(note) => void handleSaveNote(note)}
+            onDeleteNote={() => void handleDeleteNote()}
+            onDelete={() => void handleDeleteMark()}
+            onClose={() => setOpenNote(null)}
+          />
+        )}
       </div>
-      {openAnnotation && (
-        <AnnotationPopover
-          annotation={openAnnotation}
-          referenceElement={anchorElement}
-          onClose={closeAnnotation}
-        />
-      )}
-      {openSourceNote && (
-        <SourceNotePopover
-          note={openSourceNote.note}
-          referenceElement={openSourceNote.element}
-          onClose={() => setOpenSourceNote(null)}
-        />
-      )}
-      {pending && (
-        <UserAnnotationToolbar
-          rect={pending.rect}
-          style={pendingStyle}
-          color={pendingColor}
-          opacity={pendingOpacity}
-          notice={pendingNotice}
-          onStyleChange={handleStyleChange}
-          onColorChange={setPendingColor}
-          onOpacityChange={setPendingOpacity}
-          onApply={() => void handleApply()}
-          onWriteNote={() => void handleWriteNote()}
-          onCancel={dismissPending}
-        />
-      )}
-      {openNote && (
-        <UserMarkPopover
-          annotation={openNote.annotation}
-          referenceElement={openNote.element}
-          startEditing={openNote.startEditing}
-          onSave={(note) => void handleSaveNote(note)}
-          onDeleteNote={() => void handleDeleteNote()}
-          onDelete={() => void handleDeleteMark()}
-          onClose={() => setOpenNote(null)}
-        />
-      )}
-    </div>
+    </>
   );
 }

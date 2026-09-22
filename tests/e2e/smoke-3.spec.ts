@@ -161,6 +161,16 @@ test.describe("smoke-3 私人批註", () => {
     await expect(page.locator("[data-user-annotation-id]")).toHaveCount(0);
   });
 
+  test("個人標記可用鍵盤打開", async ({ page }) => {
+    await selectInPassage(page, 14, 16);
+    await page.getByRole("toolbar", { name: "標記工具" }).getByRole("button", { name: "標記", exact: true }).click();
+    const mark = page.locator("[data-user-annotation-id]").first();
+    await expect(mark).toBeVisible();
+    await mark.focus();
+    await mark.press("Enter");
+    await expect(page.getByRole("dialog", { name: "個人標記" })).toBeVisible();
+  });
+
   test("點擊高亮或波浪線可刪除", async ({ page }) => {
     // A highlight with no note has no 批 marker, so the marked text itself is
     // the only entry point. Both styles must be deletable the same way.

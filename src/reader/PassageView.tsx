@@ -2,6 +2,7 @@ import { memo, useEffect, useMemo } from "react";
 import type { Passage, SourceNote, UserAnnotation } from "../types/corpus";
 import type { PublishedAnnotation, PublishedProperName } from "../types/annotations";
 import { anchorMatches, segmentByIntervals, type Interval } from "./anchors";
+import type { SearchMatch } from "./search";
 import { withOpacity } from "./userAnnotationStyle";
 import styles from "./PassageView.module.css";
 
@@ -15,13 +16,16 @@ type PassageViewProps = {
   onOpenAnnotation: (annotation: PublishedAnnotation, element: HTMLElement) => void;
   onOpenSourceNote: (note: SourceNote, element: HTMLElement) => void;
   onOpenMark: (annotation: UserAnnotation, element: HTMLElement) => void;
+  searchMatches: SearchMatch[];
+  activeSearchOrdinal: number | null;
 };
 
 type Layer =
   | { kind: "properName"; value: PublishedProperName }
   | { kind: "annotation"; value: PublishedAnnotation }
   | { kind: "sourceNote"; value: SourceNote }
-  | { kind: "userAnnotation"; value: UserAnnotation };
+  | { kind: "userAnnotation"; value: UserAnnotation }
+  | { kind: "search"; value: SearchMatch };
 
 function findLayer<K extends Layer["kind"]>(
   layers: Layer[],
@@ -60,6 +64,8 @@ function PassageViewComponent({
   onOpenAnnotation,
   onOpenSourceNote,
   onOpenMark,
+  searchMatches,
+  activeSearchOrdinal,
 }: PassageViewProps) {
   const { segments, staleCount } = useMemo(() => {
     /*
@@ -111,10 +117,23 @@ function PassageViewComponent({
         end: value.anchor.end,
         data: { kind: "userAnnotation" as const, value },
       })),
+      ...searchMatches.map((value) => ({
+        start: value.start,
+        end: value.end,
+        data: { kind: "search" as const, value },
+      })),
     ];
 
     return { segments: segmentByIntervals(passage.text, intervals), staleCount: stale };
-  }, [passage.text, properNames, annotations, sourceNotes, userAnnotations, showProperNames]);
+  }, [
+    passage.text,
+    properNames,
+    annotations,
+    sourceNotes,
+    userAnnotations,
+    searchMatches,
+    showProperNames,
+  ]);
 
   useEffect(() => {
     if (staleCount > 0) {
@@ -126,16 +145,19 @@ function PassageViewComponent({
   }, [staleCount, passage.id]);
 
   return (
-    <p className={styles.passage} data-passage-id={passage.id}>
+    <p className={styles.passage} id={passage.id} data-passage-id={passage.id}>
       {segments.map((segment, index) => {
         const previous = index > 0 ? segments[index - 1].covering : [];
         const properName = findLayer(segment.covering, "properName")?.value;
         const annotation = findLayer(segment.covering, "annotation")?.value;
         const sourceNote = findLayer(segment.covering, "sourceNote")?.value;
         const userAnnotation = findLayer(segment.covering, "userAnnotation")?.value;
+        const searchMatch = findLayer(segment.covering, "search")?.value;
 
-        const continues = <K extends Layer["kind"]>(kind: K, id: string) =>
-          findLayer(previous, kind)?.value.id === id;
+        const continues = <K extends Layer["kind"]>(kind: K, id: string) => {
+          const previousLayer = findLayer(previous, kind);
+          return (previousLayer?.value as { id?: string } | undefined)?.id === id;
+        };
 
         let node: React.ReactNode = segment.text;
 
@@ -213,6 +235,13 @@ function PassageViewComponent({
               data-user-annotation-id={userAnnotation.id}
               data-user-style={userAnnotation.style}
               title="點擊可查看或刪除標記"
+              role={!continues("userAnnotation", userAnnotation.id) ? "button" : undefined}
+              tabIndex={!continues("userAnnotation", userAnnotation.id) ? 0 : undefined}
+              aria-label={
+                !continues("userAnnotation", userAnnotation.id)
+                  ? `查看個人標記：${userAnnotation.anchor.exact}`
+                  : undefined
+              }
               onClick={(event) => {
                 // A mark is also selectable text: if the user just drag-selected
                 // across it, the selection is the intent, not inspection.
@@ -222,6 +251,30 @@ function PassageViewComponent({
                 }
                 onOpenMark(userAnnotation, event.currentTarget);
               }}
+              onKeyDown={(event) => {
+                if (
+                  !continues("userAnnotation", userAnnotation.id) &&
+                  (event.key === "Enter" || event.key === " ")
+                ) {
+                  event.preventDefault();
+                  onOpenMark(userAnnotation, event.currentTarget);
+                }
+              }}
+            >
+              {node}
+            </span>
+          );
+        }
+
+        if (searchMatch) {
+          node = (
+            <span
+              className={
+                searchMatch.ordinal === activeSearchOrdinal
+                  ? styles.searchMatchActive
+                  : styles.searchMatch
+              }
+              data-search-match={searchMatch.ordinal}
             >
               {node}
             </span>
